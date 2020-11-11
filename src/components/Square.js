@@ -1,14 +1,13 @@
 import './Square.css'
 
-const Square = ({ state, clickHandler }) => {
-  const key = Object.keys(state)[0];
+const Square = ({ state, keys, clickHandler }) => {  
   const handler = () => {
-    clickHandler(key)
+    clickHandler(keys)
   }
    
   return (
     <div onClick={handler} className='square'>
-      <h2>{state[key]}</h2>
+      <h1>{state}</h1>
     </div>
   )
 };
