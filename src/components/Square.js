@@ -4,10 +4,10 @@ const Square = ({ state, keys, clickHandler }) => {
   const handler = () => {
     clickHandler(keys)
   }
-   
+  
   return (
     <div onClick={handler} className='square'>
-      <h1>{state}</h1>
+      { state === ("O") || state === ("X") ? <h1>{state}</h1> : null }
     </div>
   )
 };

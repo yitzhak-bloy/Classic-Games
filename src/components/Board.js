@@ -6,7 +6,7 @@ import './Board.css'
 
 const Board = () => { 
   const [squares, setSquares] = useState(
-    ['', '', 'X', 'X','', 'X', 'X', 'O', 'O']
+    ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
   );
   const [whoseTurn, setWhoseTurn] = useState("O")
   const [win, setWin] = useState(false);
@@ -45,10 +45,12 @@ const Board = () => {
   useEffect(() => {
     if(whoseTurn === "X") {
       const c = minimax(squares, aiPlayer)
-      setSquares(squares.map((square, i) => {
-        if(i !== c[0]) return square;
-        return aiPlayer
-      }))
+      setTimeout(() => {
+        setSquares(squares.map((square, i) => {
+          if(i != c.index) return square
+          return aiPlayer
+        }))
+      }, 1000);
       setWhoseTurn("O")
     }
   }, [whoseTurn, squares])
