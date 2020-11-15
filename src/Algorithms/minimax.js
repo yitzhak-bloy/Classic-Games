@@ -1,22 +1,7 @@
+import { winning } from '../shared/winning';
+
 const huPlayer = "O";
 const aiPlayer = "X";
-
-const winning = (board, player) => {
-  if (
-    (board[0] === player && board[1] === player && board[2] === player) ||
-    (board[3] === player && board[4] === player && board[5] === player) ||
-    (board[6] === player && board[7] === player && board[8] === player) ||
-    (board[0] === player && board[3] === player && board[6] === player) ||
-    (board[1] === player && board[4] === player && board[7] === player) ||
-    (board[2] === player && board[5] === player && board[8] === player) ||
-    (board[0] === player && board[4] === player && board[8] === player) ||
-    (board[2] === player && board[4] === player && board[6] === player)
-  ) {
-    return true
-  } else {
-    return false
-  }
-};
 
 const arrOfEmptyIndexies = (board) => {
   let arr = []; 
@@ -33,11 +18,9 @@ export const minimax = (newBoard, player) => {
 
   if (winning(newBoard, huPlayer)){
     return {score:-10};
-  }
-  else if (winning(newBoard, aiPlayer)){
+  } else if (winning(newBoard, aiPlayer)){
     return {score:10};
-  }
-  else if (availSpots.length === 0){
+  } else if (availSpots.length === 0){
     return {score:0};
   }
 
@@ -51,8 +34,7 @@ export const minimax = (newBoard, player) => {
     if (player === aiPlayer){
       let result = minimax(newBoard, huPlayer);
       move.score = result.score;
-    }
-    else{
+    } else {
       let result = minimax(newBoard, aiPlayer);
       move.score = result.score;
     }
@@ -63,18 +45,18 @@ export const minimax = (newBoard, player) => {
   }
 
   let bestMove;
-  if(player === aiPlayer){
+  if (player === aiPlayer) {
     var bestScore = -10000;
-    for(let i = 0; i < moves.length; i++){
-      if(moves[i].score > bestScore){
+    for (let i = 0; i < moves.length; i++) {
+      if (moves[i].score > bestScore) {
         bestScore = moves[i].score;
         bestMove = i;
       }
     }
-  }else{
+  } else {
     let bestScore = 10000;
-    for(let i = 0; i < moves.length; i++){
-      if(moves[i].score < bestScore){
+    for (let i = 0; i < moves.length; i++) {
+      if (moves[i].score < bestScore) {
         bestScore = moves[i].score;
         bestMove = i;
       }
@@ -83,3 +65,4 @@ export const minimax = (newBoard, player) => {
 
   return moves[bestMove];
 }
+

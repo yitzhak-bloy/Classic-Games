@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
+import { winning } from '../shared/winning';
 import './Board.css'
 
 const Board = () => { 
@@ -17,30 +18,12 @@ const Board = () => {
   const clickHandler = (SerialNum) => {
     if (whoseTurn === "O") {
       setSquares(squares.map((square, i) => {
-        if(i !== SerialNum) return square;
+        if(i !== SerialNum || square === "X") return square;
+        setWhoseTurn("X")
         return huPlayer
       }))
-      setWhoseTurn("X")
     }
   }
-
-  const winning = (board, player) => {
-    if (
-      (board[0] === player && board[1] === player && board[2] === player) ||
-      (board[3] === player && board[4] === player && board[5] === player) ||
-      (board[6] === player && board[7] === player && board[8] === player) ||
-      (board[0] === player && board[3] === player && board[6] === player) ||
-      (board[1] === player && board[4] === player && board[7] === player) ||
-      (board[2] === player && board[5] === player && board[8] === player) ||
-      (board[0] === player && board[4] === player && board[8] === player) ||
-      (board[2] === player && board[4] === player && board[6] === player)
-    ) {
-      return true
-    } else {
-      return false
-    }
-  };
-
 
   useEffect(() => {
     if(whoseTurn === "X") {
@@ -50,24 +33,21 @@ const Board = () => {
           if(i != c.index) return square
           return aiPlayer
         }))
-      }, 1000);
+      }, 500);
       setWhoseTurn("O")
     }
   }, [whoseTurn, squares])
 
+  useEffect(() => {
+    if (winning(squares, 'X') || winning(squares, 'O')) {
+      setWin(true);
+    }
+  }, [squares])
 
 
-
-  // useEffect(() => {
-  //   if (winning(squares, 'X') || winning(squares, 'O')) {
-  //     setWin(true);
-  //   }
-  // }, [squares])
-
-
-  // if (win) {
-  //   return <h1>מזל טוב נצחת</h1>
-  // }   
+  if (win) {
+    return <h1>מזל טוב {whoseTurn === "O"? "X": "O"}</h1>
+  }   
   
   return (
     <div className='board' >
