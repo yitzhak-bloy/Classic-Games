@@ -1,40 +1,42 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
 import { winning } from '../shared/winning';
+import { PlayerContext } from '../shared/context/Player-context';
 import './Board.css'
 
 const Board = () => { 
   const [squares, setSquares] = useState(
     ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
   );
-  const [whoseTurn, setWhoseTurn] = useState("O")
+  const [whoseTurn, setWhoseTurn] = useState("X")
   const [win, setWin] = useState(false);
 
-  const huPlayer = "O";
-  const aiPlayer = "X";
+  const huPlayer = useContext(PlayerContext).huPlayer;
+  console.log("Board -> huPlayer", huPlayer)
+  const aiPlayer = useContext(PlayerContext).aiPlayer;
 
   const clickHandler = (SerialNum) => {
-    if (whoseTurn === "O") {
+    if (whoseTurn === huPlayer) {
       setSquares(squares.map((square, i) => {
-        if(i !== SerialNum || square === "X") return square;
-        setWhoseTurn("X")
+        if(i !== SerialNum || square === aiPlayer) return square;
+        setWhoseTurn(aiPlayer)
         return huPlayer
       }))
     }
   }
 
   useEffect(() => {
-    if(whoseTurn === "X") {
-      const c = minimax(squares, aiPlayer)
+    if (whoseTurn === aiPlayer) {
+      const bestMove = minimax(squares, aiPlayer)
       setTimeout(() => {
         setSquares(squares.map((square, i) => {
-          if(i != c.index) return square
+          if(i != bestMove.index) return square
           return aiPlayer
         }))
       }, 500);
-      setWhoseTurn("O")
+      setWhoseTurn(huPlayer)
     }
   }, [whoseTurn, squares])
 
@@ -43,7 +45,6 @@ const Board = () => {
       setWin(true);
     }
   }, [squares])
-
 
   if (win) {
     return <h1>מזל טוב {whoseTurn === "O"? "X": "O"}</h1>
