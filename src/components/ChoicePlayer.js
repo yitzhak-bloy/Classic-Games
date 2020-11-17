@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 
+import { ButtonGroup } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+
 import { PlayerContext } from '../shared/context/Player-context';
 
 const ChoicePlayer = () => {
@@ -16,8 +19,11 @@ const ChoicePlayer = () => {
   return (
     <div>
       <h5>What player do you want to be?</h5>
-      <button onClick={changeToX} >X</button> 
-      <button onClick={YchangeToO} >O</button>
+      <ButtonGroup disableElevation variant="contained" color='inherit' size='large' >
+        <Button onClick={changeToX}>X</Button>
+        <Button onClick={YchangeToO}>O</Button>
+      </ButtonGroup>
+      <p/>
     </div>
   )
 };
