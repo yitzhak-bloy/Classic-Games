@@ -6,15 +6,20 @@ const aiPlayer = "X";
 const arrOfEmptyIndexies = (board) => {
   let arr = []; 
   for (let i = 0; i < board.length; i++) {
-    if (board[i] != "O" && board[i] != "X") {
+    if (board[i] !== "O" && board[i] !== "X") {
       arr.push(i)
     }    
   }
   return arr
 }
 
-export const minimax = (newBoard, player) => {
+export const minimax = (newBoard, player, level) => {
   let availSpots = arrOfEmptyIndexies(newBoard);
+
+  if (level === "easy") {
+    const random = Math.floor(Math.random() * availSpots.length);
+    return {index: availSpots[random]}
+  }
 
   if (winning(newBoard, huPlayer)){
     return {score:-10};

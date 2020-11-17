@@ -4,6 +4,7 @@ import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
 import { winning } from '../shared/winning';
 import { PlayerContext } from '../shared/context/Player-context';
+import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import './Board.css'
 
 const Board = () => { 
@@ -14,8 +15,9 @@ const Board = () => {
   const [win, setWin] = useState(false);
 
   const huPlayer = useContext(PlayerContext).huPlayer;
-  console.log("Board -> huPlayer", huPlayer)
   const aiPlayer = useContext(PlayerContext).aiPlayer;
+
+  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
 
   const clickHandler = (SerialNum) => {
     if (whoseTurn === huPlayer) {
@@ -29,7 +31,7 @@ const Board = () => {
 
   useEffect(() => {
     if (whoseTurn === aiPlayer) {
-      const bestMove = minimax(squares, aiPlayer)
+      const bestMove = minimax(squares, aiPlayer, difficultyLevel)
       setTimeout(() => {
         setSquares(squares.map((square, i) => {
           if(i != bestMove.index) return square
@@ -47,6 +49,7 @@ const Board = () => {
   }, [squares])
 
   if (win) {
+    console.log("Board -> whoseTurn", whoseTurn)
     return <h1>מזל טוב {whoseTurn === "O"? "X": "O"}</h1>
   }   
   

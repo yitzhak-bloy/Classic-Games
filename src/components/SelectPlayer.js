@@ -5,14 +5,14 @@ import { Button } from '@material-ui/core';
 
 import { PlayerContext } from '../shared/context/Player-context';
 
-const ChoicePlayer = () => {
+const SelectPlayer = () => {
   const playerChange = useContext(PlayerContext).playerChange;
 
   const changeToX = () => {
     playerChange("X")
   }
 
-  const YchangeToO = () => {
+  const changeToO = () => {
     playerChange("O")
   };
 
@@ -21,11 +21,11 @@ const ChoicePlayer = () => {
       <h5>What player do you want to be?</h5>
       <ButtonGroup disableElevation variant="contained" color='inherit' size='large' >
         <Button onClick={changeToX}>X</Button>
-        <Button onClick={YchangeToO}>O</Button>
+        <Button onClick={changeToO}>O</Button>
       </ButtonGroup>
       <p/>
     </div>
   )
 };
 
-export default ChoicePlayer
+export default SelectPlayer
