@@ -12,7 +12,7 @@ const Board = () => {
     ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
   );
   const [whoseTurn, setWhoseTurn] = useState("X")
-  const [win, setWin] = useState(false);
+  const [win, setWin] = useState([false]);
 
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
@@ -40,17 +40,18 @@ const Board = () => {
       }, 500);
       setWhoseTurn(huPlayer)
     }
-  }, [whoseTurn, squares])
+  }, [whoseTurn, squares, huPlayer])
 
   useEffect(() => {
-    if (winning(squares, 'X') || winning(squares, 'O')) {
-      setWin(true);
+    if (winning(squares, 'X')) {
+      setWin([true, "X"]);
+    } else if (winning(squares, 'O')) {
+      setWin([true, "O"]);
     }
   }, [squares])
 
-  if (win) {
-    console.log("Board -> whoseTurn", whoseTurn)
-    return <h1>מזל טוב {whoseTurn === "O"? "X": "O"}</h1>
+  if (win[0]) {
+    return <h1>מזל טוב {win[1]}</h1>
   }   
   
   return (

@@ -8,9 +8,9 @@ import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-contex
 
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;
-
-  const changeToHard = () => {
-    difficultyChange("easy")
+  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
+  const changeTo = () => {
+    difficultyChange(difficultyLevel)
   }
 
   const changeToEasy = () => {
@@ -19,10 +19,9 @@ const SelectLevel = () => {
 
   return (
     <div>
-      <h5>What level of difficulty do you want to play?</h5>
+      <h5>My difficulty level:</h5>
       <ButtonGroup disableElevation variant="contained" color='inherit' size='large' >
-        <Button onClick={changeToHard}>hard</Button>
-        <Button onClick={changeToEasy}>easy</Button>
+        <Button onClick={changeTo}>{difficultyLevel}</Button>
       </ButtonGroup>
       <p/>
     </div>
