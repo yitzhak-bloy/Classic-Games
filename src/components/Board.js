@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import Box from '@material-ui/core/Box';
+import { Button } from '@material-ui/core';
 
 import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
@@ -51,21 +52,28 @@ const Board = () => {
     }
   }, [squares])
 
+  const handelRestart = () => {
+    setSquares(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+  };
+
   if (win[0]) {
     return <h1>מזל טוב {win[1]}</h1>
   }   
   
   return (
-    <Box className='board' m={2} >
-      <Square state={squares[0]} keys={0} clickHandler={clickHandler} />
-      <Square state={squares[1]} keys={1} clickHandler={clickHandler}/>
-      <Square state={squares[2]} keys={2} clickHandler={clickHandler}/>
-      <Square state={squares[3]} keys={3} clickHandler={clickHandler}/>
-      <Square state={squares[4]} keys={4} clickHandler={clickHandler}/>
-      <Square state={squares[5]} keys={5} clickHandler={clickHandler}/>
-      <Square state={squares[6]} keys={6} clickHandler={clickHandler}/>
-      <Square state={squares[7]} keys={7} clickHandler={clickHandler}/>
-      <Square state={squares[8]} keys={8} clickHandler={clickHandler}/>
+    <Box >
+      <Box className='board' m={2} >
+        <Square state={squares[0]} keys={0} clickHandler={clickHandler} />
+        <Square state={squares[1]} keys={1} clickHandler={clickHandler}/>
+        <Square state={squares[2]} keys={2} clickHandler={clickHandler}/>
+        <Square state={squares[3]} keys={3} clickHandler={clickHandler}/>
+        <Square state={squares[4]} keys={4} clickHandler={clickHandler}/>
+        <Square state={squares[5]} keys={5} clickHandler={clickHandler}/>
+        <Square state={squares[6]} keys={6} clickHandler={clickHandler}/>
+        <Square state={squares[7]} keys={7} clickHandler={clickHandler}/>
+        <Square state={squares[8]} keys={8} clickHandler={clickHandler}/>
+      </Box>  
+      <Button onClick={handelRestart} disableElevation variant="contained" color='inherit' size='large' >new game</Button>                             
     </Box>
   )
 };

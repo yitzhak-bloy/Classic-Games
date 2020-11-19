@@ -18,7 +18,7 @@ const SelectPlayer = () => {
 
   return (
     <Box width={1} border={1} borderTop={0} >
-      <Box component="div"   p={1} m={1} display="inline"  >
+      <Box component="div" p={1} m={1} display="inline"  >
         I play as:
       </Box>
       <Box component="div" p={1} m={1} display="inline"  >
