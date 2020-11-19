@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import Box from '@material-ui/core/Box';
 
 import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
@@ -55,7 +56,7 @@ const Board = () => {
   }   
   
   return (
-    <div className='board' >
+    <Box className='board' m={2} >
       <Square state={squares[0]} keys={0} clickHandler={clickHandler} />
       <Square state={squares[1]} keys={1} clickHandler={clickHandler}/>
       <Square state={squares[2]} keys={2} clickHandler={clickHandler}/>
@@ -65,7 +66,7 @@ const Board = () => {
       <Square state={squares[6]} keys={6} clickHandler={clickHandler}/>
       <Square state={squares[7]} keys={7} clickHandler={clickHandler}/>
       <Square state={squares[8]} keys={8} clickHandler={clickHandler}/>
-    </div>
+    </Box>
   )
 };
 

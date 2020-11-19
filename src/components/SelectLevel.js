@@ -1,10 +1,11 @@
 import { useContext } from 'react';
+import Box from '@material-ui/core/Box';
+
 
 import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
-
 
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;
@@ -18,13 +19,14 @@ const SelectLevel = () => {
   };
 
   return (
-    <div>
-      <h5>My difficulty level:</h5>
-      <ButtonGroup disableElevation variant="contained" color='inherit' size='large' >
+    <Box width={1} border={1} >
+      <Box component="div" p={1} m={1} display="inline"  >
+        My difficulty level:
+      </Box>
+      <Box component="div" p={1} m={1} display="inline"  >
         <Button onClick={changeTo}>{difficultyLevel}</Button>
-      </ButtonGroup>
-      <p/>
-    </div>
+      </Box>
+    </Box>
   )
 };
 

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import Box from '@material-ui/core/Box';
 
 import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
@@ -16,13 +17,14 @@ const SelectPlayer = () => {
   }
 
   return (
-    <div>
-      <h5>I play as:</h5>
-      <ButtonGroup disableElevation variant="contained" color='inherit' size='large' >
-        <Button onClick={changeTo}>{huPlayer}</Button>
-      </ButtonGroup>
-      <p/>
-    </div>
+    <Box width={1} border={1} borderTop={0} >
+      <Box component="div"   p={1} m={1} display="inline"  >
+        I play as:
+      </Box>
+      <Box component="div" p={1} m={1} display="inline"  >
+        <Button onClick={changeTo} >{huPlayer}</Button>
+      </Box>
+    </Box>
   )
 };
 
