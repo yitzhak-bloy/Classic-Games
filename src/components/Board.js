@@ -57,7 +57,9 @@ const Board = () => {
   };
 
   if (win[0]) {
-    return <h1>מזל טוב {win[1]}</h1>
+    setWin([false])
+    alert(  `מזל טוב ${win[1]}`)
+    handelRestart()
   }   
   
   return (
