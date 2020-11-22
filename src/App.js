@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Board from './components/Board';
 import SelectPlayer from './components/SelectPlayer';
 import SelectLevel from './components/SelectLevel'
+import Header from './components/Header';
 import { PlayerContext } from './shared/context/Player-context';
 import { DifficultyLevelContext } from './shared/context/DifficultyLevel-context';
 import './App.css';
@@ -28,6 +29,7 @@ function App() {
       }
     }}>
       <div className="App">
+        <Header />
         <h1>Tic Tac Toe game</h1>
         <SelectLevel />
         <SelectPlayer />
