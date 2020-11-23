@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Board from './components/Board';
 import SelectPlayer from './components/SelectPlayer';
 import SelectLevel from './components/SelectLevel'
-import Header from './components/Header';
+import Header from './Navigation/Header';
 import { PlayerContext } from './shared/context/Player-context';
 import { DifficultyLevelContext } from './shared/context/DifficultyLevel-context';
 import './App.css';
