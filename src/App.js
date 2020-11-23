@@ -30,7 +30,6 @@ function App() {
     }}>
       <div className="App">
         <Header />
-        <h1>Tic Tac Toe game</h1>
         <SelectLevel />
         <SelectPlayer />
         <Board />
