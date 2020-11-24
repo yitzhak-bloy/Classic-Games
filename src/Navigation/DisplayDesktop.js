@@ -10,7 +10,7 @@ const DisplayDesktop = (headersData, useStyles) => {
 
   return (
     <Toolbar className={toolbar}>
-      <Typography variant="h6" component="h1" className={logo}>
+      <Typography variant="h6" component="h1" className={logo} to='./' >
         TicTacToeGame
       </Typography>
       <div>

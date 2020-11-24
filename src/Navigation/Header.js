@@ -14,12 +14,8 @@ const headersData = [
     href: "/statistics",
   },
   {
-    label: "My Account",
-    href: "/account",
-  },
-  {
-    label: "Log Out",
-    href: "/logout",
+    label: "Log In",
+    href: "/form",
   },
 ];
 

@@ -1,42 +1,33 @@
-import { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from 'react-router-dom';
 
-import Board from './components/Board';
-import SelectPlayer from './components/SelectPlayer';
-import SelectLevel from './components/SelectLevel'
 import Header from './Navigation/Header';
-import { PlayerContext } from './shared/context/Player-context';
-import { DifficultyLevelContext } from './shared/context/DifficultyLevel-context';
-import './App.css';
+import GsmeBoard from './pages/GameBoard';
+import Form from './pages/Form';
+import Statistics from './pages/Statistics';
 
-function App() {
-  const [huPlayer ,setHuPlayer] = useState('X');
-  const [aiPlayer ,setaiPlayer] = useState('O');
-  const [level, setLevel] = useState('hard')
-  
+const App = () => {
   return (
-    <PlayerContext.Provider value={{  
-      huPlayer: huPlayer,
-      aiPlayer: aiPlayer,
-      playerChange: (player) => {
-        setHuPlayer(player) 
-        setaiPlayer(player === "X" ? "O": "X" )
-      } 
-    }}> 
-    <DifficultyLevelContext.Provider value={{  
-      difficultyLevel: level,
-      difficultyChange: (level) => {
-        setLevel(level === "hard" ? "easy" : "hard")
-      }
-    }}>
-      <div className="App">
-        <Header />
-        <SelectLevel />
-        <SelectPlayer />
-        <Board />
-      </div>  
-    </DifficultyLevelContext.Provider>
-    </PlayerContext.Provider>
-  );
+    <Router>
+      <Header />
+      <Switch>
+        <Route path='/' exact >
+          <GsmeBoard />
+        </Route>
+        <Route path='/form' >
+          <Form />
+        </Route>
+        <Route path='/statistics' >
+          <Statistics />
+        </Route>
+        <Redirect to='./' />
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
