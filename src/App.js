@@ -7,7 +7,8 @@ import {
 
 import Header from './Navigation/Header';
 import GsmeBoard from './pages/GameBoard';
-import Form from './pages/Form';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import Statistics from './pages/Statistics';
 
 const App = () => {
@@ -18,8 +19,11 @@ const App = () => {
         <Route path='/' exact >
           <GsmeBoard />
         </Route>
-        <Route path='/form' >
-          <Form />
+        <Route path='/Login' >
+          <Login />
+        </Route>
+        <Route path='/signUp' >
+          <SignUp />
         </Route>
         <Route path='/statistics' >
           <Statistics />
