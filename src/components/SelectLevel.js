@@ -10,16 +10,13 @@ import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-contex
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;
   const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
+  
   const changeTo = () => {
     difficultyChange(difficultyLevel)
   }
 
-  const changeToEasy = () => {
-    difficultyChange("hard")
-  };
-
   return (
-    <Box width={1} border={1} >
+    <Box width={1} border={1} mt={4} >
       <Box component="div" p={1} m={1} display="inline"  >
         My difficulty level:
       </Box>

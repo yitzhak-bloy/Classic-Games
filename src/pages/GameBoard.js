@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Box from '@material-ui/core/Box';
 
 import Board from '../components/Board';
 import SelectPlayer from '../components/SelectPlayer';
@@ -27,11 +28,11 @@ const GameBoard = () => {
         setLevel(level === "hard" ? "easy" : "hard")
       }
     }}>
-      <div className="App">
+      <Box className="GameBoard">
         <SelectLevel />
         <SelectPlayer />
         <Board />
-      </div>  
+      </Box >  
     </DifficultyLevelContext.Provider>
     </PlayerContext.Provider>
   );
