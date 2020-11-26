@@ -75,7 +75,7 @@ const Board = () => {
         <Square state={squares[7]} keys={7} clickHandler={clickHandler}/>
         <Square state={squares[8]} keys={8} clickHandler={clickHandler}/>
       </Box>  
-      <Button onClick={handelRestart} disableElevation variant="contained" color='inherit' size='large' >new game</Button>                             
+      <Button onClick={handelRestart} disableElevation variant="outlined" size="large" color="primary" >new game</Button>                             
     </Box>
   )
 };

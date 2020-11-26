@@ -7,6 +7,7 @@ import SelectLevel from '../components/SelectLevel'
 import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import './GameBoard.css';
+import { Grid } from '@material-ui/core';
 
 const GameBoard = () => {
   const [huPlayer ,setHuPlayer] = useState('X');
@@ -29,8 +30,14 @@ const GameBoard = () => {
       }
     }}>
       <Box className="GameBoard">
-        <SelectLevel />
-        <SelectPlayer />
+        <Grid container mt={6} justify="space-evenly"  >
+          <Grid item  >
+            <SelectLevel />
+          </Grid>
+          <Grid item>
+            <SelectPlayer />
+          </Grid>
+        </Grid>
         <Board />
       </Box >  
     </DifficultyLevelContext.Provider>

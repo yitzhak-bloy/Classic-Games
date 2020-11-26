@@ -16,12 +16,9 @@ const SelectLevel = () => {
   }
 
   return (
-    <Box width={1} border={1} mt={4} >
-      <Box component="div" p={1} m={1} display="inline"  >
-        My difficulty level:
-      </Box>
-      <Box component="div" p={1} m={1} display="inline"  >
-        <Button onClick={changeTo}>{difficultyLevel}</Button>
+    <Box  >
+      <Box component="div" p={1} m={1}  mt={5} >
+        <Button onClick={changeTo} variant="outlined" size="large" color="primary">{difficultyLevel}</Button>
       </Box>
     </Box>
   )

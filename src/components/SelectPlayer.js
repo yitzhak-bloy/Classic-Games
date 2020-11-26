@@ -17,12 +17,9 @@ const SelectPlayer = () => {
   }
 
   return (
-    <Box width={1} border={1} borderTop={0} >
-      <Box component="div" p={1} m={1} display="inline"  >
-        I play as:
-      </Box>
-      <Box component="div" p={1} m={1} display="inline"  >
-        <Button onClick={changeTo} >{huPlayer}</Button>
+    <Box>
+      <Box component="div" p={1} m={1}  mt={5}  >
+        <Button onClick={changeTo} variant="outlined" size="large" color="primary" >{huPlayer}</Button>
       </Box>
     </Box>
   )
