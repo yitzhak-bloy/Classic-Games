@@ -6,15 +6,21 @@ import SelectPlayer from '../components/SelectPlayer';
 import SelectLevel from '../components/SelectLevel'
 import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
+import { GameRunning } from '../shared/context/GameRunning-context';
 import './GameBoard.css';
 import { Grid } from '@material-ui/core';
 
 const GameBoard = () => {
   const [huPlayer ,setHuPlayer] = useState('X');
   const [aiPlayer ,setaiPlayer] = useState('O');
-  const [level, setLevel] = useState('hard')
+  const [level, setLevel] = useState('hard');
+  const [gameRunning, setGameRunning] = useState(false)
   
   return (
+    <GameRunning.Provider value={{  
+      gameRunning: gameRunning,
+      gameChange: (state) => {setGameRunning(state)}
+    }}> 
     <PlayerContext.Provider value={{  
       huPlayer: huPlayer,
       aiPlayer: aiPlayer,
@@ -30,7 +36,7 @@ const GameBoard = () => {
       }
     }}>
       <Box className="GameBoard">
-        <Grid container mt={6} justify="space-evenly"  >
+        <Grid container  justify="space-evenly"  >
           <Grid item  >
             <SelectLevel />
           </Grid>
@@ -42,6 +48,7 @@ const GameBoard = () => {
       </Box >  
     </DifficultyLevelContext.Provider>
     </PlayerContext.Provider>
+    </GameRunning.Provider>
   );
 }
 

@@ -1,18 +1,19 @@
 import { useContext } from 'react';
 import Box from '@material-ui/core/Box';
-
-
-import { ButtonGroup } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 
+import { GameRunning } from '../shared/context/GameRunning-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;
-  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
-  
+  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;  
+  const gameRun = useContext(GameRunning).gameRunning;
+
   const changeTo = () => {
-    difficultyChange(difficultyLevel)
+    if(!gameRun) {
+    difficultyChange(difficultyLevel);
+    }
   }
 
   return (

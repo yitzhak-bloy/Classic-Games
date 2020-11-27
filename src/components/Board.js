@@ -7,14 +7,15 @@ import { minimax } from '../Algorithms/minimax';
 import { winning } from '../shared/winning';
 import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
+import { GameRunning } from '../shared/context/GameRunning-context';
 import './Board.css'
 
 const Board = () => { 
-  const [squares, setSquares] = useState(
-    ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-  );
+  const [squares, setSquares] = useState(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
   const [whoseTurn, setWhoseTurn] = useState("X")
   const [win, setWin] = useState([false]);
+
+  const gameRunChange = useContext(GameRunning).gameChange;
 
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
@@ -26,6 +27,7 @@ const Board = () => {
       setSquares(squares.map((square, i) => {
         if(i !== SerialNum || square === aiPlayer) return square;
         setWhoseTurn(aiPlayer)
+        gameRunChange(true)
         return huPlayer
       }))
     }
@@ -53,7 +55,8 @@ const Board = () => {
   }, [squares])
 
   const handelRestart = () => {
-    setSquares(["0", "1", "2", "3", "4", "5", "6", "7", "8"])
+    setSquares(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
+    gameRunChange(false);
   };
 
   if (win[0]) {
