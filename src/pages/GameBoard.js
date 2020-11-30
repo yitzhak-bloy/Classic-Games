@@ -35,7 +35,7 @@ const GameBoard = () => {
         setLevel(level === "hard" ? "easy" : "hard")
       }
     }}>
-      <Box className="GameBoard">
+      <Box className="GameBoard" bgcolor="#FFFFFF">
         <Grid container  justify="space-evenly"  >
           <Grid item  >
             <SelectLevel />
