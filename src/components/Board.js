@@ -38,10 +38,14 @@ const Board = () => {
   }, [whoseTurn, squares, huPlayer])
 
   useEffect(() => {
-    if (winning(squares, 'X')) {
+    if (winning(squares, 'X') === "full" || winning(squares, 'O') === "full") {
+      setWin([true, "tie"]);
+      handelRestart();
+      setOpen(true);
+    } else if (winning(squares, 'X')) {
       setWin([true, "X"]);
-      handelRestart()
-      setOpen(true)
+      handelRestart();
+      setOpen(true);
     } else if (winning(squares, 'O')) {
       setWin([true, "O"]);
       handelRestart()
