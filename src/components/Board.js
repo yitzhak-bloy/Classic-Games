@@ -15,7 +15,7 @@ const Board = () => {
   const [squares, setSquares] = useState(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
   const [whoseTurn, setWhoseTurn] = useState("X")
   const [win, setWin] = useState([false]);
-  const [open, setOpen] = useState(false);
+  const [popsUpOpen, setPopsUpOpen] = useState(false);
 
   const gameRunChange = useContext(GameRunning).gameChange;
 
@@ -40,19 +40,15 @@ const Board = () => {
   useEffect(() => {
   if (winning(squares, 'X') === "true") {
       setWin([true, "X"]);
-      handelRestart();
-      setOpen(true);
+      setPopsUpOpen(true);
     } else if (winning(squares, 'O') === "true") {
       setWin([true, "O"]);
-      handelRestart()
-      setOpen(true)  
+      setPopsUpOpen(true)  
     } else if (winning(squares, 'X') === "full" || winning(squares, 'O') === "full") {
-      console.log("🚀 ~ file: Board.js ~ line 42 ~ useEffect ~ winning(squares, 'X')", winning(squares, 'X'))
       setWin([true, "tie"]);
-      handelRestart();
-      setOpen(true);
+      setPopsUpOpen(true);
     }
-  }, [squares, win, open])
+  }, [squares, win, popsUpOpen])
 
   const clickHandler = (SerialNum) => {
     if (whoseTurn === huPlayer) {
@@ -71,7 +67,10 @@ const Board = () => {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    handelRestart();
+    setTimeout(() => {
+      setPopsUpOpen(false);
+    }, 1);
   };
   
   return (
@@ -88,7 +87,7 @@ const Board = () => {
         <Square state={squares[8]} keys={8} clickHandler={clickHandler}/>
       </Box>  
 
-      <PopsUp open={open} handleClose={handleClose} win={win} />
+      <PopsUp open={popsUpOpen} handleClose={handleClose} win={win} />
 
       <Button onClick={handelRestart} disableElevation variant="outlined" size="large" color="primary" >new game</Button>                             
     </Box>
