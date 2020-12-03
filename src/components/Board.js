@@ -57,7 +57,7 @@ const Board = () => {
   const clickHandler = (SerialNum) => {
     if (whoseTurn === huPlayer) {
       setSquares(squares.map((square, i) => {
-        if(i !== SerialNum || square === aiPlayer) return square;
+        if(i !== SerialNum || square === aiPlayer || square === huPlayer) return square;
         setWhoseTurn(aiPlayer)
         gameRunChange(true)
         return huPlayer
