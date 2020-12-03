@@ -21,9 +21,9 @@ export const minimax = (newBoard, player, level) => {
     return {index: availSpots[random]}
   }
 
-  if (winning(newBoard, huPlayer)){
+  if (winning(newBoard, huPlayer) === "true"){
     return {score:-10};
-  } else if (winning(newBoard, aiPlayer)){
+  } else if (winning(newBoard, aiPlayer) === "true"){
     return {score:10};
   } else if (availSpots.length === 0){
     return {score:0};
