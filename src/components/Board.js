@@ -8,12 +8,12 @@ import { winning } from '../shared/winning';
 import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import { GameRunning } from '../shared/context/GameRunning-context';
+import { TurnContext } from '../shared/context/Turn-context';
 import PopsUp from './PopsUp';
 import './Board.css'
 
 const Board = () => { 
   const [squares, setSquares] = useState(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
-  const [whoseTurn, setWhoseTurn] = useState("X")
   const [win, setWin] = useState([false]);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
 
@@ -21,6 +21,9 @@ const Board = () => {
 
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
+
+  const setWhoseTurn = useContext(TurnContext).TurnChange; 
+  const whoseTurn = useContext(TurnContext).whoseTurn;   
 
   const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
 
@@ -64,6 +67,7 @@ const Board = () => {
   const handelRestart = () => {
     setSquares(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
     gameRunChange(false);
+    setWhoseTurn("X")
   };
 
   const handleClose = () => {
