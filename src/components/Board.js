@@ -18,13 +18,10 @@ const Board = () => {
   const [popsUpOpen, setPopsUpOpen] = useState(false);
 
   const gameRunChange = useContext(GameRunning).gameChange;
-
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
-
   const setWhoseTurn = useContext(TurnContext).TurnChange; 
   const whoseTurn = useContext(TurnContext).whoseTurn;   
-
   const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
 
   useEffect(() => {
@@ -41,16 +38,16 @@ const Board = () => {
   }, [whoseTurn, squares, huPlayer])
 
   useEffect(() => {
-  if (winning(squares, 'X') === "true") {
-      setWin([true, "X"]);
-      setPopsUpOpen(true);
-    } else if (winning(squares, 'O') === "true") {
-      setWin([true, "O"]);
-      setPopsUpOpen(true)  
-    } else if (winning(squares, 'X') === "full" || winning(squares, 'O') === "full") {
-      setWin([true, "tie"]);
-      setPopsUpOpen(true);
-    }
+    if (winning(squares, 'X') === "true") {
+        setWin([true, "X"]);
+        setPopsUpOpen(true);
+      } else if (winning(squares, 'O') === "true") {
+        setWin([true, "O"]);
+        setPopsUpOpen(true)  
+      } else if (winning(squares, 'X') === "full" || winning(squares, 'O') === "full") {
+        setWin([true, "tie"]);
+        setPopsUpOpen(true);
+      }
   }, [squares, win, popsUpOpen])
 
   const clickHandler = (SerialNum) => {

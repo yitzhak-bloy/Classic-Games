@@ -48,9 +48,11 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
         <div className={drawerContainer}>{getDrawerChoices()}</div>
       </Drawer>
       <div>
-        <Typography variant="h6" component="h1" className={logo}>
-          TicTacToeGame
-        </Typography>
+        <Link component={RouterLink} to="/" >
+          <Typography variant="h6" component="h1" className={logo}>
+            TicTacToeGame
+          </Typography>
+        </Link> 
       </div>
     </Toolbar>
   );

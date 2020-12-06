@@ -2,6 +2,7 @@ import {
   Toolbar,
   Typography,
   Button,
+  Link,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -10,9 +11,11 @@ const DisplayDesktop = (headersData, useStyles) => {
 
   return (
     <Toolbar className={toolbar}>
-      <Typography variant="h6" component="h1" className={logo} to='./' >
-        TicTacToeGame
-      </Typography>
+        <Link component={RouterLink} to="/" >
+          <Typography variant="h6" component="h1" className={logo} >
+              TicTacToeGame
+          </Typography>
+        </Link> 
       <div>
         {headersData.map(({ label, href }) => {
           return <Button
