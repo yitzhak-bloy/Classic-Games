@@ -1,5 +1,8 @@
 const express = require('express');
 
+const HttpError = require('../models/http-error');
+console.log("🚀 ~ file: userStatistics-routes.js ~ line 4 ~ HttpError", HttpError)
+
 const router = express.Router();
 
 const USER_STATISTICS = [
@@ -48,7 +51,11 @@ const USER_STATISTICS = [
 router.get('/:uid', (req, res, next) => {
   const userId = req.params.uid;
 
-  const user = USER_STATISTICS.find(u => u.id === userId)
+  const user = USER_STATISTICS.find(u => u.id === userId);
+
+  if (!user) {
+    return next(new HttpError('could not find a user for the provided id', 404));
+  }
 
   res.json({user})
 })
