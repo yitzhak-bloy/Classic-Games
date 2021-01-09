@@ -5,6 +5,8 @@ const statisticsRoutes = require('./routes/userStatistics-routes');
 
 const app = express();
 
+app.use(bodyParser.json());
+
 app.use('/api/userStatistics', statisticsRoutes);
 
 app.use((error, req, res, next) => {

@@ -1,3 +1,5 @@
+const { v4: uuidv4 } = require('uuid');
+
 const HttpError = require('../models/http-error');
 
 const USER_STATISTICS = [
@@ -55,4 +57,34 @@ const getUserStatisticsById = (req, res, next) => {
   res.json({user})
 }
 
-exports.getUserStatisticsById = getUserStatisticsById
+const createUserStatistics = (req, res, next) => {
+  const { name, email, password } = req.body;
+
+  const createdUserStatistics = {
+    id: uuidv4(),
+    name, 
+    email, 
+    password,
+    statistic: {
+      hard: {
+        Victory: 0,
+        loss: 0,
+        draw: 0,
+        AverageRating: 0
+      },
+      easy: {
+        Victory: 0,
+        loss: 0,
+        draw: 0,
+        AverageRating: 0
+      }
+    }
+  }
+
+  USER_STATISTICS.push(createdUserStatistics);
+
+  res.status(201).json({users: USER_STATISTICS})
+};  
+
+exports.getUserStatisticsById = getUserStatisticsById;
+exports.createUserStatistics = createUserStatistics;
