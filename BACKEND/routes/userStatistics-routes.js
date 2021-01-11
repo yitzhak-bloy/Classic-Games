@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get('/:uid', userStatisticsControllers.getUserStatisticsById);
 
-router.post('/', userStatisticsControllers.createUserStatistics)
+router.post('/', userStatisticsControllers.createUserStatistics);
+
+router.patch('/:uid', userStatisticsControllers.updateUserStatistics);
 
 module.exports = router; 
