@@ -57,7 +57,7 @@ const getUserStatisticsById = (req, res, next) => {
   res.json({user})
 }
 
-const createUserStatistics = (req, res, next) => {
+const signup = (req, res, next) => {
   const { name, email, password } = req.body;
 
   const createdUserStatistics = {
@@ -86,6 +86,18 @@ const createUserStatistics = (req, res, next) => {
   res.status(201).json({users: USER_STATISTICS})
 };  
 
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  const identifiedUser = USER_STATISTICS.find(u => u.email === email);
+
+  if (!identifiedUser || identifiedUser.password !== password) {
+    throw new HttpError('Could not identify user, credentials seem to be worng.', 401);
+  }
+
+  res.json({ messege: 'Logged in!'});
+}
+
 const updateUserStatistics = (req, res, next) => {
   const userId = req.params.uid;
   const { level, outcome } = req.body;
@@ -108,5 +120,6 @@ const updateUserStatistics = (req, res, next) => {
 }
 
 exports.getUserStatisticsById = getUserStatisticsById;
-exports.createUserStatistics = createUserStatistics;
+exports.signup = signup;
+exports.login = login;
 exports.updateUserStatistics = updateUserStatistics;

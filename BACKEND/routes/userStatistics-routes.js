@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get('/:uid', userStatisticsControllers.getUserStatisticsById);
 
-router.post('/', userStatisticsControllers.createUserStatistics);
+router.post('/signup', userStatisticsControllers.signup);
+
+router.post('/login', userStatisticsControllers.login);
 
 router.patch('/:uid', userStatisticsControllers.updateUserStatistics);
 
