@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
 
@@ -58,7 +59,19 @@ const getUserStatisticsById = (req, res, next) => {
 }
 
 const signup = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log("errors:", errors);
+    throw new HttpError('Invalid inputs passed, please check uour data.', 422);
+  };
+
   const { name, email, password } = req.body;
+
+  const hasUser = USER_STATISTICS.find(u => u.email === email);
+
+  if (hasUser) {
+    throw new HttpError('Could not creat user, email already exists.', 422)
+  }
 
   const createdUserStatistics = {
     id: uuidv4(),
@@ -99,6 +112,12 @@ const login = (req, res, next) => {
 }
 
 const updateUserStatistics = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log("errors:", errors);
+    throw new HttpError('Something went wrong.', 422);
+  };
+
   const userId = req.params.uid;
   const { level, outcome } = req.body;
 
