@@ -47,16 +47,22 @@ const USER_STATISTICS = [
   }
 ]
 
-const getUserStatisticsById = (req, res, next) => {
+const getUserStatisticsById = async (req, res, next) => {
   const userId = req.params.uid;
 
-  const user = USER_STATISTICS.find(u => u.id === userId);
+  let user;
+
+  try {
+    user = await UserStatistc.findById(userId);
+  } catch (err) {
+    return next(new HttpError('Samething went wrong, please try again', 404));
+  }
 
   if (!user) {
     return next(new HttpError('could not find a user for the provided id', 404));
   }
 
-  res.json({user})
+  res.json({user: user.toObject( {getters: true} )})
 }
 
 const signup = async (req, res, next) => {
