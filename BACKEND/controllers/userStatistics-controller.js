@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
 
 const HttpError = require('../models/http-error');
+const UserStatistc = require('../models/userStatistic');
 
 const USER_STATISTICS = [
   {
@@ -58,7 +59,7 @@ const getUserStatisticsById = (req, res, next) => {
   res.json({user})
 }
 
-const signup = (req, res, next) => {
+const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("errors:", errors);
@@ -73,8 +74,7 @@ const signup = (req, res, next) => {
     throw new HttpError('Could not creat user, email already exists.', 422)
   }
 
-  const createdUserStatistics = {
-    id: uuidv4(),
+  const createdUserStatistics = new UserStatistc({
     name, 
     email, 
     password,
@@ -92,11 +92,19 @@ const signup = (req, res, next) => {
         AverageRating: 0
       }
     }
+  })
+
+  try {
+    await createdUserStatistics.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Creating user failed, please try again.',
+      500
+    )
+    return next(error);
   }
 
-  USER_STATISTICS.push(createdUserStatistics);
-
-  res.status(201).json({users: USER_STATISTICS})
+  res.status(201).json({users: createdUserStatistics})
 };  
 
 const login = (req, res, next) => {

@@ -8,16 +8,16 @@ const userStatistcSchema = new Schena({
   password: { type: String, required: true },
   statistic: { 
     hard: {
-      victory: { type: Number },
-      loss: { type: Number },
-      draw: { type: Number },
-      AverageRating: { type: Number },
+      victory: { type: Number, required: true },
+      loss: { type: Number, required: true },
+      draw: { type: Number, required: true },
+      AverageRating: { type: Number, required: true },
     },
     easy: {
-      victory: { type: Number },
-      loss: { type: Number },
-      draw: { type: Number },
-      AverageRating: { type: Number },
+      victory: { type: Number, required: true },
+      loss: { type: Number, required: true },
+      draw: { type: Number, required: true },
+      AverageRating: { type: Number, required: true },
     },
   },  
 })
