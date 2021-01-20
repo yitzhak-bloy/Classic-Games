@@ -69,16 +69,10 @@ const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("errors:", errors);
-    throw new HttpError('Invalid inputs passed, please check uour data.', 422);
+    return next( new HttpError('Invalid inputs passed, please check uour data.', 422) );
   };
 
   const { name, email, password } = req.body;
-
-  const hasUser = USER_STATISTICS.find(u => u.email === email);
-
-  if (hasUser) {
-    throw new HttpError('Could not creat user, email already exists.', 422)
-  }
 
   const createdUserStatistics = new UserStatistc({
     name, 
@@ -113,43 +107,60 @@ const signup = async (req, res, next) => {
   res.status(201).json({users: createdUserStatistics})
 };  
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const identifiedUser = USER_STATISTICS.find(u => u.email === email);
+  let identifiedUser;
+  try{
+    identifiedUser = await UserStatistc.find({ email: email })
+  } catch (err) {
+    return next(new HttpError('Samething went wrong, please try again', 404))
+  }
 
-  if (!identifiedUser || identifiedUser.password !== password) {
-    throw new HttpError('Could not identify user, credentials seem to be worng.', 401);
+  if (!identifiedUser || identifiedUser[0].password !== password) {
+    return next( new HttpError('Could not identify user, credentials seem to be worng.', 401) )
   }
 
   res.json({ messege: 'Logged in!'});
 }
 
-const updateUserStatistics = (req, res, next) => {
+const updateUserStatistics = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("errors:", errors);
     throw new HttpError('Something went wrong.', 422);
   };
 
-  const userId = req.params.uid;
   const { level, outcome } = req.body;
+  const userId = req.params.uid;
 
-  const updateUser = { ...USER_STATISTICS.find(u => u.id === userId) };
-  const indexUser = USER_STATISTICS.findIndex(u => u.id === userId);
+  let UserStatistic;
+  try {
+    UserStatistic = await UserStatistc.findById(userId);
+  } catch(err) {
+    return next(new HttpError('Samething went wrong, please try again', 404));
+  }
 
-  if (!updateUser) {
+  if (!UserStatistic) {
     return next(new HttpError('could not find a user for the provided id', 404));
   }
 
-  const statistic = updateUser.statistic[level];
+  const statistic = UserStatistic.statistic[level];
   
   statistic[outcome]++;
   statistic.AverageRating = outcome === "victory" ? statistic.AverageRating+1 : outcome === "loss" ? statistic.AverageRating-1: statistic.AverageRating;
-
-  USER_STATISTICS[indexUser] = updateUser;
   
-  res.status(201).json({users: USER_STATISTICS})
+  try {
+    await UserStatistic.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Update statistic user failed, please try again.',
+      500
+    )
+    return next(error);
+  }
+
+  res.status(201).json({ users: UserStatistic.toObject( {getters: true} ) });
 }
 
 exports.getUserStatisticsById = getUserStatisticsById;
