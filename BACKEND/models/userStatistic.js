@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
+const uniqueValidetor = require('mongoose-unique-validator')
 
 const Schena = mongoose.Schema;
 
 const userStatistcSchema = new Schena({
   name: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true, minlength: 6 },
   statistic: { 
     hard: {
       victory: { type: Number, required: true },
@@ -21,5 +22,7 @@ const userStatistcSchema = new Schena({
     },
   },  
 })
+
+userStatistcSchema.plugin(uniqueValidetor);
 
 module.exports = mongoose.model('UserStatistc', userStatistcSchema)
