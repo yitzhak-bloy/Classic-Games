@@ -4,12 +4,21 @@ const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const UserStatistc = require('../models/userStatistic');
 
+const getAllUserStatistics = async (req, res, next) => {
+  let users;
+  try {
+    users = await UserStatistc.find({}, '-password')
+  } catch(err) {
+    return next(new HttpError('Samething went wrong, please try again', 404));
+  }
+
+  res.json({ users: users.map( user => user.toObject({ getters: true }) ) })
+}
 
 const getUserStatisticsById = async (req, res, next) => {
   const userId = req.params.uid;
 
   let user;
-
   try {
     user = await UserStatistc.findById(userId);
   } catch (err) {
@@ -34,7 +43,7 @@ const signup = async (req, res, next) => {
 
   let existingUser;
   try {
-    existingUser =  await UserStatistc.findOne({ email: email })
+    existingUser = await UserStatistc.findOne({ email: email })
   } catch(err) {
     return next(new HttpError('Samething went wrong, please try again', 404));
   }
@@ -52,13 +61,13 @@ const signup = async (req, res, next) => {
         victory: 0,
         loss: 0,
         draw: 0,
-        AverageRating: 0
+        averageRating: 0
       },
       easy: {
         victory: 0,
         loss: 0,
         draw: 0,
-        AverageRating: 0
+        averageRating: 0
       }
     }
   })
@@ -117,7 +126,7 @@ const updateUserStatistics = async (req, res, next) => {
   const statistic = UserStatistic.statistic[level];
   
   statistic[outcome]++;
-  statistic.AverageRating = outcome === "victory" ? statistic.AverageRating+1 : outcome === "loss" ? statistic.AverageRating-1: statistic.AverageRating;
+  statistic.averageRating = outcome === "victory" ? statistic.averageRating+1 : outcome === "loss" ? statistic.averageRating-1: statistic.averageRating;
   
   try {
     await UserStatistic.save();
@@ -132,6 +141,7 @@ const updateUserStatistics = async (req, res, next) => {
   res.status(201).json({ users: UserStatistic.toObject( {getters: true} ) });
 }
 
+exports.getAllUserStatistics = getAllUserStatistics;
 exports.getUserStatisticsById = getUserStatisticsById;
 exports.signup = signup;
 exports.login = login;
