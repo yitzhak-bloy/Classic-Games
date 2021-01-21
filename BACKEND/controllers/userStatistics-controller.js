@@ -4,48 +4,6 @@ const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const UserStatistc = require('../models/userStatistic');
 
-const USER_STATISTICS = [
-  {
-    id: 'u1',
-    name: 'yosi',
-    email: 'yosi@gmail.com',
-    password: '123456',
-    statistic: {
-      hard: {
-        victory: 0,
-        loss: 0,
-        draw: 0,
-        AverageRating: 0
-      },
-      easy: {
-        victory: 0,
-        loss: 0,
-        draw: 0,
-        AverageRating: 0
-      }
-    }
-  },
-  {
-    id: 'u2',
-    name: 'efrat',
-    email: 'efrat@gmail.com',
-    password: '123456',
-    statistic: {
-      hard: {
-        victory: 0,
-        loss: 0,
-        draw: 0,
-        AverageRating: 0
-      },
-      easy: {
-        victory: 0,
-        loss: 0,
-        draw: 0,
-        AverageRating: 0
-      }
-    }
-  }
-]
 
 const getUserStatisticsById = async (req, res, next) => {
   const userId = req.params.uid;
@@ -73,6 +31,17 @@ const signup = async (req, res, next) => {
   };
 
   const { name, email, password } = req.body;
+
+  let existingUser;
+  try {
+    existingUser =  await UserStatistc.findOne({ email: email })
+  } catch(err) {
+    return next(new HttpError('Samething went wrong, please try again', 404));
+  }
+
+  if (existingUser) {
+    return next(new HttpError('Signing up failed, please try again', 500));
+  }
 
   const createdUserStatistics = new UserStatistc({
     name, 
@@ -110,14 +79,14 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  let identifiedUser;
+  let existingUser;
   try{
-    identifiedUser = await UserStatistc.find({ email: email })
+    existingUser = await UserStatistc.findOne({ email: email })
   } catch (err) {
     return next(new HttpError('Samething went wrong, please try again', 404))
   }
 
-  if (!identifiedUser || identifiedUser[0].password !== password) {
+  if (!existingUser || existingUser.password !== password) {
     return next( new HttpError('Could not identify user, credentials seem to be worng.', 401) )
   }
 
