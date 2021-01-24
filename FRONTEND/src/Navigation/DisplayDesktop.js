@@ -11,11 +11,11 @@ const DisplayDesktop = (headersData, useStyles) => {
 
   return (
     <Toolbar className={toolbar}>
-        <Link component={RouterLink} to="/" >
-          <Typography variant="h6" component="h1" className={logo} >
-              TicTacToeGame
+      <Link component={RouterLink} to="/" >
+        <Typography variant="h6" component="h1" className={logo} >
+          TicTacToeGame
           </Typography>
-        </Link> 
+      </Link>
       <div>
         {headersData.map(({ label, href }) => {
           return <Button

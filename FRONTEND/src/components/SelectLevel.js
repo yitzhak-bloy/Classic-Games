@@ -7,18 +7,18 @@ import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-contex
 
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;
-  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;  
+  const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
   const gameRun = useContext(GameRunning).gameRunning;
 
   const changeTo = () => {
-    if(!gameRun) {
-    difficultyChange(difficultyLevel);
+    if (!gameRun) {
+      difficultyChange(difficultyLevel);
     }
   }
 
   return (
     <Box  >
-      <Box component="div" p={1} m={1}  mt={5} >
+      <Box component="div" p={1} m={1} mt={5} >
         <Button onClick={changeTo} variant="outlined" size="large" color="primary">{difficultyLevel}</Button>
       </Box>
     </Box>

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  const {paper, avatar, form, submit} = useStyles();
+  const { paper, avatar, form, submit } = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">

@@ -8,12 +8,12 @@ import { TurnContext } from '../shared/context/Turn-context';
 
 const SelectPlayer = () => {
   const playerChange = useContext(PlayerContext).playerChange;
-  const huPlayer = useContext(PlayerContext).huPlayer;  
+  const huPlayer = useContext(PlayerContext).huPlayer;
   const gameRun = useContext(GameRunning).gameRunning;
-  const TurnChange = useContext(TurnContext).TurnChange;  
+  const TurnChange = useContext(TurnContext).TurnChange;
 
   const changeTo = () => {
-    if(!gameRun) {
+    if (!gameRun) {
       playerChange(huPlayer == "X" ? "O" : "X");
       TurnChange("X");
     }
@@ -21,7 +21,7 @@ const SelectPlayer = () => {
 
   return (
     <Box>
-      <Box component="div" p={1} m={1}  mt={5}  >
+      <Box component="div" p={1} m={1} mt={5}  >
         <Button onClick={changeTo} variant="outlined" size="large" color="primary" >{huPlayer}</Button>
       </Box>
     </Box>

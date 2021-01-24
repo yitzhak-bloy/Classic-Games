@@ -52,7 +52,7 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
           <Typography variant="h6" component="h1" className={logo}>
             TicTacToeGame
           </Typography>
-        </Link> 
+        </Link>
       </div>
     </Toolbar>
   );

@@ -4,11 +4,11 @@ const huPlayer = "O";
 const aiPlayer = "X";
 
 const arrOfEmptyIndexies = (board) => {
-  let arr = []; 
+  let arr = [];
   for (let i = 0; i < board.length; i++) {
     if (board[i] !== "O" && board[i] !== "X") {
       arr.push(i)
-    }    
+    }
   }
   return arr
 }
@@ -18,25 +18,25 @@ export const minimax = (newBoard, player, level) => {
 
   if (level === "easy") {
     const random = Math.floor(Math.random() * availSpots.length);
-    return {index: availSpots[random]}
+    return { index: availSpots[random] }
   }
 
-  if (winning(newBoard, huPlayer) === "true"){
-    return {score:-10};
-  } else if (winning(newBoard, aiPlayer) === "true"){
-    return {score:10};
-  } else if (availSpots.length === 0){
-    return {score:0};
+  if (winning(newBoard, huPlayer) === "true") {
+    return { score: -10 };
+  } else if (winning(newBoard, aiPlayer) === "true") {
+    return { score: 10 };
+  } else if (availSpots.length === 0) {
+    return { score: 0 };
   }
 
   let moves = [];
 
-  for (let i = 0; i < availSpots.length; i++){
+  for (let i = 0; i < availSpots.length; i++) {
     let move = {};
-  	move.index = newBoard[availSpots[i]];
+    move.index = newBoard[availSpots[i]];
     newBoard[availSpots[i]] = player;
-    
-    if (player === aiPlayer){
+
+    if (player === aiPlayer) {
       let result = minimax(newBoard, huPlayer);
       move.score = result.score;
     } else {
@@ -66,7 +66,7 @@ export const minimax = (newBoard, player, level) => {
         bestMove = i;
       }
     }
-  } 
+  }
 
   return moves[bestMove];
 }

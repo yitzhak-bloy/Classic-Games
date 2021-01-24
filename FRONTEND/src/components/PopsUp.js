@@ -22,17 +22,17 @@ const PopsUp = ({ open, handleClose, win }) => {
 
   let sentence;
   if (win[1] == "tie") {
-    sentence = 
+    sentence =
       <>
         <DialogTitle id="alert-dialog-title" className={dialogContent}>{"Tie"}</DialogTitle>
         <DialogContent className={dialogContent}>
           <DialogContentText id="alert-dialog-description">
             There is no winner
           </DialogContentText>
-        </DialogContent> 
+        </DialogContent>
       </>
   } else if (win[1] == huPlayer) {
-    sentence = 
+    sentence =
       <>
         <DialogTitle id="alert-dialog-title" className={dialogContent}>{"You won!"}</DialogTitle>
         <DialogContent className={dialogContent}>
@@ -40,9 +40,9 @@ const PopsUp = ({ open, handleClose, win }) => {
             Congratulations! you are the winner!
           </DialogContentText>
         </DialogContent>
-      </> 
+      </>
   } else {
-    sentence = 
+    sentence =
       <>
         <DialogTitle id="alert-dialog-title" className={dialogContent}>{"You lost!"}</DialogTitle>
         <DialogContent className={dialogContent}>
@@ -50,7 +50,7 @@ const PopsUp = ({ open, handleClose, win }) => {
             Losing isn't the end. You can always win the next time.
           </DialogContentText>
         </DialogContent>
-      </> 
+      </>
   }
 
   return (
@@ -65,7 +65,7 @@ const PopsUp = ({ open, handleClose, win }) => {
         <DialogActions>
           <Button onClick={handleClose} variant="outlined" size="small" color="primary" autoFocus className={dialogContent}>
             new game
-          </Button>                             
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

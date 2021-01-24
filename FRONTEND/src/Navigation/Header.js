@@ -68,11 +68,11 @@ const Header = () => {
     setResponsiveness();
     window.addEventListener("resize", () => setResponsiveness());
   }, []);
-                     
+
   return (
     <header>
       <AppBar className={header} >
-        {mobileView ? 
+        {mobileView ?
           displayMobile
           :
           displayDesktop

@@ -18,17 +18,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Square = ({ state, keys, clickHandler }) => {  
+const Square = ({ state, keys, clickHandler }) => {
   const classes = useStyles();
 
   const handler = () => {
     clickHandler(keys)
   }
-  
+
   return (
     <div onClick={handler} className={classes.root} color='secondary' >
-      <Box   bgcolor="#ffb2ff" color="#400CCC">
-        { state === ("O") || state === ("X") ? <Typography variant="h1" component="h2" >{state}</Typography> : null }
+      <Box bgcolor="#ffb2ff" color="#400CCC">
+        {state === ("O") || state === ("X") ? <Typography variant="h1" component="h2" >{state}</Typography> : null}
       </Box>
     </div>
   )
