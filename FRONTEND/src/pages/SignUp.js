@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -34,6 +34,25 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const { paper, avatar, form, submit } = useStyles();
 
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: ''
+  })
+
+  const signupSubmitHandler = event => {
+    event.preventDefault()
+    console.log("🚀 ~ file: SignUp.js ~ line 40 ~ SignUp ~ event::::::::::", user)
+  }
+
+  const handelChange = event => {
+    const { name, value } = event.target;
+    setUser(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -44,21 +63,22 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={form} noValidate>
+        <form className={form} onSubmit={signupSubmitHandler}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="name"
+                label="Name"
                 autoFocus
+                onChange={handelChange}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
@@ -67,8 +87,9 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                onChange={handelChange}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -78,6 +99,7 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handelChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,6 +112,7 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handelChange}
               />
             </Grid>
           </Grid>
