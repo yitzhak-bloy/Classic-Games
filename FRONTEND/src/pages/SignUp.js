@@ -40,9 +40,27 @@ export default function SignUp() {
     password: ''
   })
 
-  const signupSubmitHandler = event => {
+  const signupSubmitHandler = async event => {
     event.preventDefault()
-    console.log("🚀 ~ file: SignUp.js ~ line 40 ~ SignUp ~ event::::::::::", user)
+
+    try {
+      const response = await fetch('http://localhost:5000/api/userStatistics/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          password: user.password
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log("🚀 ~ file: SignUp.js ~ line 61 ~ SignUp ~ responseData:", responseData)
+
+    } catch (err) {
+    }
   }
 
   const handelChange = event => {
@@ -78,18 +96,6 @@ export default function SignUp() {
                 onChange={handelChange}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                onChange={handelChange}
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
