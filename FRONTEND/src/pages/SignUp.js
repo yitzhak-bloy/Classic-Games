@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import LoadingSpinner from '../shared/components/LoadingSpinner';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -38,6 +40,7 @@ export default function SignUp() {
 
   const { paper, avatar, form, submit } = useStyles();
 
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -47,6 +50,7 @@ export default function SignUp() {
   const signupSubmitHandler = async event => {
     event.preventDefault()
 
+    setLoading(true);
     try {
       const response = await fetch('http://localhost:5000/api/userStatistics/signup', {
         method: 'POST',
@@ -62,8 +66,12 @@ export default function SignUp() {
 
       const responseData = await response.json();
       console.log("🚀 ~ file: SignUp.js ~ line 61 ~ SignUp ~ responseData:", responseData);
+
+      setLoading(false);
       history.push("/");
-    } catch (err) { }
+    } catch (err) {
+      setLoading(false);
+    }
   }
 
   const handelChange = event => {
@@ -76,6 +84,7 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
+      {loading && <LoadingSpinner asOverlay />}
       <CssBaseline />
       <div className={paper}>
         <Avatar className={avatar}>
