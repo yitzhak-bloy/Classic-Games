@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Link as RouterLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +12,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  const history = useHistory();
+
   const { paper, avatar, form, submit } = useStyles();
 
   const [user, setUser] = useState({
@@ -57,10 +61,9 @@ export default function SignUp() {
       });
 
       const responseData = await response.json();
-      console.log("🚀 ~ file: SignUp.js ~ line 61 ~ SignUp ~ responseData:", responseData)
-
-    } catch (err) {
-    }
+      console.log("🚀 ~ file: SignUp.js ~ line 61 ~ SignUp ~ responseData:", responseData);
+      history.push("/");
+    } catch (err) { }
   }
 
   const handelChange = event => {

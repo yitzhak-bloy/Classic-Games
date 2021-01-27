@@ -14,7 +14,7 @@ const DisplayDesktop = (headersData, useStyles) => {
       <Link component={RouterLink} to="/" >
         <Typography variant="h6" component="h1" className={logo} >
           TicTacToeGame
-          </Typography>
+        </Typography>
       </Link>
       <div>
         {headersData.map(({ label, href }) => {
