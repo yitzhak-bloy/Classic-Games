@@ -8,11 +8,11 @@ const getAllUserStatistics = async (req, res, next) => {
   let users;
   try {
     users = await UserStatistc.find({}, '-password')
-  } catch(err) {
+  } catch (err) {
     return next(new HttpError('Samething went wrong, please try again', 404));
   }
 
-  res.json({ users: users.map( user => user.toObject({ getters: true }) ) })
+  res.json({ users: users.map(user => user.toObject({ getters: true })) })
 }
 
 const getUserStatisticsById = async (req, res, next) => {
@@ -29,14 +29,14 @@ const getUserStatisticsById = async (req, res, next) => {
     return next(new HttpError('could not find a user for the provided id', 404));
   }
 
-  res.json({user: user.toObject( {getters: true} )})
+  res.json({ user: user.toObject({ getters: true }) })
 }
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log("errors:", errors);
-    return next( new HttpError('Invalid inputs passed, please check uour data.', 422) );
+    return next(new HttpError('Invalid inputs passed, please check uour data.', 422));
   };
 
   const { name, email, password } = req.body;
@@ -44,7 +44,7 @@ const signup = async (req, res, next) => {
   let existingUser;
   try {
     existingUser = await UserStatistc.findOne({ email: email })
-  } catch(err) {
+  } catch (err) {
     return next(new HttpError('Samething went wrong, please try again', 404));
   }
 
@@ -53,8 +53,8 @@ const signup = async (req, res, next) => {
   }
 
   const createdUserStatistics = new UserStatistc({
-    name, 
-    email, 
+    name,
+    email,
     password,
     statistic: {
       hard: {
@@ -82,24 +82,24 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({users: createdUserStatistics})
-};  
+  res.status(201).json({ users: createdUserStatistics })
+};
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
-  try{
+  try {
     existingUser = await UserStatistc.findOne({ email: email })
   } catch (err) {
     return next(new HttpError('Samething went wrong, please try again', 404))
   }
 
   if (!existingUser || existingUser.password !== password) {
-    return next( new HttpError('Could not identify user, credentials seem to be worng.', 401) )
+    return next(new HttpError('Could not identify user, credentials seem to be worng.', 401))
   }
 
-  res.json({ messege: 'Logged in!'});
+  res.json({ messege: 'Logged in!' });
 }
 
 const updateUserStatistics = async (req, res, next) => {
@@ -115,7 +115,7 @@ const updateUserStatistics = async (req, res, next) => {
   let UserStatistic;
   try {
     UserStatistic = await UserStatistc.findById(userId);
-  } catch(err) {
+  } catch (err) {
     return next(new HttpError('Samething went wrong, please try again', 404));
   }
 
@@ -124,10 +124,10 @@ const updateUserStatistics = async (req, res, next) => {
   }
 
   const statistic = UserStatistic.statistic[level];
-  
+
   statistic[outcome]++;
-  statistic.averageRating = outcome === "victory" ? statistic.averageRating+1 : outcome === "loss" ? statistic.averageRating-1: statistic.averageRating;
-  
+  statistic.averageRating = outcome === "victory" ? statistic.averageRating + 1 : outcome === "loss" ? statistic.averageRating - 1 : statistic.averageRating;
+
   try {
     await UserStatistic.save();
   } catch (err) {
@@ -138,7 +138,7 @@ const updateUserStatistics = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ users: UserStatistic.toObject( {getters: true} ) });
+  res.status(201).json({ users: UserStatistic.toObject({ getters: true }) });
 }
 
 exports.getAllUserStatistics = getAllUserStatistics;
