@@ -20,38 +20,8 @@ const PopsUp = ({ open, handleClose, win }) => {
   const huPlayer = useContext(PlayerContext).huPlayer;
   const { dialogContent } = useStyles();
 
-  let sentence;
-  if (win[1] == "tie") {
-    sentence =
-      <>
-        <DialogTitle id="alert-dialog-title" className={dialogContent}>{"Tie"}</DialogTitle>
-        <DialogContent className={dialogContent}>
-          <DialogContentText id="alert-dialog-description">
-            There is no winner
-          </DialogContentText>
-        </DialogContent>
-      </>
-  } else if (win[1] == huPlayer) {
-    sentence =
-      <>
-        <DialogTitle id="alert-dialog-title" className={dialogContent}>{"You won!"}</DialogTitle>
-        <DialogContent className={dialogContent}>
-          <DialogContentText id="alert-dialog-description">
-            Congratulations! you are the winner!
-          </DialogContentText>
-        </DialogContent>
-      </>
-  } else {
-    sentence =
-      <>
-        <DialogTitle id="alert-dialog-title" className={dialogContent}>{"You lost!"}</DialogTitle>
-        <DialogContent className={dialogContent}>
-          <DialogContentText id="alert-dialog-description">
-            Losing isn't the end. You can always win the next time.
-          </DialogContentText>
-        </DialogContent>
-      </>
-  }
+  const title = win[1] == 'tie' ? 'tie' : win[1] == huPlayer ? 'You won!' : 'You lost!';
+  const ContentText = win[1] == 'tie' ? 'There is no winner' : win[1] == huPlayer ? 'Congratulations! you are the winner!' : "Losing isn't the end. You can always win the next time.";
 
   return (
     <div>
@@ -61,7 +31,12 @@ const PopsUp = ({ open, handleClose, win }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {sentence}
+        <DialogTitle id="alert-dialog-title" className={dialogContent}>{title}</DialogTitle>
+        <DialogContent className={dialogContent}>
+          <DialogContentText id="alert-dialog-description">
+            {ContentText}
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant="outlined" size="small" color="primary" autoFocus className={dialogContent}>
             new game
