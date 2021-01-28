@@ -88,7 +88,7 @@ const Board = () => {
         <Square state={squares[8]} keys={8} clickHandler={clickHandler} />
       </Box>
 
-      <PopsUp open={popsUpOpen} handleClose={handleClose} win={win} />
+      <PopsUp open={popsUpOpen} handleClose={handleClose} description={win} />
 
       <Button onClick={handelRestart} disableElevation variant="outlined" size="large" color="primary" >new game</Button>
     </Box>

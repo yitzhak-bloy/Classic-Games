@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import LoadingSpinner from '../shared/components/LoadingSpinner';
+import PopsUp from '../components/PopsUp';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +42,7 @@ export default function SignUp() {
   const { paper, avatar, form, submit } = useStyles();
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -65,11 +67,15 @@ export default function SignUp() {
       });
 
       const responseData = await response.json();
-      console.log("🚀 ~ file: SignUp.js ~ line 61 ~ SignUp ~ responseData:", responseData);
+
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
 
       setLoading(false);
       history.push("/");
     } catch (err) {
+      setError(err)
       setLoading(false);
     }
   }
@@ -82,8 +88,15 @@ export default function SignUp() {
     }))
   }
 
+  const handleClosePopsUp = () => {
+    setTimeout(() => {
+      setError(null);
+    }, 1);
+  };
+
   return (
     <Container component="main" maxWidth="xs">
+      {error && <PopsUp open={error} handleClose={handleClosePopsUp} description={error} />}
       {loading && <LoadingSpinner asOverlay />}
       <CssBaseline />
       <div className={paper}>

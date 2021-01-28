@@ -16,12 +16,23 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const PopsUp = ({ open, handleClose, win }) => {
+const PopsUp = ({ open, handleClose, description }) => {
   const huPlayer = useContext(PlayerContext).huPlayer;
   const { dialogContent } = useStyles();
 
-  const title = win[1] == 'tie' ? 'tie' : win[1] == huPlayer ? 'You won!' : 'You lost!';
-  const ContentText = win[1] == 'tie' ? 'There is no winner' : win[1] == huPlayer ? 'Congratulations! you are the winner!' : "Losing isn't the end. You can always win the next time.";
+  const title =
+    description.message ? 'error' :
+      description[1] == 'tie' ? 'tie' :
+        description[1] == huPlayer ? 'You won!' :
+          'You lost!';
+  const contentText =
+    description.message ? description.message :
+      description[1] == 'tie' ? 'There is no winner' :
+        description[1] == huPlayer ? 'Congratulations! you are the winner!' :
+          "Losing isn't the end. You can always win the next time.";
+  const contentButton =
+    description.message ? "Close" :
+      "New game"
 
   return (
     <div>
@@ -34,12 +45,12 @@ const PopsUp = ({ open, handleClose, win }) => {
         <DialogTitle id="alert-dialog-title" className={dialogContent}>{title}</DialogTitle>
         <DialogContent className={dialogContent}>
           <DialogContentText id="alert-dialog-description">
-            {ContentText}
+            {contentText}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} variant="outlined" size="small" color="primary" autoFocus className={dialogContent}>
-            new game
+            {contentButton}
           </Button>
         </DialogActions>
       </Dialog>
