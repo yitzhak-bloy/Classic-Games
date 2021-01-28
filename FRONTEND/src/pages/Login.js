@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { useHistory } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,7 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link as RouterLink } from "react-router-dom";
+
+import LoadingSpinner from '../shared/components/LoadingSpinner';
+import PopsUp from '../components/PopsUp';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,10 +37,65 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
+  const history = useHistory();
+
   const { paper, avatar, form, submit } = useStyles();
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const loginSubmitHandler = async event => {
+    event.preventDefault()
+
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/userStatistics/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: user.email,
+          password: user.password
+        }),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
+
+      setLoading(false);
+      history.push("/");
+    } catch (err) {
+      setError(err)
+      setLoading(false);
+    }
+  }
+
+  const handelChange = event => {
+    const { name, value } = event.target;
+    setUser(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleClosePopsUp = () => {
+    setTimeout(() => {
+      setError(null);
+    }, 1);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
+      {error && <PopsUp open={error} handleClose={handleClosePopsUp} description={error} />}
+      {loading && <LoadingSpinner asOverlay />}
       <CssBaseline />
       <div className={paper}>
         <Avatar className={avatar}>
@@ -43,7 +104,7 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={form} noValidate>
+        <form className={form} noValidate onSubmit={loginSubmitHandler}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -54,6 +115,7 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handelChange}
           />
           <TextField
             variant="outlined"
@@ -65,6 +127,7 @@ const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handelChange}
           />
 
           <Button
