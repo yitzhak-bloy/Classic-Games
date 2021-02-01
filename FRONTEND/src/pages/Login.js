@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -14,7 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import LoadingSpinner from '../shared/components/LoadingSpinner';
-import PopsUp from '../components/PopsUp';
+import PopsUp from '../shared/components/PopsUp';
+import { UserContext } from '../shared/context/User-context';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const history = useHistory();
+  const userContext = useContext(UserContext);
 
   const { paper, avatar, form, submit } = useStyles();
 
@@ -70,6 +72,7 @@ const Login = () => {
         throw new Error(responseData.message);
       }
 
+      userContext.setUser(responseData)
       setLoading(false);
       history.push("/");
     } catch (err) {

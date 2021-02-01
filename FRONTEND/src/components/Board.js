@@ -9,7 +9,7 @@ import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import { GameRunning } from '../shared/context/GameRunning-context';
 import { TurnContext } from '../shared/context/Turn-context';
-import PopsUp from './PopsUp';
+import PopsUp from '../shared/components/PopsUp';
 import './Board.css'
 
 const Board = () => {

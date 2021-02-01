@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,6 +7,7 @@ import {
 
 import DisplayDesktop from './DisplayDesktop';
 import DisplayMobile from './DisplayMobile';
+import { UserContext } from '../shared/context/User-context';
 
 const headersData = [
   {
@@ -52,6 +53,20 @@ const Header = () => {
   const { mobileView, drawerOpen } = state;
 
   const { header } = useStyles();
+
+  const userContext = useContext(UserContext);
+
+  const handelLogout = () => userContext.setUser({});
+
+  if (userContext.user.user) {
+    headersData[1].label = 'Log Out';
+    headersData[1].href = '/';
+    headersData[1].onClick = handelLogout;
+  } else {
+    headersData[1].label = 'Log In';
+    headersData[1].href = '/Login';
+    headersData[1].onClick = undefined;
+  }
 
   const handleDrawerOpen = () => setState((prevState) => ({ ...prevState, drawerOpen: true }));
   const handleDrawerClose = () => setState((prevState) => ({ ...prevState, drawerOpen: false }));

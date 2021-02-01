@@ -14,7 +14,7 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
   const { logo, drawerContainer } = useStyles();
 
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href }) => {
+    return headersData.map(({ label, href, onClick }) => {
       return (
         <Link
           {...{
@@ -23,6 +23,7 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
             color: "inherit",
             style: { textDecoration: "none" },
             key: label,
+            onClick: onClick,
           }}
         >
           <MenuItem>{label}</MenuItem>

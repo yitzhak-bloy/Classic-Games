@@ -17,14 +17,15 @@ const DisplayDesktop = (headersData, useStyles) => {
         </Typography>
       </Link>
       <div>
-        {headersData.map(({ label, href }) => {
+        {headersData.map(({ label, href, onClick }) => {
           return <Button
             {...{
               key: label,
               color: "inherit",
               to: href,
               component: RouterLink,
-              className: menuButton
+              className: menuButton,
+              onClick: onClick
             }}
           >
             {label}
