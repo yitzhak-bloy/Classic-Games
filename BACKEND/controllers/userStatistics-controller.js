@@ -49,7 +49,7 @@ const signup = async (req, res, next) => {
   }
 
   if (existingUser) {
-    return next(new HttpError('Signing up failed, please try again', 500));
+    return next(new HttpError('User already exists, please try logging in.', 500));
   }
 
   const createdUserStatistics = new UserStatistc({
@@ -82,7 +82,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ users: createdUserStatistics })
+  res.status(201).json({ user: createdUserStatistics })
 };
 
 const login = async (req, res, next) => {
@@ -99,7 +99,7 @@ const login = async (req, res, next) => {
     return next(new HttpError('Could not identify user, credentials seem to be worng.', 401))
   }
 
-  res.json({ messege: 'Logged in!' });
+  res.json({ user: existingUser.toObject({ getters: true }) });
 }
 
 const updateUserStatistics = async (req, res, next) => {
