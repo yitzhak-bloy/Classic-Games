@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import LoadingSpinner from '../shared/components/LoadingSpinner';
 import PopsUp from '../shared/components/PopsUp';
 import { UserContext } from '../shared/context/User-context';
+import { useHttpClient } from '../shared//hooks/http-hook';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,10 +42,9 @@ export default function SignUp() {
   const history = useHistory();
   const userContext = useContext(UserContext);
 
+  const { loading, error, sendRequest, handleClosePopsUp } = useHttpClient();
   const { paper, avatar, form, submit } = useStyles();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -54,33 +54,23 @@ export default function SignUp() {
   const signupSubmitHandler = async event => {
     event.preventDefault()
 
-    setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/userStatistics/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+      const responseData = await sendRequest(
+        'http://localhost:5000/api/userStatistics/signup',
+        'POST',
+        JSON.stringify({
           name: user.name,
           email: user.email,
           password: user.password
         }),
-      });
+        {
+          'Content-Type': 'application/json'
+        }
+      )
 
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.message);
-      }
-
-      userContext.setUser(responseData)
-      setLoading(false);
+      userContext.setUser(responseData);
       history.push("/");
-    } catch (err) {
-      setError(err)
-      setLoading(false);
-    }
+    } catch (err) { }
   }
 
   const handelChange = event => {
@@ -90,12 +80,6 @@ export default function SignUp() {
       [name]: value
     }))
   }
-
-  const handleClosePopsUp = () => {
-    setTimeout(() => {
-      setError(null);
-    }, 1);
-  };
 
   return (
     <Container component="main" maxWidth="xs">
