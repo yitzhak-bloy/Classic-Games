@@ -109,14 +109,13 @@ const updateUserStatistics = async (req, res, next) => {
     throw new HttpError('Something went wrong.', 422);
   };
 
-  const { level, outcome } = req.body;
-  const userId = req.params.uid;
+  const { email, level, outcome } = req.body;
 
   let UserStatistic;
   try {
-    UserStatistic = await UserStatistc.findById(userId);
+    UserStatistic = await UserStatistc.findOne({ email: email })
   } catch (err) {
-    return next(new HttpError('Samething went wrong, please try again', 404));
+    return next(new HttpError('Samething went wrong, please try again', 404))
   }
 
   if (!UserStatistic) {
