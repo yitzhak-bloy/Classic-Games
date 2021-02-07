@@ -9,6 +9,8 @@ import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import { GameRunning } from '../shared/context/GameRunning-context';
 import { TurnContext } from '../shared/context/Turn-context';
+import { UserContext } from '../shared/context/User-context';
+import { useHttpClient } from '../shared//hooks/http-hook';
 import PopsUp from '../shared/components/PopsUp';
 import './Board.css'
 
@@ -16,13 +18,17 @@ const Board = () => {
   const [squares, setSquares] = useState(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
   const [win, setWin] = useState([false]);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
+  const [request, setRequest] = useState(false);
 
+  const user = useContext(UserContext).user;
   const gameRunChange = useContext(GameRunning).gameChange;
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
   const setWhoseTurn = useContext(TurnContext).TurnChange;
   const whoseTurn = useContext(TurnContext).whoseTurn;
   const difficultyLevel = useContext(DifficultyLevelContext).difficultyLevel;
+
+  const { sendRequest } = useHttpClient();
 
   useEffect(() => {
     if (whoseTurn === aiPlayer) {
@@ -41,17 +47,44 @@ const Board = () => {
     if (winning(squares, 'X') === "true") {
       setWin([true, "X"]);
       setPopsUpOpen(true);
+      setRequest(true);
     } else if (winning(squares, 'O') === "true") {
       setWin([true, "O"]);
-      setPopsUpOpen(true)
+      setPopsUpOpen(true);
+      setRequest(true);
     } else if (winning(squares, 'X') === "full" || winning(squares, 'O') === "full") {
       setWin([true, "tie"]);
       setPopsUpOpen(true);
+      setRequest(true);
     }
-  }, [squares, win, popsUpOpen])
+  }, [squares])
+
+  useEffect(async () => {
+    if (request) {
+      let outcome = win[1] == huPlayer ? 'victory' : win[1] == aiPlayer ? 'loss' : 'draw'
+
+      if (user.user) {
+        try {
+          const responseData = await sendRequest(
+            'http://localhost:5000/api/userStatistics/updata',
+            'PATCH',
+            JSON.stringify({
+              email: user.user.email,
+              level: difficultyLevel,
+              outcome
+            }),
+            {
+              'Content-Type': 'application/json'
+            }
+          )
+        } catch (err) { }
+      }
+    }
+  }, [request])
 
   const clickHandler = (SerialNum) => {
     if (whoseTurn === huPlayer) {
+      setRequest(false)
       setSquares(squares.map((square, i) => {
         if (i !== SerialNum || square === aiPlayer || square === huPlayer) return square;
         setWhoseTurn(aiPlayer)
