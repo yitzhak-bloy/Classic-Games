@@ -1,10 +1,16 @@
 import { useState, useContext, useEffect } from 'react';
 
+import LoadingSpinner from '../shared/components/LoadingSpinner';
 import { UserContext } from '../shared/context/User-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
 const Statistics = () => {
-  const emailOfUser = useContext(UserContext).user.user.email;
+  const currentUser = useContext(UserContext).user;
+
+  let emailOfUser;
+  if (JSON.stringify(currentUser) !== '{}') {
+    emailOfUser = currentUser.user.email
+  }
 
   const [userStatistic, setUserStatistic] = useState(undefined);
 
@@ -22,11 +28,11 @@ const Statistics = () => {
   }, [])
 
   if (!emailOfUser) {
-    return "מצטערים חבל של נרשמת"
+    return "מצטערים חבל שלא נרשמת"
   }
 
   if (!userStatistic) {
-    return <h1>i am Statistics!</h1>
+    return <LoadingSpinner asOverlay />
   }
 
   let userSta = userStatistic.filter((user) => user.email == emailOfUser)[0];
