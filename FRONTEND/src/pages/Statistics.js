@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 
 import LoadingSpinner from '../shared/components/LoadingSpinner';
+import { findHighestScore } from '../Algorithms/findHighestScore';
 import { UserContext } from '../shared/context/User-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
@@ -18,13 +19,13 @@ const Statistics = () => {
 
   let allUsers;
   useEffect(() => {
-    const a = async () => {
+    const req = async () => {
       try {
         allUsers = await sendRequest('http://localhost:5000/api/userStatistics/');
         setUserStatistic(allUsers.users)
       } catch (err) { }
     }
-    a()
+    req()
   }, [])
 
   if (!emailOfUser) {
@@ -36,6 +37,8 @@ const Statistics = () => {
   }
 
   let userSta = userStatistic.filter((user) => user.email == emailOfUser)[0];
+
+  const [largestEasy, largestHard] = findHighestScore(userStatistic);
 
   return (
     <div>
