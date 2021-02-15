@@ -1,11 +1,55 @@
 import { useState, useContext, useEffect } from 'react';
 
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 import LoadingSpinner from '../shared/components/LoadingSpinner';
 import { findHighestScore } from '../Algorithms/findHighestScore';
 import { UserContext } from '../shared/context/User-context';
 import { useHttpClient } from '../shared/hooks/http-hook';
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const createData = (name, averageRating, victory, loss, draw) => {
+  return { name, averageRating, victory, loss, draw };
+}
+
+const rows = [
+  createData('Heard', 159, 6.0, 24, 4.0),
+  createData('easy', 237, 9.0, 37, 4.3),
+];
+
+const useStyles = makeStyles({
+  table: {
+    maxWidth: 600,
+  },
+});
+
 const Statistics = () => {
+  const classes = useStyles();
+
   const currentUser = useContext(UserContext).user;
 
   let emailOfUser;
@@ -40,19 +84,73 @@ const Statistics = () => {
 
   const [largestEasy, largestHard] = findHighestScore(userStatistic);
 
+  const rowsPersonal = [
+    createData('Heard', userSta.statistic.hard.averageRating, userSta.statistic.hard.victory, userSta.statistic.hard.loss, userSta.statistic.hard.draw),
+    createData('easy', userSta.statistic.easy.averageRating, userSta.statistic.easy.victory, userSta.statistic.easy.loss, userSta.statistic.easy.draw),
+  ];
+
+  const [userHard1, userHard2, userHard3] = largestHard;
+  const [userEasy1, userEasy2, userEasy3] = largestEasy;
+
+  const rowsPublic = [
+    createData('Heard', `${userHard1.name}: ${userHard1.statistic.hard.averageRating}`, `${userHard2.name}: ${userHard2.statistic.hard.averageRating}`, `${userHard3.name}: ${userHard3.statistic.hard.averageRating}`),
+    createData('easy', `${userEasy1.name}: ${userEasy1.statistic.hard.averageRating}`, `${userEasy2.name}: ${userEasy2.statistic.hard.averageRating}`, `${userEasy3.name}: ${userEasy3.statistic.hard.averageRating}`),
+  ];
+
   return (
     <div>
-      <h1>{userSta.name}</h1>
-      <h2>hard</h2>
-      <h3>averageRating: {userSta.statistic.hard.averageRating}</h3>
-      <h3>victory: {userSta.statistic.hard.victory}</h3>
-      <h3>loss: {userSta.statistic.hard.loss}</h3>
-      <h3>draw: {userSta.statistic.hard.draw}</h3>
-      <h2>easy</h2>
-      <h3>averageRating: {userSta.statistic.easy.averageRating}</h3>
-      <h3>victory: {userSta.statistic.easy.victory}</h3>
-      <h3>loss: {userSta.statistic.easy.loss}</h3>
-      <h3>draw: {userSta.statistic.easy.draw}</h3>
+      <h1 align="center">Users with the highest score</h1>
+      <TableContainer component={Paper}>
+        <Table align="center" className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Difficulty</StyledTableCell>
+              <StyledTableCell align="center">First Place&nbsp;</StyledTableCell>
+              <StyledTableCell align="center">Second place&nbsp;</StyledTableCell>
+              <StyledTableCell align="center">Third place&nbsp;</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsPublic.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell component="th" scope="row">
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell align="center">{row.averageRating}</StyledTableCell>
+                <StyledTableCell align="center">{row.victory}</StyledTableCell>
+                <StyledTableCell align="center">{row.loss}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <h1 align="center">Personal score of {userSta.name}</h1>
+      <TableContainer component={Paper}>
+        <Table align="center" className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Difficulty</StyledTableCell>
+              <StyledTableCell align="center">AverageRating&nbsp;</StyledTableCell>
+              <StyledTableCell align="center">Victory&nbsp;</StyledTableCell>
+              <StyledTableCell align="center">Loss&nbsp;</StyledTableCell>
+              <StyledTableCell align="center">Draw&nbsp;</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsPersonal.map((row) => (
+              <StyledTableRow key={row.name}>
+                <StyledTableCell component="th" scope="row">
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell align="center">{row.averageRating}</StyledTableCell>
+                <StyledTableCell align="center">{row.victory}</StyledTableCell>
+                <StyledTableCell align="center">{row.loss}</StyledTableCell>
+                <StyledTableCell align="center">{row.draw}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   )
 };
