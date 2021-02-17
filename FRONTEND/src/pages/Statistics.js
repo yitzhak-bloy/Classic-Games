@@ -36,11 +36,6 @@ const createData = (name, averageRating, victory, loss, draw) => {
   return { name, averageRating, victory, loss, draw };
 }
 
-const rows = [
-  createData('Heard', 159, 6.0, 24, 4.0),
-  createData('easy', 237, 9.0, 37, 4.3),
-];
-
 const useStyles = makeStyles({
   table: {
     maxWidth: 600,
@@ -93,8 +88,8 @@ const Statistics = () => {
   const [userEasy1, userEasy2, userEasy3] = largestEasy;
 
   const rowsPublic = [
-    createData('Heard', `${userHard1.name}: ${userHard1.statistic.hard.averageRating}`, `${userHard2.name}: ${userHard2.statistic.hard.averageRating}`, `${userHard3.name}: ${userHard3.statistic.hard.averageRating}`),
-    createData('easy', `${userEasy1.name}: ${userEasy1.statistic.hard.averageRating}`, `${userEasy2.name}: ${userEasy2.statistic.hard.averageRating}`, `${userEasy3.name}: ${userEasy3.statistic.hard.averageRating}`),
+    createData('Heard', `${userHard1.name}: [${userHard1.statistic.hard.averageRating}]`, `${userHard2.name}: [${userHard2.statistic.hard.averageRating}]`, `${userHard3.name}: [${userHard3.statistic.hard.averageRating}]`),
+    createData('easy', `${userEasy1.name}: [${userEasy1.statistic.easy.averageRating}]`, `${userEasy2.name}: [${userEasy2.statistic.easy.averageRating}]`, `${userEasy3.name}: [${userEasy3.statistic.easy.averageRating}]`),
   ];
 
   return (

@@ -19,7 +19,7 @@ router.post('/signup',
 
 router.post('/login', userStatisticsControllers.login);
 
-router.patch('/:uid',
+router.patch('/updata',
   [
     check('level').notEmpty(),
     check('outcome').notEmpty(),
