@@ -15,23 +15,6 @@ const getAllUserStatistics = async (req, res, next) => {
   res.json({ users: users.map(user => user.toObject({ getters: true })) })
 }
 
-const getUserStatisticsById = async (req, res, next) => {
-  const userId = req.params.uid;
-
-  let user;
-  try {
-    user = await UserStatistc.findById(userId);
-  } catch (err) {
-    return next(new HttpError('Samething went wrong, please try again', 404));
-  }
-
-  if (!user) {
-    return next(new HttpError('could not find a user for the provided id', 404));
-  }
-
-  res.json({ user: user.toObject({ getters: true }) })
-}
-
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -141,7 +124,6 @@ const updateUserStatistics = async (req, res, next) => {
 }
 
 exports.getAllUserStatistics = getAllUserStatistics;
-exports.getUserStatisticsById = getUserStatisticsById;
 exports.signup = signup;
 exports.login = login;
 exports.updateUserStatistics = updateUserStatistics;

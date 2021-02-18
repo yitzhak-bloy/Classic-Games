@@ -7,8 +7,6 @@ const router = express.Router();
 
 router.get('/', userStatisticsControllers.getAllUserStatistics);
 
-router.get('/:uid', userStatisticsControllers.getUserStatisticsById);
-
 router.post('/signup',
   [
     check('name').notEmpty(),

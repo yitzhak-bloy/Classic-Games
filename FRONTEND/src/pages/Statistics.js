@@ -131,7 +131,7 @@ const Statistics = () => {
         !emailOfUser
           ?
           <h1 align="center" >
-            To see the personal score you need to <Link component={RouterLink} to="/Login" >login</Link>
+            To see the personal score, you need to <Link component={RouterLink} to="/Login" >login</Link>
           </h1>
           :
           <div>
