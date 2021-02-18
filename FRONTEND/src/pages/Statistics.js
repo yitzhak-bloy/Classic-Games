@@ -67,22 +67,16 @@ const Statistics = () => {
     req()
   }, [])
 
-  if (!emailOfUser) {
-    return "מצטערים חבל שלא נרשמת"
-  }
+  // if (!emailOfUser) {
+  //   return <h1>dfvd</h1>
+
+  // }
 
   if (!userStatistic) {
     return <LoadingSpinner asOverlay />
   }
 
-  let userSta = userStatistic.filter((user) => user.email == emailOfUser)[0];
-
   const [largestEasy, largestHard] = findHighestScore(userStatistic);
-
-  const rowsPersonal = [
-    createData('Heard', userSta.statistic.hard.averageRating, userSta.statistic.hard.victory, userSta.statistic.hard.loss, userSta.statistic.hard.draw),
-    createData('easy', userSta.statistic.easy.averageRating, userSta.statistic.easy.victory, userSta.statistic.easy.loss, userSta.statistic.easy.draw),
-  ];
 
   const [userHard1, userHard2, userHard3] = largestHard;
   const [userEasy1, userEasy2, userEasy3] = largestEasy;
@@ -91,6 +85,17 @@ const Statistics = () => {
     createData('Heard', `${userHard1.name}: [${userHard1.statistic.hard.averageRating}]`, `${userHard2.name}: [${userHard2.statistic.hard.averageRating}]`, `${userHard3.name}: [${userHard3.statistic.hard.averageRating}]`),
     createData('easy', `${userEasy1.name}: [${userEasy1.statistic.easy.averageRating}]`, `${userEasy2.name}: [${userEasy2.statistic.easy.averageRating}]`, `${userEasy3.name}: [${userEasy3.statistic.easy.averageRating}]`),
   ];
+
+  let userSta;
+  let rowsPersonal;
+  if (emailOfUser) {
+    userSta = userStatistic.filter((user) => user.email == emailOfUser)[0];
+
+    rowsPersonal = [
+      createData('Heard', userSta.statistic.hard.averageRating, userSta.statistic.hard.victory, userSta.statistic.hard.loss, userSta.statistic.hard.draw),
+      createData('easy', userSta.statistic.easy.averageRating, userSta.statistic.easy.victory, userSta.statistic.easy.loss, userSta.statistic.easy.draw),
+    ];
+  }
 
   return (
     <div>
@@ -119,33 +124,38 @@ const Statistics = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <h1 align="center">Personal score of {userSta.name}</h1>
-      <TableContainer component={Paper}>
-        <Table align="center" className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Difficulty</StyledTableCell>
-              <StyledTableCell align="center">AverageRating&nbsp;</StyledTableCell>
-              <StyledTableCell align="center">Victory&nbsp;</StyledTableCell>
-              <StyledTableCell align="center">Loss&nbsp;</StyledTableCell>
-              <StyledTableCell align="center">Draw&nbsp;</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsPersonal.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.averageRating}</StyledTableCell>
-                <StyledTableCell align="center">{row.victory}</StyledTableCell>
-                <StyledTableCell align="center">{row.loss}</StyledTableCell>
-                <StyledTableCell align="center">{row.draw}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {
+        !emailOfUser ? <h1 align="center" >To see the personal score you need to login</h1> :
+          <div>
+            <h1 align="center">Personal score of {userSta.name}</h1>
+            <TableContainer component={Paper}>
+              <Table align="center" className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>Difficulty</StyledTableCell>
+                    <StyledTableCell align="center">AverageRating&nbsp;</StyledTableCell>
+                    <StyledTableCell align="center">Victory&nbsp;</StyledTableCell>
+                    <StyledTableCell align="center">Loss&nbsp;</StyledTableCell>
+                    <StyledTableCell align="center">Draw&nbsp;</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rowsPersonal.map((row) => (
+                    <StyledTableRow key={row.name}>
+                      <StyledTableCell component="th" scope="row">
+                        {row.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">{row.averageRating}</StyledTableCell>
+                      <StyledTableCell align="center">{row.victory}</StyledTableCell>
+                      <StyledTableCell align="center">{row.loss}</StyledTableCell>
+                      <StyledTableCell align="center">{row.draw}</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+      }
     </div>
   )
 };
