@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { Link as RouterLink } from "react-router-dom";
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,6 +9,13 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {
+  Toolbar,
+  Typography,
+  Button,
+  Link,
+} from "@material-ui/core";
+
 
 import LoadingSpinner from '../shared/components/LoadingSpinner';
 import { findHighestScore } from '../Algorithms/findHighestScore';
@@ -67,11 +75,6 @@ const Statistics = () => {
     req()
   }, [])
 
-  // if (!emailOfUser) {
-  //   return <h1>dfvd</h1>
-
-  // }
-
   if (!userStatistic) {
     return <LoadingSpinner asOverlay />
   }
@@ -125,7 +128,12 @@ const Statistics = () => {
         </Table>
       </TableContainer>
       {
-        !emailOfUser ? <h1 align="center" >To see the personal score you need to login</h1> :
+        !emailOfUser
+          ?
+          <h1 align="center" >
+            To see the personal score you need to <Link component={RouterLink} to="/Login" >login</Link>
+          </h1>
+          :
           <div>
             <h1 align="center">Personal score of {userSta.name}</h1>
             <TableContainer component={Paper}>
