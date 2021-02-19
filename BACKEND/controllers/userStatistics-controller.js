@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 const HttpError = require('../models/http-error');
 const UserStatistc = require('../models/userStatistic');
@@ -34,6 +35,14 @@ const signup = async (req, res, next) => {
   if (existingUser) {
     return next(new HttpError('User already exists, please try logging in.', 500));
   }
+
+  let hashedPassword;
+  try {
+    hashedPassword = await bcrypt.hash(password, 12);
+  } catch (err) {
+    return next(new HttpError('Samething went wrong, please try again', 404));
+  }
+
 
   const createdUserStatistics = new UserStatistc({
     name,
