@@ -43,11 +43,10 @@ const signup = async (req, res, next) => {
     return next(new HttpError('Samething went wrong, please try again', 404));
   }
 
-
   const createdUserStatistics = new UserStatistc({
     name,
     email,
-    password,
+    password: hashedPassword,
     statistic: {
       hard: {
         victory: 0,
@@ -87,7 +86,18 @@ const login = async (req, res, next) => {
     return next(new HttpError('Samething went wrong, please try again', 404))
   }
 
-  if (!existingUser || existingUser.password !== password) {
+  if (!existingUser) {
+    return next(new HttpError('Could not identify user, credentials seem to be worng.', 401))
+  }
+
+  let isValidPassword;
+  try {
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
+  } catch (err) {
+    return next(new HttpError('Samething went wrong, please try again', 500))
+  }
+
+  if (!isValidPassword) {
     return next(new HttpError('Could not identify user, credentials seem to be worng.', 401))
   }
 
