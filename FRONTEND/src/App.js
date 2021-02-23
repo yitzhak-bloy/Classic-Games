@@ -15,11 +15,14 @@ import { UserContext } from './shared/context/User-context';
 
 const App = () => {
   const [user, setUser] = useState({});
+  const [email, setEmail] = useState({});
 
   return (
     <UserContext.Provider value={{
       user: user,
-      setUser: currentUser => setUser(currentUser)
+      email: email,
+      setUser: currentUser => setUser(currentUser),
+      setEmail: email => setEmail(email)
     }} >
       <Router>
         <Header />

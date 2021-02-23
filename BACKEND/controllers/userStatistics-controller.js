@@ -73,7 +73,7 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ user: createdUserStatistics })
+  res.status(201).json({ user: createdUserStatistics, email: createdUserStatistics.email })
 };
 
 const login = async (req, res, next) => {
@@ -101,7 +101,7 @@ const login = async (req, res, next) => {
     return next(new HttpError('Could not identify user, credentials seem to be worng.', 401))
   }
 
-  res.json({ user: existingUser.toObject({ getters: true }) });
+  res.json({ user: existingUser.toObject({ getters: true }), email: existingUser.email });
 }
 
 const updateUserStatistics = async (req, res, next) => {

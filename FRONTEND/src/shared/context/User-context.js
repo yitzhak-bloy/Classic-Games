@@ -2,5 +2,7 @@ import { createContext } from 'react';
 
 export const UserContext = createContext({
   user: {},
-  setUser: () => { }
+  email: undefined,
+  setUser: () => { },
+  setEmail: () => { }
 });

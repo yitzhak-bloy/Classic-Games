@@ -20,7 +20,7 @@ const Board = () => {
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [request, setRequest] = useState(false);
 
-  const user = useContext(UserContext).user;
+  const email = useContext(UserContext).email;
   const gameRunChange = useContext(GameRunning).gameChange;
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
@@ -63,13 +63,13 @@ const Board = () => {
     if (request) {
       let outcome = win[1] == huPlayer ? 'victory' : win[1] == aiPlayer ? 'loss' : 'draw'
 
-      if (user.user) {
+      if (email) {
         try {
           const responseData = await sendRequest(
             'http://localhost:5000/api/userStatistics/updata',
             'PATCH',
             JSON.stringify({
-              email: user.user.email,
+              email: email,
               level: difficultyLevel,
               outcome
             }),

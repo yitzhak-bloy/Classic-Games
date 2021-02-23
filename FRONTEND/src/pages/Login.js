@@ -64,10 +64,10 @@ const Login = () => {
         {
           'Content-Type': 'application/json'
         },
-
       );
 
-      userContext.setUser(responseData)
+      userContext.setUser(responseData);
+      userContext.setEmail(responseData.email);
       history.push("/");
     } catch (err) { }
   }
