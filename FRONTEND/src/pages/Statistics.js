@@ -2,17 +2,14 @@ import { useState, useContext, useEffect } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import {
-  Toolbar,
-  Typography,
-  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
   Link,
 } from "@material-ui/core";
 
@@ -53,16 +50,16 @@ const useStyles = makeStyles({
 const Statistics = () => {
   const classes = useStyles();
 
-  const currentUser = useContext(UserContext).user;
+  const currentEmailUser = useContext(UserContext).email;
 
   let emailOfUser;
-  if (JSON.stringify(currentUser) !== '{}') {
-    emailOfUser = currentUser.user.email
+  if (JSON.stringify(currentEmailUser) !== '{}') {
+    emailOfUser = currentEmailUser
   }
 
   const [userStatistic, setUserStatistic] = useState(undefined);
 
-  const { loading, error, sendRequest, handleClosePopsUp } = useHttpClient();
+  const { sendRequest } = useHttpClient();
 
   let allUsers;
   useEffect(() => {
