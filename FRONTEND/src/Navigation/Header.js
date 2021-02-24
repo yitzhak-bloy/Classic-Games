@@ -56,9 +56,9 @@ const Header = () => {
 
   const userContext = useContext(UserContext);
 
-  const handelLogout = () => userContext.setUser({});
+  const handelLogout = () => userContext.setEmail('');
 
-  if (userContext.user.user) {
+  if (userContext.email) {
     headersData[1].label = 'Log Out';
     headersData[1].href = '/';
     headersData[1].onClick = handelLogout;
