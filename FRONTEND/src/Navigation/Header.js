@@ -56,7 +56,10 @@ const Header = () => {
 
   const userContext = useContext(UserContext);
 
-  const handelLogout = () => userContext.setEmail('');
+  const handelLogout = () => {
+    userContext.setEmail('');
+    localStorage.removeItem('userData');
+  }
 
   if (userContext.email) {
     headersData[1].label = 'Log Out';

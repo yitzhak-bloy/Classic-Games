@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -15,6 +15,13 @@ import { UserContext } from './shared/context/User-context';
 
 const App = () => {
   const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+    if (storedData) {
+      setEmail(storedData.email);
+    }
+  }, [])
 
   return (
     <UserContext.Provider value={{

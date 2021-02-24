@@ -67,6 +67,7 @@ const Login = () => {
       );
 
       userContext.setEmail(responseData.email);
+      localStorage.setItem('userData', JSON.stringify({ email: responseData.email }))
       history.push("/");
     } catch (err) { }
   }
