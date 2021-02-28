@@ -7,11 +7,12 @@ import {
 } from 'react-router-dom';
 
 import Header from './Navigation/Header';
-import GsmeBoard from './pages/GameBoard';
+import TicTacToe from './pages/TicTacToe';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Statistics from './pages/Statistics';
 import Homepage from './pages/Homepage';
+import Snake from './pages/Snake';
 import { UserContext } from './shared/context/User-context';
 
 const App = () => {
@@ -36,7 +37,10 @@ const App = () => {
             <Homepage />
           </Route>
           <Route path='/ticTacToe' >
-            <GsmeBoard />
+            <TicTacToe />
+          </Route>
+          <Route path='/snake' >
+            <Snake />
           </Route>
           <Route path='/Login' >
             <Login />

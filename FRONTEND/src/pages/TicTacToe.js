@@ -8,10 +8,10 @@ import { PlayerContext } from '../shared/context/Player-context';
 import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-context';
 import { GameRunning } from '../shared/context/GameRunning-context';
 import { TurnContext } from '../shared/context/Turn-context';
-import './GameBoard.css';
+import './TicTacToe.css';
 import { Grid } from '@material-ui/core';
 
-const GameBoard = () => {
+const TicTacToe = () => {
   const [huPlayer, setHuPlayer] = useState('X');
   const [aiPlayer, setaiPlayer] = useState('O');
   const [level, setLevel] = useState('hard');
@@ -61,4 +61,4 @@ const GameBoard = () => {
   );
 }
 
-export default GameBoard;
+export default TicTacToe;
