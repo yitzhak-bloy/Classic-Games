@@ -11,6 +11,7 @@ import GsmeBoard from './pages/GameBoard';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Statistics from './pages/Statistics';
+import Homepage from './pages/Homepage';
 import { UserContext } from './shared/context/User-context';
 
 const App = () => {
@@ -32,6 +33,9 @@ const App = () => {
         <Header />
         <Switch>
           <Route path='/' exact >
+            <Homepage />
+          </Route>
+          <Route path='/ticTacToe' >
             <GsmeBoard />
           </Route>
           <Route path='/Login' >
