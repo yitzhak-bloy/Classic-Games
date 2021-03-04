@@ -1,0 +1,13 @@
+.snake-board {
+  width: 350px;
+  height: 350px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

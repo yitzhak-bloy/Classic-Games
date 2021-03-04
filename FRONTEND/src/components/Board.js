@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import Box from '@material-ui/core/Box';
-import { Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 
 import Square from './Square';
 import { minimax } from '../Algorithms/minimax';
