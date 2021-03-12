@@ -5,19 +5,69 @@ import { Box } from '@material-ui/core';
 import './SnakeBoard.css'
 
 let index = [...Array(169).keys()];
-// console.log("🚀 ~ file: SnakeBoard.js ~ line 6 ~ index", index)
-
 
 const SnakeBoard = () => {
-  const [theSnake, setTheSnake] = useState([78, 79, 80]);
-  const [direction, setDirection] = useState('right');
-  const [worker, setWorker] = useState(false);
+  const [theSnake, setTheSnake] = useState([87, 74, 61]);
+  const [direction, setDirection] = useState('left');
+  const [worker, setWorker] = useState(true);
 
   useEffect(() => {
-    if (direction === 'right') {
-      setTimeout(() => {
-        setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
-      }, [100])
+    if (worker) {
+      if (direction === 'right') {
+        if (
+          theSnake[theSnake.length - 1] + 1 !== 13 &&
+          theSnake[theSnake.length - 1] + 1 !== 26 &&
+          theSnake[theSnake.length - 1] + 1 !== 39 &&
+          theSnake[theSnake.length - 1] + 1 !== 52 &&
+          theSnake[theSnake.length - 1] + 1 !== 65 &&
+          theSnake[theSnake.length - 1] + 1 !== 78 &&
+          theSnake[theSnake.length - 1] + 1 !== 91 &&
+          theSnake[theSnake.length - 1] + 1 !== 104 &&
+          theSnake[theSnake.length - 1] + 1 !== 117 &&
+          theSnake[theSnake.length - 1] + 1 !== 130 &&
+          theSnake[theSnake.length - 1] + 1 !== 143 &&
+          theSnake[theSnake.length - 1] + 1 !== 156
+        ) {
+          setTimeout(() => {
+            setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
+          }, [100])
+        }
+      } else if (direction === 'left') {
+        if (
+          theSnake[theSnake.length - 1] - 1 !== 12 &&
+          theSnake[theSnake.length - 1] - 1 !== 25 &&
+          theSnake[theSnake.length - 1] - 1 !== 38 &&
+          theSnake[theSnake.length - 1] - 1 !== 51 &&
+          theSnake[theSnake.length - 1] - 1 !== 64 &&
+          theSnake[theSnake.length - 1] - 1 !== 77 &&
+          theSnake[theSnake.length - 1] - 1 !== 90 &&
+          theSnake[theSnake.length - 1] - 1 !== 103 &&
+          theSnake[theSnake.length - 1] - 1 !== 116 &&
+          theSnake[theSnake.length - 1] - 1 !== 129 &&
+          theSnake[theSnake.length - 1] - 1 !== 142 &&
+          theSnake[theSnake.length - 1] - 1 !== 155 &&
+          theSnake[theSnake.length - 1] - 1 !== 168 &&
+          !theSnake.includes(theSnake[theSnake.length - 1] - 1)
+        ) {
+          setTimeout(() => {
+            setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
+          }, [100])
+        }
+      } else if (direction === 'down') {
+        if (theSnake[theSnake.length - 1] + 13 <= 168) {
+          setTimeout(() => {
+            setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
+          }, [100])
+        }
+      } else if (direction === 'up') {
+        if (theSnake[theSnake.length - 1] - 13 >= 0) {
+          setTimeout(() => {
+            setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
+          }, [100])
+        }
+      }
+
+
     }
   }, [theSnake])
 
