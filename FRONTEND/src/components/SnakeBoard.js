@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Box } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 
 import './SnakeBoard.css'
 
@@ -30,10 +30,11 @@ const SnakeBoard = () => {
         ) {
           setTimeout(() => {
             setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
-          }, [100])
+          }, [500])
         }
       } else if (direction === 'left') {
         if (
+          theSnake[theSnake.length - 1] - 1 >= 0 &&
           theSnake[theSnake.length - 1] - 1 !== 12 &&
           theSnake[theSnake.length - 1] - 1 !== 25 &&
           theSnake[theSnake.length - 1] - 1 !== 38 &&
@@ -51,25 +52,71 @@ const SnakeBoard = () => {
         ) {
           setTimeout(() => {
             setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
-          }, [100])
+          }, [500])
         }
       } else if (direction === 'down') {
         if (theSnake[theSnake.length - 1] + 13 <= 168) {
           setTimeout(() => {
             setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
-          }, [100])
+          }, [500])
         }
       } else if (direction === 'up') {
         if (theSnake[theSnake.length - 1] - 13 >= 0) {
           setTimeout(() => {
             setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
-          }, [100])
+          }, [500])
         }
       }
 
 
     }
   }, [theSnake])
+
+  useEffect(() => {
+    document.onkeydown = checkKey;
+
+    function checkKey(e) {
+      e = e || window.event;
+
+      if (e.keyCode == '38') {
+        handelUp()
+      }
+      else if (e.keyCode == '40') {
+        handelDown()
+      }
+      else if (e.keyCode == '37') {
+        handelLeft()
+      }
+      else if (e.keyCode == '39') {
+        handelRight()
+      }
+    }
+
+  })
+
+  const handelRight = () => {
+    if (direction !== 'left') {
+      setDirection('right')
+    }
+  }
+
+  const handelLeft = () => {
+    if (direction !== 'right') {
+      setDirection('left')
+    }
+  }
+
+  const handelUp = () => {
+    if (direction != 'down') {
+      setDirection('up')
+    }
+  }
+
+  const handelDown = () => {
+    if (direction != 'up') {
+      setDirection('down')
+    }
+  }
 
 
   return (
@@ -88,12 +135,22 @@ const SnakeBoard = () => {
 
             return (
               <Box bgcolor="#ffb2ff" color="#000099" key={i}>
-                {i}
+
               </Box>
             )
           })
         }
       </Box>
+      <div>
+        <div className='center'>
+          <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
+          <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
+        </div>
+        <div>
+          <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
+          <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
+        </div>
+      </div>
     </div>
   )
 };
