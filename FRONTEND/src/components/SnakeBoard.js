@@ -7,14 +7,14 @@ import './SnakeBoard.css'
 let index = [...Array(169).keys()];
 
 const SnakeBoard = () => {
-  const [theSnake, setTheSnake] = useState([87, 74, 61]);
-  const [direction, setDirection] = useState('left');
-  const [worker, setWorker] = useState(true);
+  const [theSnake, setTheSnake] = useState([110, 97, 84]);
+  const [direction, setDirection] = useState('up');
+  const [running, setRunning] = useState(false);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    if (worker) {
+    if (running) {
       if (direction === 'right') {
         if (
           theSnake[theSnake.length - 1] + 1 !== 13 &&
@@ -28,7 +28,8 @@ const SnakeBoard = () => {
           theSnake[theSnake.length - 1] + 1 !== 117 &&
           theSnake[theSnake.length - 1] + 1 !== 130 &&
           theSnake[theSnake.length - 1] + 1 !== 143 &&
-          theSnake[theSnake.length - 1] + 1 !== 156
+          theSnake[theSnake.length - 1] + 1 !== 156 &&
+          !theSnake.includes(theSnake[theSnake.length - 1] + 1)
         ) {
           setTimeout(() => {
             if (theSnake[theSnake.length - 1] + 1 === food) {
@@ -69,7 +70,10 @@ const SnakeBoard = () => {
           }, [100])
         }
       } else if (direction === 'down') {
-        if (theSnake[theSnake.length - 1] + 13 <= 168) {
+        if (
+          theSnake[theSnake.length - 1] + 13 <= 168 &&
+          !theSnake.includes(theSnake[theSnake.length - 1] + 13)
+        ) {
           setTimeout(() => {
             if (theSnake[theSnake.length - 1] + 13 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13]);
@@ -81,7 +85,10 @@ const SnakeBoard = () => {
           }, [100])
         }
       } else if (direction === 'up') {
-        if (theSnake[theSnake.length - 1] - 13 >= 0) {
+        if (
+          theSnake[theSnake.length - 1] - 13 >= 0 &&
+          !theSnake.includes(theSnake[theSnake.length - 1] - 13)
+        ) {
           setTimeout(() => {
             if (theSnake[theSnake.length - 1] - 13 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13]);
@@ -94,7 +101,7 @@ const SnakeBoard = () => {
         }
       }
     }
-  }, [theSnake])
+  }, [theSnake, running])
 
   useEffect(() => {
     document.onkeydown = checkKey;
@@ -119,24 +126,28 @@ const SnakeBoard = () => {
 
   const handelRight = () => {
     if (direction !== 'left') {
+      setRunning(true);
       setDirection('right')
     }
   }
 
   const handelLeft = () => {
     if (direction !== 'right') {
+      setRunning(true);
       setDirection('left')
     }
   }
 
   const handelUp = () => {
     if (direction != 'down') {
+      setRunning(true);
       setDirection('up')
     }
   }
 
   const handelDown = () => {
     if (direction != 'up') {
+      setRunning(true);
       setDirection('down')
     }
   }
