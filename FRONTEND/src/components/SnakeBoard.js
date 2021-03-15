@@ -11,6 +11,7 @@ const SnakeBoard = () => {
   const [direction, setDirection] = useState('left');
   const [worker, setWorker] = useState(true);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
+  const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     if (worker) {
@@ -33,10 +34,11 @@ const SnakeBoard = () => {
             if (theSnake[theSnake.length - 1] + 1 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1])
               setFood(Math.floor(Math.random() * 169));
+              setCounter(counter + 1);
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
             }
-          }, [500])
+          }, [100])
         }
       } else if (direction === 'left') {
         if (
@@ -60,10 +62,11 @@ const SnakeBoard = () => {
             if (theSnake[theSnake.length - 1] - 1 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1]);
               setFood(Math.floor(Math.random() * 169));
+              setCounter(counter + 1);
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
             }
-          }, [500])
+          }, [100])
         }
       } else if (direction === 'down') {
         if (theSnake[theSnake.length - 1] + 13 <= 168) {
@@ -71,10 +74,11 @@ const SnakeBoard = () => {
             if (theSnake[theSnake.length - 1] + 13 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13]);
               setFood(Math.floor(Math.random() * 169));
+              setCounter(counter + 1);
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
             }
-          }, [500])
+          }, [100])
         }
       } else if (direction === 'up') {
         if (theSnake[theSnake.length - 1] - 13 >= 0) {
@@ -82,10 +86,11 @@ const SnakeBoard = () => {
             if (theSnake[theSnake.length - 1] - 13 === food) {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13]);
               setFood(Math.floor(Math.random() * 169));
+              setCounter(counter + 1);
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
             }
-          }, [500])
+          }, [100])
         }
       }
     }
@@ -139,6 +144,7 @@ const SnakeBoard = () => {
   return (
     <div className="center" >
       <h1> !אני הלוח</h1>
+      <h2>{counter}</h2>
       <Box className='snake-board' >
         {
           index.map((i) => {
