@@ -10,6 +10,7 @@ const SnakeBoard = () => {
   const [theSnake, setTheSnake] = useState([87, 74, 61]);
   const [direction, setDirection] = useState('left');
   const [worker, setWorker] = useState(true);
+  const [food, setFood] = useState(Math.floor(Math.random() * 169));
 
   useEffect(() => {
     if (worker) {
@@ -29,7 +30,12 @@ const SnakeBoard = () => {
           theSnake[theSnake.length - 1] + 1 !== 156
         ) {
           setTimeout(() => {
-            setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
+            if (theSnake[theSnake.length - 1] + 1 === food) {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1])
+              setFood(Math.floor(Math.random() * 169));
+            } else {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
+            }
           }, [500])
         }
       } else if (direction === 'left') {
@@ -51,24 +57,37 @@ const SnakeBoard = () => {
           !theSnake.includes(theSnake[theSnake.length - 1] - 1)
         ) {
           setTimeout(() => {
-            setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
+            if (theSnake[theSnake.length - 1] - 1 === food) {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1]);
+              setFood(Math.floor(Math.random() * 169));
+            } else {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
+            }
           }, [500])
         }
       } else if (direction === 'down') {
         if (theSnake[theSnake.length - 1] + 13 <= 168) {
           setTimeout(() => {
-            setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
+            if (theSnake[theSnake.length - 1] + 13 === food) {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13]);
+              setFood(Math.floor(Math.random() * 169));
+            } else {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
+            }
           }, [500])
         }
       } else if (direction === 'up') {
         if (theSnake[theSnake.length - 1] - 13 >= 0) {
           setTimeout(() => {
-            setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
+            if (theSnake[theSnake.length - 1] - 13 === food) {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13]);
+              setFood(Math.floor(Math.random() * 169));
+            } else {
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
+            }
           }, [500])
         }
       }
-
-
     }
   }, [theSnake])
 
@@ -91,7 +110,6 @@ const SnakeBoard = () => {
         handelRight()
       }
     }
-
   })
 
   const handelRight = () => {
@@ -118,7 +136,6 @@ const SnakeBoard = () => {
     }
   }
 
-
   return (
     <div className="center" >
       <h1> !אני הלוח</h1>
@@ -133,6 +150,14 @@ const SnakeBoard = () => {
               )
             }
 
+            if (food === i) {
+              return (
+                <Box bgcolor="#000555" color="#006666" key={i}>
+                  ---
+                </Box>
+              )
+            }
+
             return (
               <Box bgcolor="#ffb2ff" color="#000099" key={i}>
 
@@ -141,15 +166,13 @@ const SnakeBoard = () => {
           })
         }
       </Box>
+      <div className='center'>
+        <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
+        <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
+      </div>
       <div>
-        <div className='center'>
-          <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
-          <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
-        </div>
-        <div>
-          <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
-          <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
-        </div>
+        <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
+        <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
       </div>
     </div>
   )
