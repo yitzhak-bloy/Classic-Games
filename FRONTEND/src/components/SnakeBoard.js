@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Box, Button } from '@material-ui/core';
 
+import PopsUp from '../shared/components/PopsUp';
 import './SnakeBoard.css'
 
 let index = [...Array(169).keys()];
@@ -13,6 +14,7 @@ const SnakeBoard = () => {
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
   const [counter, setCounter] = useState(0);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
+  const [popsUpOpen, setPopsUpOpen] = useState(false);
 
   useEffect(() => {
     if (running) {
@@ -41,6 +43,8 @@ const SnakeBoard = () => {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
             }
           }, [snakeSpeed])
+        } else {
+          setPopsUpOpen(true);
         }
       } else if (direction === 'left') {
         if (
@@ -69,6 +73,8 @@ const SnakeBoard = () => {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
             }
           }, [snakeSpeed])
+        } else {
+          setPopsUpOpen(true);
         }
       } else if (direction === 'down') {
         if (
@@ -84,6 +90,8 @@ const SnakeBoard = () => {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
             }
           }, [snakeSpeed])
+        } else {
+          setPopsUpOpen(true);
         }
       } else if (direction === 'up') {
         if (
@@ -99,6 +107,8 @@ const SnakeBoard = () => {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
             }
           }, [snakeSpeed])
+        } else {
+          setPopsUpOpen(true);
         }
       }
     }
@@ -171,6 +181,21 @@ const SnakeBoard = () => {
     }
   }
 
+  const handelRestart = () => {
+    setTheSnake([110, 97, 84]);
+    setRunning(false);
+    setFood(Math.floor(Math.random() * 169));
+    setCounter(0)
+    setDirection('up')
+  };
+
+  const handleClose = () => {
+    handelRestart();
+    setTimeout(() => {
+      setPopsUpOpen(false);
+    }, 1);
+  };
+
   return (
     <div className="center" >
       <h2>{counter}</h2>
@@ -214,6 +239,7 @@ const SnakeBoard = () => {
         <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
         <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
       </div>
+      <PopsUp open={popsUpOpen} handleClose={handleClose} description={['snake', counter]} />
     </div>
   )
 };

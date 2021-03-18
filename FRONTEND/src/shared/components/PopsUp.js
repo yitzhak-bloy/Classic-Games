@@ -21,15 +21,17 @@ const PopsUp = ({ open, handleClose, description }) => {
   const { dialogContent } = useStyles();
 
   const title =
-    description.message ? 'error' :
-      description[1] == 'tie' ? 'tie' :
-        description[1] == huPlayer ? 'You won!' :
-          'You lost!';
+    description[0] === 'snake' ? 'game over!' :
+      description.message ? 'error' :
+        description[1] == 'tie' ? 'tie' :
+          description[1] == huPlayer ? 'You won!' :
+            'You lost!';
   const contentText =
-    description.message ? description.message :
-      description[1] == 'tie' ? 'There is no winner' :
-        description[1] == huPlayer ? 'Congratulations! you are the winner!' :
-          "Losing isn't the end. You can always win the next time.";
+    description[0] === 'snake' ? `The game is over, your achievement is ${description[1]}.` :
+      description.message ? description.message :
+        description[1] == 'tie' ? 'There is no winner' :
+          description[1] == huPlayer ? 'Congratulations! you are the winner!' :
+            "Losing isn't the end. You can always win the next time.";
   const contentButton =
     description.message ? "Close" :
       "New game"
