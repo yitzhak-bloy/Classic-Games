@@ -12,6 +12,7 @@ const SnakeBoard = () => {
   const [running, setRunning] = useState(false);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
   const [counter, setCounter] = useState(0);
+  const [snakeSpeed, setSnakeSpeed] = useState(200);
 
   useEffect(() => {
     if (running) {
@@ -39,7 +40,7 @@ const SnakeBoard = () => {
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
             }
-          }, [100])
+          }, [snakeSpeed])
         }
       } else if (direction === 'left') {
         if (
@@ -67,7 +68,7 @@ const SnakeBoard = () => {
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
             }
-          }, [100])
+          }, [snakeSpeed])
         }
       } else if (direction === 'down') {
         if (
@@ -82,7 +83,7 @@ const SnakeBoard = () => {
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
             }
-          }, [100])
+          }, [snakeSpeed])
         }
       } else if (direction === 'up') {
         if (
@@ -97,7 +98,7 @@ const SnakeBoard = () => {
             } else {
               setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
             }
-          }, [100])
+          }, [snakeSpeed])
         }
       }
     }
@@ -152,10 +153,32 @@ const SnakeBoard = () => {
     }
   }
 
+  const handelEasy = () => {
+    if (!running) {
+      setSnakeSpeed(600);
+    }
+  }
+
+  const handelMedium = () => {
+    if (!running) {
+      setSnakeSpeed(200);
+    }
+  }
+
+  const handelHard = () => {
+    if (!running) {
+      setSnakeSpeed(50);
+    }
+  }
+
   return (
     <div className="center" >
-      <h1> !אני הלוח</h1>
       <h2>{counter}</h2>
+      <div >
+        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color="primary" >Easy</Button>
+        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color="primary" >Medium</Button>
+        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color="primary" >Hard</Button>
+      </div>
       <Box className='snake-board' >
         {
           index.map((i) => {
