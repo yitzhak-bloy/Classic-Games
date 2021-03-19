@@ -11,3 +11,16 @@
   flex-direction: column;
   align-items: center;
 }
+
+.snake-butten {
+  width: 350px;
+  height:75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.snake-counter {
+  margin-top: 3%;
+}

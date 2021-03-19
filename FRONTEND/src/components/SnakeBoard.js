@@ -198,11 +198,11 @@ const SnakeBoard = () => {
 
   return (
     <div className="center" >
-      <h2>{counter}</h2>
-      <div >
-        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color="primary" >Easy</Button>
-        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color="primary" >Medium</Button>
-        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color="primary" >Hard</Button>
+      <h2 className='snake-counter'>{counter}</h2>
+      <div className='snake-butten'>
+        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color={snakeSpeed === 600 ? "palette.primary.dark" : 'primary'} >Easy</Button>
+        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color={snakeSpeed === 200 ? "palette.primary.dark" : 'primary'} >Medium</Button>
+        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color={snakeSpeed === 50 ? "palette.primary.dark" : 'primary'} >Hard</Button>
       </div>
       <Box className='snake-board' >
         {
@@ -225,7 +225,6 @@ const SnakeBoard = () => {
 
             return (
               <Box bgcolor="#ffb2ff" color="#000099" key={i}>
-
               </Box>
             )
           })
