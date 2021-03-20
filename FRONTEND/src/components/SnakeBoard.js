@@ -200,9 +200,9 @@ const SnakeBoard = () => {
     <div className="center" >
       <h2 className='snake-counter'>{counter}</h2>
       <div className='snake-butten'>
-        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color={snakeSpeed === 600 ? "palette.primary.dark" : 'primary'} >Easy</Button>
-        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color={snakeSpeed === 200 ? "palette.primary.dark" : 'primary'} >Medium</Button>
-        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color={snakeSpeed === 50 ? "palette.primary.dark" : 'primary'} >Hard</Button>
+        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color={snakeSpeed === 600 ? "primary" : 'palette.primary.dark'} >Easy</Button>
+        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color={snakeSpeed === 200 ? "primary" : 'palette.primary.dark'} >Medium</Button>
+        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color={snakeSpeed === 50 ? "primary" : 'palette.primary.dark'} >Hard</Button>
       </div>
       <Box className='snake-board' >
         {
@@ -230,13 +230,16 @@ const SnakeBoard = () => {
           })
         }
       </Box>
-      <div className='center'>
+      <div className='button-direction' >
+        <div></div>
         <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
-        <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
-      </div>
-      <div>
+        <div></div>
         <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
+        <div></div>
         <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
+        <div></div>
+        <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
+        <div></div>
       </div>
       <PopsUp open={popsUpOpen} handleClose={handleClose} description={['snake', counter]} />
     </div>
