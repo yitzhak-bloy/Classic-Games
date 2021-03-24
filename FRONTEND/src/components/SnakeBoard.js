@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Box, Button } from '@material-ui/core';
 
+import apple from '../svg/apple.svg';
 import PopsUp from '../shared/components/PopsUp';
 import './SnakeBoard.css'
 
@@ -217,8 +218,8 @@ const SnakeBoard = () => {
 
             if (food === i) {
               return (
-                <Box bgcolor="#000555" color="#006666" key={i}>
-                  ---
+                <Box bgcolor="#ffb2ff" color="#000099" key={i}>
+                  <img src={apple} alt="apple" />
                 </Box>
               )
             }
