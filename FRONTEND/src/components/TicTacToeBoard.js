@@ -9,11 +9,11 @@ import { DifficultyLevelContext } from '../shared/context/DifficultyLevel-contex
 import { GameRunning } from '../shared/context/GameRunning-context';
 import { TurnContext } from '../shared/context/Turn-context';
 import { UserContext } from '../shared/context/User-context';
-import { useHttpClient } from '../shared//hooks/http-hook';
+import { useHttpClient } from '../shared/hooks/http-hook';
 import PopsUp from '../shared/components/PopsUp';
-import './Board.css'
+import './TicTacToeBoard.css'
 
-const Board = () => {
+const TicTacToeBoard = () => {
   const [squares, setSquares] = useState(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
   const [win, setWin] = useState([false]);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
@@ -127,4 +127,4 @@ const Board = () => {
   )
 };
 
-export default Board;
+export default TicTacToeBoard;

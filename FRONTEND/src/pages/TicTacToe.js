@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Box from '@material-ui/core/Box';
 
-import Board from '../components/Board';
+import TicTacToeBoard from '../components/TicTacToeBoard';
 import SelectPlayer from '../components/SelectPlayer';
 import SelectLevel from '../components/SelectLevel'
 import { PlayerContext } from '../shared/context/Player-context';
@@ -52,7 +52,7 @@ const TicTacToe = () => {
                   <SelectPlayer />
                 </Grid>
               </Grid>
-              <Board />
+              <TicTacToeBoard />
             </Box >
           </TurnContext.Provider>
         </DifficultyLevelContext.Provider>
