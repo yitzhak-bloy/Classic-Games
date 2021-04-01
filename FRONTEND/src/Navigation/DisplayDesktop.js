@@ -33,7 +33,7 @@ const DisplayDesktop = (headersData, useStyles) => {
         })}
       </div>
     </Toolbar>
-  )
+  )                               
 };
 
 export default DisplayDesktop;

@@ -65,7 +65,7 @@ const TicTacToeBoard = () => {
       if (email) {
         try {
           const responseData = await sendRequest(
-            'http://localhost:5000/api/userStatistics/updata',
+            'http://localhost:5000/api/userStatistics//updata/tictactoe',
             'PATCH',
             JSON.stringify({
               email: email,

@@ -82,8 +82,8 @@ const Statistics = () => {
   const [userEasy1, userEasy2, userEasy3] = largestEasy;
 
   const rowsPublic = [
-    createData('Heard', `${userHard1.name}: [${userHard1.statistic.hard.averageRating}]`, `${userHard2.name}: [${userHard2.statistic.hard.averageRating}]`, `${userHard3.name}: [${userHard3.statistic.hard.averageRating}]`),
-    createData('easy', `${userEasy1.name}: [${userEasy1.statistic.easy.averageRating}]`, `${userEasy2.name}: [${userEasy2.statistic.easy.averageRating}]`, `${userEasy3.name}: [${userEasy3.statistic.easy.averageRating}]`),
+    createData('Heard', `${userHard1.name}: [${userHard1.ticTacToeStatistic.hard.averageRating}]`, `${userHard2.name}: [${userHard2.ticTacToeStatistic.hard.averageRating}]`, `${userHard3.name}: [${userHard3.ticTacToeStatistic.hard.averageRating}]`),
+    createData('easy', `${userEasy1.name}: [${userEasy1.ticTacToeStatistic.easy.averageRating}]`, `${userEasy2.name}: [${userEasy2.ticTacToeStatistic.easy.averageRating}]`, `${userEasy3.name}: [${userEasy3.ticTacToeStatistic.easy.averageRating}]`),
   ];
 
   let userSta;
@@ -92,8 +92,8 @@ const Statistics = () => {
     userSta = userStatistic.filter((user) => user.email == emailOfUser)[0];
 
     rowsPersonal = [
-      createData('Heard', userSta.statistic.hard.averageRating, userSta.statistic.hard.victory, userSta.statistic.hard.loss, userSta.statistic.hard.draw),
-      createData('easy', userSta.statistic.easy.averageRating, userSta.statistic.easy.victory, userSta.statistic.easy.loss, userSta.statistic.easy.draw),
+      createData('Heard', userSta.ticTacToeStatistic.hard.averageRating, userSta.ticTacToeStatistic.hard.victory, userSta.ticTacToeStatistic.hard.loss, userSta.ticTacToeStatistic.hard.draw),
+      createData('easy', userSta.ticTacToeStatistic.easy.averageRating, userSta.ticTacToeStatistic.easy.victory, userSta.ticTacToeStatistic.easy.loss, userSta.ticTacToeStatistic.easy.draw),
     ];
   }
 

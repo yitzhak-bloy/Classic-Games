@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 
 const userStatisticsControllers = require('../controllers/userStatistics-controller');
+const ticTacToeStatisticsControllers = require('../controllers/ticTacToeStatistics-controllers');
 
 const router = express.Router();
 
@@ -17,11 +18,11 @@ router.post('/signup',
 
 router.post('/login', userStatisticsControllers.login);
 
-router.patch('/updata',
+router.patch('/updata/tictactoe',
   [
     check('level').notEmpty(),
     check('outcome').notEmpty(),
   ],
-  userStatisticsControllers.updateUserStatistics);
+  ticTacToeStatisticsControllers.updateTicTacToeStatistics);
 
-module.exports = router; 
+module.exports = router;
