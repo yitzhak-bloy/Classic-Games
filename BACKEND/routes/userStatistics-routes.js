@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 
 const userStatisticsControllers = require('../controllers/userStatistics-controller');
 const ticTacToeStatisticsControllers = require('../controllers/ticTacToeStatistics-controllers');
+const snakeStatisticsControllers = require('../controllers/snakeStatistics-controllers');
 
 const router = express.Router();
 
@@ -24,5 +25,13 @@ router.patch('/updata/tictactoe',
     check('outcome').notEmpty(),
   ],
   ticTacToeStatisticsControllers.updateTicTacToeStatistics);
+
+router.patch('/updata/snake',
+  [
+    check('level').notEmpty(),
+    check('result').notEmpty(),
+  ],
+  snakeStatisticsControllers.updateSnakeStatistics);
+
 
 module.exports = router;
