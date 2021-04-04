@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { Box, Button } from '@material-ui/core';
+
+import { useHttpClient } from '../shared/hooks/http-hook';
+import { UserContext } from '../shared/context/User-context';
 
 import apple from '../svg/apple.svg';
 import PopsUp from '../shared/components/PopsUp';
@@ -16,6 +19,11 @@ const SnakeBoard = () => {
   const [counter, setCounter] = useState(0);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
+  const [request, setRequest] = useState(false);
+
+  const email = useContext(UserContext).email;
+
+  const { sendRequest } = useHttpClient();
 
   useEffect(() => {
     if (running) {
@@ -46,6 +54,7 @@ const SnakeBoard = () => {
           }, [snakeSpeed])
         } else {
           setPopsUpOpen(true);
+          setRequest(true);
         }
       } else if (direction === 'left') {
         if (
@@ -76,6 +85,7 @@ const SnakeBoard = () => {
           }, [snakeSpeed])
         } else {
           setPopsUpOpen(true);
+          setRequest(true);
         }
       } else if (direction === 'down') {
         if (
@@ -93,6 +103,7 @@ const SnakeBoard = () => {
           }, [snakeSpeed])
         } else {
           setPopsUpOpen(true);
+          setRequest(true);
         }
       } else if (direction === 'up') {
         if (
@@ -110,6 +121,7 @@ const SnakeBoard = () => {
           }, [snakeSpeed])
         } else {
           setPopsUpOpen(true);
+          setRequest(true);
         }
       }
     }
@@ -135,6 +147,27 @@ const SnakeBoard = () => {
       }
     }
   })
+
+  useEffect(async () => {
+    if (request) {
+      if (email) {
+        try {
+          const responseData = await sendRequest(
+            'http://localhost:5000/api/userStatistics/updata/snake',
+            'PATCH',
+            JSON.stringify({
+              email: email,
+              level: snakeSpeed === 200 ? 'medium' : snakeSpeed === 600 ? 'easy' : 'hard',
+              result: counter
+            }),
+            {
+              'Content-Type': 'application/json'
+            }
+          )
+        } catch (err) { }
+      }
+    }
+  }, [request])
 
   const handelRight = () => {
     if (direction !== 'left') {
@@ -188,6 +221,7 @@ const SnakeBoard = () => {
     setFood(Math.floor(Math.random() * 169));
     setCounter(0)
     setDirection('up')
+    setRequest(false);
   };
 
   const handleClose = () => {
