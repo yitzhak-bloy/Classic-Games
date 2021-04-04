@@ -184,36 +184,22 @@ const SnakeBoard = () => {
   }
 
   const handelUp = () => {
-    if (direction != 'down') {
+    if (direction !== 'down') {
       setRunning(true);
       setDirection('up')
     }
   }
 
   const handelDown = () => {
-    if (direction != 'up') {
+    if (direction !== 'up') {
       setRunning(true);
       setDirection('down')
     }
   }
 
-  const handelEasy = () => {
-    if (!running) {
-      setSnakeSpeed(600);
-    }
-  }
-
-  const handelMedium = () => {
-    if (!running) {
-      setSnakeSpeed(200);
-    }
-  }
-
-  const handelHard = () => {
-    if (!running) {
-      setSnakeSpeed(50);
-    }
-  }
+  const handelEasy = () => !running && setSnakeSpeed(600);
+  const handelMedium = () => !running && setSnakeSpeed(200);
+  const handelHard = () => !running && setSnakeSpeed(50);
 
   const handelRestart = () => {
     setTheSnake([110, 97, 84]);
