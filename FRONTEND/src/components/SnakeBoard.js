@@ -11,10 +11,8 @@ import './SnakeBoard.css'
 
 let index = [...Array(169).keys()];
 
-const SnakeBoard = () => {
+const SnakeBoard = ({ running, direction, handelRestart }) => {
   const [theSnake, setTheSnake] = useState([110, 97, 84]);
-  const [direction, setDirection] = useState('up');
-  const [running, setRunning] = useState(false);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
   const [counter, setCounter] = useState(0);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
@@ -127,27 +125,6 @@ const SnakeBoard = () => {
     }
   }, [theSnake, running])
 
-  useEffect(() => {
-    document.onkeydown = checkKey;
-
-    function checkKey(e) {
-      e = e || window.event;
-
-      if (e.keyCode == '38') {
-        handelUp()
-      }
-      else if (e.keyCode == '40') {
-        handelDown()
-      }
-      else if (e.keyCode == '37') {
-        handelLeft()
-      }
-      else if (e.keyCode == '39') {
-        handelRight()
-      }
-    }
-  })
-
   useEffect(async () => {
     if (request) {
       if (email) {
@@ -169,49 +146,16 @@ const SnakeBoard = () => {
     }
   }, [request])
 
-  const handelRight = () => {
-    if (direction !== 'left') {
-      setRunning(true);
-      setDirection('right')
-    }
-  }
-
-  const handelLeft = () => {
-    if (direction !== 'right') {
-      setRunning(true);
-      setDirection('left')
-    }
-  }
-
-  const handelUp = () => {
-    if (direction !== 'down') {
-      setRunning(true);
-      setDirection('up')
-    }
-  }
-
-  const handelDown = () => {
-    if (direction !== 'up') {
-      setRunning(true);
-      setDirection('down')
-    }
-  }
-
   const handelEasy = () => !running && setSnakeSpeed(600);
   const handelMedium = () => !running && setSnakeSpeed(200);
   const handelHard = () => !running && setSnakeSpeed(50);
 
-  const handelRestart = () => {
-    setTheSnake([110, 97, 84]);
-    setRunning(false);
-    setFood(Math.floor(Math.random() * 169));
-    setCounter(0)
-    setDirection('up')
-    setRequest(false);
-  };
-
   const handleClose = () => {
     handelRestart();
+    setTheSnake([110, 97, 84]);
+    setFood(Math.floor(Math.random() * 169));
+    setCounter(0)
+    setRequest(false);
     setTimeout(() => {
       setPopsUpOpen(false);
     }, 1);
@@ -251,17 +195,6 @@ const SnakeBoard = () => {
           })
         }
       </Box>
-      <div className='button-direction' >
-        <div></div>
-        <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
-        <div></div>
-        <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
-        <div></div>
-        <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
-        <div></div>
-        <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
-        <div></div>
-      </div>
       <PopsUp open={popsUpOpen} handleClose={handleClose} description={['snake', counter]} />
     </div>
   )

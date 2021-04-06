@@ -1,0 +1,14 @@
+.buttons {
+  display: flex;
+  justify-content: center
+}
+
+.buttons-directions {
+  width: 380px;
+  height:150px;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 50px 50px 50px;
+  padding-top: 15px;
+  justify-content: center;
+}
