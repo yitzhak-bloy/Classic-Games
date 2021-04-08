@@ -11,7 +11,7 @@ import './SnakeBoard.css'
 
 let index = [...Array(169).keys()];
 
-const SnakeBoard = ({ running, direction, handelRestart }) => {
+const SnakeBoard = ({ running, direction, setRunning, setDirection }) => {
   const [theSnake, setTheSnake] = useState([110, 97, 84]);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
   const [counter, setCounter] = useState(0);
@@ -159,6 +159,11 @@ const SnakeBoard = ({ running, direction, handelRestart }) => {
     setTimeout(() => {
       setPopsUpOpen(false);
     }, 1);
+  };
+
+  const handelRestart = () => {
+    setRunning(false);
+    setDirection('up')
   };
 
   return (
