@@ -6,24 +6,23 @@ import './DirectionButtons.css';
 const DirectionButtons = ({ direction, setRunning, setDirection }) => {
 
   useEffect(() => {
-    document.onkeydown = checkKey;
-
-    function checkKey(e) {
+    const checkKey = (e) => {
       e = e || window.event;
 
-      if (e.keyCode == '38') {
+      if (e.keyCode === 38) {
         handelUp()
       }
-      else if (e.keyCode == '40') {
+      else if (e.keyCode === 40) {
         handelDown()
       }
-      else if (e.keyCode == '37') {
+      else if (e.keyCode === 37) {
         handelLeft()
       }
-      else if (e.keyCode == '39') {
+      else if (e.keyCode === 39) {
         handelRight()
       }
     }
+    document.onkeydown = checkKey;
   })
 
   const handelRight = () => {
@@ -53,11 +52,6 @@ const DirectionButtons = ({ direction, setRunning, setDirection }) => {
       setDirection('down')
     }
   }
-
-  const handelRestart = () => {
-    setRunning(false);
-    setDirection('up')
-  };
 
   return (
     <div className='buttons'>

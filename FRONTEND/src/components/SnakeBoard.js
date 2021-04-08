@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 
-import { Box, Button } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import { useHttpClient } from '../shared/hooks/http-hook';
 import { UserContext } from '../shared/context/User-context';
@@ -11,11 +11,9 @@ import './SnakeBoard.css'
 
 let index = [...Array(169).keys()];
 
-const SnakeBoard = ({ running, direction, setRunning, setDirection }) => {
+const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRunning, setDirection }) => {
   const [theSnake, setTheSnake] = useState([110, 97, 84]);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
-  const [counter, setCounter] = useState(0);
-  const [snakeSpeed, setSnakeSpeed] = useState(200);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [request, setRequest] = useState(false);
 
@@ -146,12 +144,9 @@ const SnakeBoard = ({ running, direction, setRunning, setDirection }) => {
     }
   }, [request])
 
-  const handelEasy = () => !running && setSnakeSpeed(600);
-  const handelMedium = () => !running && setSnakeSpeed(200);
-  const handelHard = () => !running && setSnakeSpeed(50);
-
   const handleClose = () => {
-    handelRestart();
+    setRunning(false);
+    setDirection('up')
     setTheSnake([110, 97, 84]);
     setFood(Math.floor(Math.random() * 169));
     setCounter(0)
@@ -161,19 +156,8 @@ const SnakeBoard = ({ running, direction, setRunning, setDirection }) => {
     }, 1);
   };
 
-  const handelRestart = () => {
-    setRunning(false);
-    setDirection('up')
-  };
-
   return (
-    <div className="center" >
-      <h2 className='snake-counter'>{counter}</h2>
-      <div className='snake-butten'>
-        <Button onClick={handelEasy} disableElevation variant="outlined" size="large" color={snakeSpeed === 600 ? "primary" : 'palette.primary.dark'} >Easy</Button>
-        <Button onClick={handelMedium} disableElevation variant="outlined" size="large" color={snakeSpeed === 200 ? "primary" : 'palette.primary.dark'} >Medium</Button>
-        <Button onClick={handelHard} disableElevation variant="outlined" size="large" color={snakeSpeed === 50 ? "primary" : 'palette.primary.dark'} >Hard</Button>
-      </div>
+    <div >
       <Box className='snake-board' >
         {
           index.map((i) => {

@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Statistics from './pages/Statistics';
 import Homepage from './pages/Homepage';
-import Snake from './pages/Snake';
+import Snake from './pages/snake/Snake';
 import { UserContext } from './shared/context/User-context';
 
 const App = () => {
