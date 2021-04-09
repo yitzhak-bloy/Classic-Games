@@ -123,9 +123,9 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
     }
   }, [theSnake, running])
 
-  useEffect(async () => {
-    if (request) {
-      if (email) {
+  useEffect(() => {
+    (async () => {
+      if (request && email) {
         try {
           const responseData = await sendRequest(
             'http://localhost:5000/api/userStatistics/updata/snake',
@@ -141,7 +141,7 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
           )
         } catch (err) { }
       }
-    }
+    })()
   }, [request])
 
   const handleClose = () => {
