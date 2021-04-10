@@ -15,9 +15,24 @@ const Snake = () => {
   return (
     <div className="snake-div-center">
       <h2 className='snake-counter'>{counter}</h2>
-      <DifficultyLevelButtons running={running} snakeSpeed={snakeSpeed} setSnakeSpeed={setSnakeSpeed} />
-      <SnakeBoard running={running} direction={direction} counter={counter} setCounter={setCounter} snakeSpeed={snakeSpeed} setRunning={setRunning} setDirection={setDirection} />
-      <DirectionButtons direction={direction} setRunning={setRunning} setDirection={setDirection} />
+      <DifficultyLevelButtons
+        running={running}
+        snakeSpeed={snakeSpeed}
+        setSnakeSpeed={setSnakeSpeed}
+      />
+      <SnakeBoard
+        running={running}
+        direction={direction}
+        counter={counter}
+        setCounter={setCounter}
+        snakeSpeed={snakeSpeed}
+        setRunning={setRunning}
+        setDirection={setDirection}
+      />
+      <DirectionButtons
+        direction={direction}
+        setRunning={setRunning}
+        setDirection={setDirection} />
     </div>
   )
 }
