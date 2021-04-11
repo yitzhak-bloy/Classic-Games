@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp';
 import Statistics from './pages/Statistics';
 import Homepage from './pages/Homepage';
 import Snake from './pages/snake/Snake';
+import Simon from './pages/simon/Simon';
 import { UserContext } from './shared/context/User-context';
 
 const App = () => {
@@ -41,6 +42,9 @@ const App = () => {
           </Route>
           <Route path='/snake' >
             <Snake />
+          </Route>
+          <Route path='/simon' >
+            <Simon />
           </Route>
           <Route path='/Login' >
             <Login />

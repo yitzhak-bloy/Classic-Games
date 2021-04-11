@@ -11,6 +11,9 @@ const Homepage = () => {
       <h1>
         To the <Link component={RouterLink} to="/snake" >Snake game</Link>
       </h1>
+        <h1>
+        To the <Link component={RouterLink} to="/simon" >Simon game</Link>
+      </h1>
     </div>
   )
 }
