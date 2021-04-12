@@ -12,7 +12,7 @@ const Homepage = () => {
         To the <Link component={RouterLink} to="/snake" >Snake game</Link>
       </h1>
         <h1>
-        To the <Link component={RouterLink} to="/simon" >Simon game</Link>
+        To the <Link component={RouterLink} to="/matchingCard" >Matching-Card game</Link>
       </h1>
     </div>
   )
