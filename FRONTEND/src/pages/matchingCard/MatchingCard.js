@@ -1,6 +1,11 @@
+import MatchingCardBoard from '../../components/matchingCardBoard/MatchingCardBoard';
+
 const MatchingCard = () => {
   return (
-    <h1>I am MatchingCard</h1>
+    <div>
+      <h1>I am MatchingCard</h1>
+      <MatchingCardBoard />
+    </div>
   )
 }
 

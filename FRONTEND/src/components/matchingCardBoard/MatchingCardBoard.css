@@ -1,0 +1,20 @@
+.MatchingCard__board {
+  display: grid;
+  justify-content: center;
+}
+
+.MatchingCard__squares {
+  width: 350px;
+  height: 350px;
+  border: solid blue 1px;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 0.25em;
+}
+
+.MatchingCard__square {
+  border: 2px saddlebrown solid;
+  padding: 5px;
+}
