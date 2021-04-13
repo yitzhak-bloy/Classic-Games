@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    cursor: 'pointer',
     '& > *': {
       margin: theme.spacing(0),
       width: theme.spacing(16),
