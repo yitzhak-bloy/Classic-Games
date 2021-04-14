@@ -1,5 +1,7 @@
 import "./MatchingCardBoard.css"
 
+import Card from '../card/Card'
+
 const MatchingCardBoard = () => {
   let index = [...Array(36).keys()];
   console.log("🚀 ~ file: MatchingCardBoard.js ~ line 3 ~ MatchingCardBoard ~ index", index)
@@ -11,9 +13,7 @@ const MatchingCardBoard = () => {
       {
         index.map((i) => {
           return (
-            <div className='MatchingCard__square' key={i}>
-              {/* {i} */}
-            </div>
+            <Card className='MatchingCard__square' key={i}/>
           )
         })
       }
