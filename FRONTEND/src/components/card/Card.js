@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useSpring, animated as a } from 'react-spring'
-import './styles.css'
+import './Card.css'
 
-const Card = () =>  {
+const Card = ({ color }) =>  {
   const [flipped, setFlipped] = useState(false)
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -13,7 +13,7 @@ const Card = () =>  {
   return (
     <div onClick={() => setFlipped(state => !state)}>
       <a.div class="c back" style={{ opacity: opacity.interpolate(o => 1 - o), transform }} />
-      <a.div class="c front" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }} />
+      <a.div class="c front" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`), backgroundColor: color }} />
     </div>
   )
 }
