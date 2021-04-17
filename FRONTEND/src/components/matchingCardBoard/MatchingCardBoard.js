@@ -1,10 +1,11 @@
+import { useState, useEffect } from "react";
+
 import "./MatchingCardBoard.css"
 
 import Card from '../card/Card'
 
 const MatchingCardBoard = () => {
-  let index = [...Array(16).keys()];
-  console.log("🚀 ~ file: MatchingCardBoard.js ~ line 3 ~ MatchingCardBoard ~ index", index)
+  const [arrRandom, setArrRendl] = useState([])
 
   const arrayCard = [
     {
@@ -72,12 +73,23 @@ const MatchingCardBoard = () => {
       color: 'brown'
     },
   ]
-  
+
+  useEffect(() => {
+      const arrRend = [];
+      const copy = arrayCard.slice(arrayCard);      
+      for (let i = 0; i < arrayCard.length; i++) {
+        let index = Math.floor(Math.random() * copy.length);
+        let removed = copy.splice(index, 1);
+        arrRend.push(removed[0]);
+      }
+      setArrRendl(arrRend)
+  }, [])
+
   return (
     <div className='MatchingCard__board'>
       <div className='MatchingCard__squares'>
       {
-        arrayCard.map((i) => <Card className='MatchingCard__square' key={i.index} color={i.color} />)
+        arrRandom.map((i) => <Card className='MatchingCard__square' key={i.index} color={i.color} />)
       }
       </div>
     </div>
