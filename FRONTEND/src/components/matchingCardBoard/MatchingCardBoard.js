@@ -1,99 +1,98 @@
 import { useState, useEffect } from "react";
 
-import "./MatchingCardBoard.css"
-
-import Card from '../card/Card'
+import Card from "../card/Card";
+import "./MatchingCardBoard.css";
 
 const MatchingCardBoard = () => {
-  const [arrRandom, setArrRendl] = useState([])
+  const [game, setGame] = useState([]);
+  const [options, setOptions] = useState(16);
+  const [flippedCount, setFlippedCount] = useState(0);
+  const [flippedIndexes, setFlippedIndexes] = useState([]);
 
-  const arrayCard = [
-    {
-      index: 0,
-      color: 'green'
-    }, 
-    {
-      index: 1,
-      color: 'green'
-    },
-    {
-      index: 2,
-      color: 'red'
-    },
-    {
-      index: 3,
-      color: 'red'
-    },
-    {
-      index: 4,
-      color: 'blue'
-    },
-    {
-      index: 5,
-      color: 'blue'
-    },
-    {
-      index: 6,
-      color: 'yellow'
-    },
-    {
-      index: 7,
-      color: 'yellow'
-    },
-    {
-      index: 8,
-      color: 'pink'
-    }, 
-    {
-      index: 9,
-      color: 'pink'
-    },
-    {
-      index: 10,
-      color: 'orange'
-    },
-    {
-      index: 11,
-      color: 'orange'
-    },
-    {
-      index: 12,
-      color: 'purple'
-    },
-    {
-      index: 13,
-      color: 'purple'
-    },
-    {
-      index: 14,
-      color: 'brown'
-    },
-    {
-      index: 15,
-      color: 'brown'
-    },
-  ]
+  const colors = [
+    "#ecdb54",
+    "#e34132",
+    "#6ca0dc",
+    "#944743",
+    "#dbb2d1",
+    "#ec9787",
+    "#00a68c",
+    "#645394",
+    "#6c4f3d",
+    "#ebe1df",
+    "#bc6ca7",
+    "#bfd833",
+  ];
 
   useEffect(() => {
-      const arrRend = [];
-      const copy = arrayCard.slice(arrayCard);      
-      for (let i = 0; i < arrayCard.length; i++) {
-        let index = Math.floor(Math.random() * copy.length);
-        let removed = copy.splice(index, 1);
-        arrRend.push(removed[0]);
-      }
-      setArrRendl(arrRend)
-  }, [])
+    const newGame = [];
+    for (let i = 0; i < options / 2; i++) {
+      const firstOption = {
+        id: 2 * i,
+        colorId: i,
+        color: colors[i],
+        flipped: false,
+      };
+      const secondOption = {
+        id: 2 * i + 1,
+        colorId: i,
+        color: colors[i],
+        flipped: false,
+      };
 
-  return (
-    <div className='MatchingCard__board'>
-      <div className='MatchingCard__squares'>
-      {
-        arrRandom.map((i) => <Card className='MatchingCard__square' key={i.index} color={i.color} />)
-      }
+      newGame.push(firstOption);
+      newGame.push(secondOption);
+    }
+
+    const shuffledGame = newGame.sort(() => Math.random() - 0.5);
+    setGame(shuffledGame);
+  }, []);
+
+  // useEffect(() => {
+  //   // Loads when the game variable changes
+  // }, [game]);
+
+  if (flippedIndexes.length === 2) {
+    const match =
+      game[flippedIndexes[0]].colorId === game[flippedIndexes[1]].colorId;
+
+    if (match) {
+      const newGame = [...game];
+      newGame[flippedIndexes[0]].flipped = true;
+      newGame[flippedIndexes[1]].flipped = true;
+      setGame(newGame);
+
+      const newIndexes = [...flippedIndexes];
+      newIndexes.push(false);
+      setFlippedIndexes(newIndexes);
+    } else {
+      const newIndexes = [...flippedIndexes];
+      newIndexes.push(true);
+      setFlippedIndexes(newIndexes);
+    }
+  }
+
+  if (game.length === 0) return <div>loading...</div>;
+  else {
+    return (
+      <div className='MatchingCard__board'>
+        <div className='MatchingCard__squares'>
+          {game.map((card, index) => (
+            <Card
+              className='MatchingCard__square'
+              id={index}
+              color={card.color}
+              game={game}
+              flippedCount={flippedCount}
+              setFlippedCount={setFlippedCount}
+              flippedIndexes={flippedIndexes}
+              setFlippedIndexes={setFlippedIndexes}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  )
+    );
+  }
 };
 
 export default MatchingCardBoard;
