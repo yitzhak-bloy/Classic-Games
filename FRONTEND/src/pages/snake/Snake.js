@@ -1,19 +1,19 @@
 import { useState } from "react";
 
-import './Snake.css';
+import "./Snake.css";
 
-import DifficultyLevelButtons from '../../components/difficultyLevelButtons/DifficultyLevelButtons';
-import SnakeBoard from '../../components/SnakeBoard';
-import DirectionButtons from '../../components/DirectionButtons/DirectionButtons';
+import DifficultyLevelButtons from "../../components/difficultyLevelButtons/DifficultyLevelButtons";
+import SnakeBoard from "../../components/SnakeBoard";
+import DirectionButtons from "../../components/DirectionButtons/DirectionButtons";
 
 const Snake = () => {
-  const [direction, setDirection] = useState('up');
+  const [direction, setDirection] = useState("up");
   const [running, setRunning] = useState(false);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
   const [counter, setCounter] = useState(0);
 
   return (
-    <div className="snake-div-center">
+    <div className='snake-div-center'>
       <h2 className='snake-counter'>{counter}</h2>
       <DifficultyLevelButtons
         running={running}
@@ -32,9 +32,10 @@ const Snake = () => {
       <DirectionButtons
         direction={direction}
         setRunning={setRunning}
-        setDirection={setDirection} />
+        setDirection={setDirection}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Snake
+export default Snake;

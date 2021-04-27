@@ -4,13 +4,18 @@ import {
   IconButton,
   Drawer,
   Link,
-  MenuItem
+  MenuItem,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link as RouterLink } from "react-router-dom";
 
-
-const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, handleDrawerClose) => {
+const DisplayMobile = (
+  headersData,
+  useStyles,
+  drawerOpen,
+  handleDrawerOpen,
+  handleDrawerClose
+) => {
   const { logo, drawerContainer } = useStyles();
 
   const getDrawerChoices = () => {
@@ -45,12 +50,12 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
       >
         <MenuIcon />
       </IconButton>
-      <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
+      <Drawer anchor='left' open={drawerOpen} onClose={handleDrawerClose}>
         <div className={drawerContainer}>{getDrawerChoices()}</div>
       </Drawer>
       <div>
-        <Link component={RouterLink} to="/" >
-          <Typography variant="h6" component="h1" className={logo}>
+        <Link component={RouterLink} to='/'>
+          <Typography variant='h6' component='h1' className={logo}>
             TicTacToeGame
           </Typography>
         </Link>
@@ -59,4 +64,4 @@ const DisplayMobile = (headersData, useStyles, drawerOpen, handleDrawerOpen, han
   );
 };
 
-export default DisplayMobile
+export default DisplayMobile;

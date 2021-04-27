@@ -1,4 +1,4 @@
-import { winning } from '../shared/winning';
+import { winning } from "../shared/winning";
 
 const huPlayer = "O";
 const aiPlayer = "X";
@@ -7,18 +7,18 @@ const arrOfEmptyIndexies = (board) => {
   let arr = [];
   for (let i = 0; i < board.length; i++) {
     if (board[i] !== "O" && board[i] !== "X") {
-      arr.push(i)
+      arr.push(i);
     }
   }
-  return arr
-}
+  return arr;
+};
 
 export const minimax = (newBoard, player, level) => {
   let availSpots = arrOfEmptyIndexies(newBoard);
 
   if (level === "easy") {
     const random = Math.floor(Math.random() * availSpots.length);
-    return { index: availSpots[random] }
+    return { index: availSpots[random] };
   }
 
   if (winning(newBoard, huPlayer) === "true") {
@@ -69,5 +69,4 @@ export const minimax = (newBoard, player, level) => {
   }
 
   return moves[bestMove];
-}
-
+};

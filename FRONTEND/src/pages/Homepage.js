@@ -6,16 +6,25 @@ const Homepage = () => {
   return (
     <div>
       <h1>
-        To the <Link component={RouterLink} to="/ticTacToe" >TicTacToe game</Link>
+        To the{" "}
+        <Link component={RouterLink} to='/ticTacToe'>
+          TicTacToe game
+        </Link>
       </h1>
       <h1>
-        To the <Link component={RouterLink} to="/snake" >Snake game</Link>
+        To the{" "}
+        <Link component={RouterLink} to='/snake'>
+          Snake game
+        </Link>
       </h1>
-        <h1>
-        To the <Link component={RouterLink} to="/matchingCard" >Matching-Card game</Link>
+      <h1>
+        To the{" "}
+        <Link component={RouterLink} to='/matchingCard'>
+          Matching-Card game
+        </Link>
       </h1>
     </div>
-  )
-}
+  );
+};
 
 export default Homepage;

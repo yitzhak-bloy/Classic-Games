@@ -1,73 +1,101 @@
-import { useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { useEffect } from "react";
+import { Button } from "@material-ui/core";
 
-import './DirectionButtons.css';
+import "./DirectionButtons.css";
 
 const DirectionButtons = ({ direction, setRunning, setDirection }) => {
-
   useEffect(() => {
     const checkKey = (e) => {
       e = e || window.event;
 
       if (e.keyCode === 38) {
-        handelUp()
+        handelUp();
+      } else if (e.keyCode === 40) {
+        handelDown();
+      } else if (e.keyCode === 37) {
+        handelLeft();
+      } else if (e.keyCode === 39) {
+        handelRight();
       }
-      else if (e.keyCode === 40) {
-        handelDown()
-      }
-      else if (e.keyCode === 37) {
-        handelLeft()
-      }
-      else if (e.keyCode === 39) {
-        handelRight()
-      }
-    }
+    };
     document.onkeydown = checkKey;
-  })
+  });
 
   const handelRight = () => {
-    if (direction !== 'left') {
+    if (direction !== "left") {
       setRunning(true);
-      setDirection('right')
+      setDirection("right");
     }
-  }
+  };
 
   const handelLeft = () => {
-    if (direction !== 'right') {
+    if (direction !== "right") {
       setRunning(true);
-      setDirection('left')
+      setDirection("left");
     }
-  }
+  };
 
   const handelUp = () => {
-    if (direction !== 'down') {
+    if (direction !== "down") {
       setRunning(true);
-      setDirection('up')
+      setDirection("up");
     }
-  }
+  };
 
   const handelDown = () => {
-    if (direction !== 'up') {
+    if (direction !== "up") {
       setRunning(true);
-      setDirection('down')
+      setDirection("down");
     }
-  }
+  };
 
   return (
     <div className='buttons'>
-      <div className='buttons-directions' >
+      <div className='buttons-directions'>
         <div></div>
-        <Button onClick={handelUp} disableElevation variant="outlined" size="large" color="primary" >up</Button>
+        <Button
+          onClick={handelUp}
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
+          up
+        </Button>
         <div></div>
-        <Button onClick={handelLeft} disableElevation variant="outlined" size="large" color="primary" >left</Button>
+        <Button
+          onClick={handelLeft}
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
+          left
+        </Button>
         <div></div>
-        <Button onClick={handelRight} disableElevation variant="outlined" size="large" color="primary" >right</Button>
+        <Button
+          onClick={handelRight}
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
+          right
+        </Button>
         <div></div>
-        <Button onClick={handelDown} disableElevation variant="outlined" size="large" color="primary" >down</Button>
+        <Button
+          onClick={handelDown}
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
+          down
+        </Button>
         <div></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default DirectionButtons;

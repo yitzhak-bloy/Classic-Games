@@ -1,4 +1,4 @@
-import MatchingCardBoard from '../../components/matchingCardBoard/MatchingCardBoard';
+import MatchingCardBoard from "../../components/matchingCardBoard/MatchingCardBoard";
 
 const MatchingCard = () => {
   return (
@@ -6,7 +6,7 @@ const MatchingCard = () => {
       <h1>I am MatchingCard</h1>
       <MatchingCardBoard />
     </div>
-  )
-}
+  );
+};
 
 export default MatchingCard;

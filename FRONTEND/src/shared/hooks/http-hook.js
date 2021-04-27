@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 export const useHttpClient = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const sendRequest = useCallback(
-    async (url, method = 'GET', body = null, headers = {}) => {
+    async (url, method = "GET", body = null, headers = {}) => {
       setLoading(true);
 
       try {
@@ -28,8 +28,9 @@ export const useHttpClient = () => {
         setLoading(false);
         throw err;
       }
-
-    }, [])
+    },
+    []
+  );
 
   const handleClosePopsUp = () => {
     setTimeout(() => {
@@ -37,5 +38,5 @@ export const useHttpClient = () => {
     }, 1);
   };
 
-  return { loading, error, sendRequest, handleClosePopsUp }
-}
+  return { loading, error, sendRequest, handleClosePopsUp };
+};

@@ -1,13 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import {
-  AppBar,
-  Toolbar,
-  makeStyles,
-} from "@material-ui/core";
+import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 
-import DisplayDesktop from './DisplayDesktop';
-import DisplayMobile from './DisplayMobile';
-import { UserContext } from '../shared/context/User-context';
+import DisplayDesktop from "./DisplayDesktop";
+import DisplayMobile from "./DisplayMobile";
+import { UserContext } from "../shared/context/User-context";
 
 const headersData = [
   {
@@ -42,13 +38,13 @@ const useStyles = makeStyles(() => ({
   },
   drawerContainer: {
     padding: "20px 30px",
-  }
+  },
 }));
 
 const Header = () => {
   const [state, setState] = useState({
     mobileView: false,
-    drawerOpen: false
+    drawerOpen: false,
   });
   const { mobileView, drawerOpen } = state;
 
@@ -57,25 +53,33 @@ const Header = () => {
   const userContext = useContext(UserContext);
 
   const handelLogout = () => {
-    userContext.setEmail('');
-    localStorage.removeItem('userData');
-  }
+    userContext.setEmail("");
+    localStorage.removeItem("userData");
+  };
 
   if (userContext.email) {
-    headersData[1].label = 'Log Out';
-    headersData[1].href = '/';
+    headersData[1].label = "Log Out";
+    headersData[1].href = "/";
     headersData[1].onClick = handelLogout;
   } else {
-    headersData[1].label = 'Log In';
-    headersData[1].href = '/Login';
+    headersData[1].label = "Log In";
+    headersData[1].href = "/Login";
     headersData[1].onClick = undefined;
   }
 
-  const handleDrawerOpen = () => setState((prevState) => ({ ...prevState, drawerOpen: true }));
-  const handleDrawerClose = () => setState((prevState) => ({ ...prevState, drawerOpen: false }));
+  const handleDrawerOpen = () =>
+    setState((prevState) => ({ ...prevState, drawerOpen: true }));
+  const handleDrawerClose = () =>
+    setState((prevState) => ({ ...prevState, drawerOpen: false }));
 
   const displayDesktop = DisplayDesktop(headersData, useStyles);
-  const displayMobile = DisplayMobile(headersData, useStyles, drawerOpen, handleDrawerOpen, handleDrawerClose);
+  const displayMobile = DisplayMobile(
+    headersData,
+    useStyles,
+    drawerOpen,
+    handleDrawerOpen,
+    handleDrawerClose
+  );
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -89,16 +93,12 @@ const Header = () => {
 
   return (
     <header>
-      <AppBar className={header} >
-        {mobileView ?
-          displayMobile
-          :
-          displayDesktop
-        }
+      <AppBar className={header}>
+        {mobileView ? displayMobile : displayDesktop}
       </AppBar>
       <Toolbar />
     </header>
   );
-}
+};
 
 export default Header;

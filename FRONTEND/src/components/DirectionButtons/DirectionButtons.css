@@ -1,11 +1,11 @@
 .buttons {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 .buttons-directions {
   width: 380px;
-  height:150px;
+  height: 150px;
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 50px 50px 50px;

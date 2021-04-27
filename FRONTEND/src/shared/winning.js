@@ -19,10 +19,10 @@ export const winning = (board, player) => {
     (board[0] === player && board[4] === player && board[8] === player) ||
     (board[2] === player && board[4] === player && board[6] === player)
   ) {
-    return 'true'
+    return "true";
   } else if (checkIfBoardFull(board)) {
     return "full";
   } else {
-    return 'false';
+    return "false";
   }
 };
