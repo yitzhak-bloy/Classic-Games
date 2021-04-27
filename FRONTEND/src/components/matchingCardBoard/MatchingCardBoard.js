@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+import PopsUp from "../../shared/components/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 
@@ -7,12 +8,13 @@ const MatchingCardBoard = () => {
   const [game, setGame] = useState([]);
   const [options, setOptions] = useState(16);
   const [flippedCount, setFlippedCount] = useState(0);
+  const [popsUpOpen, setPopsUpOpen] = useState(false);
+
   console.log(
     "🚀 ~ file: MatchingCardBoard.js ~ line 10 ~ MatchingCardBoard ~ flippedCount",
     flippedCount
   );
   const [flippedIndexes, setFlippedIndexes] = useState([]);
-  const [highScore, setHighScore] = useState();
 
   const colors = [
     "#ecdb54",
@@ -29,7 +31,7 @@ const MatchingCardBoard = () => {
     "#bfd833",
   ];
 
-  useEffect(() => {
+  const shuffledGame = () => {
     const newGame = [];
     for (let i = 0; i < options / 2; i++) {
       const firstOption = {
@@ -51,17 +53,30 @@ const MatchingCardBoard = () => {
 
     const shuffledGame = newGame.sort(() => Math.random() - 0.5);
     setGame(shuffledGame);
+  };
+
+  useEffect(() => {
+    shuffledGame();
   }, []);
 
+  let points = Math.round(0.66 * flippedCount);
   useEffect(() => {
     const finished = !game.some((card) => !card.flipped);
     if (finished && game.length > 0) {
       setTimeout(() => {
-        const points = Math.round(0.66 * flippedCount);
         console.log("🚀 ~ you win! ~ points:", points);
+        shuffledGame();
+        setPopsUpOpen(true);
       }, 500);
     }
   }, [game]);
+
+  const handleClose = () => {
+    setFlippedCount(0);
+    setGame([]);
+    shuffledGame();
+    setPopsUpOpen(false);
+  };
 
   if (flippedIndexes.length === 2) {
     const match =
@@ -101,6 +116,11 @@ const MatchingCardBoard = () => {
             />
           ))}
         </div>
+        <PopsUp
+          open={popsUpOpen}
+          handleClose={handleClose}
+          description={["MatchingCard", points]}
+        />
       </div>
     );
   }

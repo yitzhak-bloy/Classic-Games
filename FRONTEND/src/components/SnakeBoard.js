@@ -1,17 +1,25 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 
-import { Box } from '@material-ui/core';
+import { Box } from "@material-ui/core";
 
-import { useHttpClient } from '../shared/hooks/http-hook';
-import { UserContext } from '../shared/context/User-context';
+import { useHttpClient } from "../shared/hooks/http-hook";
+import { UserContext } from "../shared/context/User-context";
 
-import apple from '../svg/apple.svg';
-import PopsUp from '../shared/components/PopsUp';
-import './SnakeBoard.css'
+import apple from "../svg/apple.svg";
+import PopsUp from "../shared/components/PopsUp";
+import "./SnakeBoard.css";
 
 let index = [...Array(169).keys()];
 
-const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRunning, setDirection }) => {
+const SnakeBoard = ({
+  running,
+  direction,
+  counter,
+  setCounter,
+  snakeSpeed,
+  setRunning,
+  setDirection,
+}) => {
   const [theSnake, setTheSnake] = useState([110, 97, 84]);
   const [food, setFood] = useState(Math.floor(Math.random() * 169));
   const [popsUpOpen, setPopsUpOpen] = useState(false);
@@ -23,7 +31,7 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
 
   useEffect(() => {
     if (running) {
-      if (direction === 'right') {
+      if (direction === "right") {
         if (
           theSnake[theSnake.length - 1] + 1 !== 13 &&
           theSnake[theSnake.length - 1] + 1 !== 26 &&
@@ -41,18 +49,20 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
         ) {
           setTimeout(() => {
             if (theSnake[theSnake.length - 1] + 1 === food) {
-              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1])
+              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1]);
               setFood(Math.floor(Math.random() * 169));
               setCounter(counter + 1);
             } else {
-              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 1].slice(1))
+              setTheSnake(
+                [...theSnake, theSnake[theSnake.length - 1] + 1].slice(1)
+              );
             }
-          }, [snakeSpeed])
+          }, [snakeSpeed]);
         } else {
           setPopsUpOpen(true);
           setRequest(true);
         }
-      } else if (direction === 'left') {
+      } else if (direction === "left") {
         if (
           theSnake[theSnake.length - 1] - 1 >= 0 &&
           theSnake[theSnake.length - 1] - 1 !== 12 &&
@@ -76,14 +86,16 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
               setFood(Math.floor(Math.random() * 169));
               setCounter(counter + 1);
             } else {
-              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 1].slice(1))
+              setTheSnake(
+                [...theSnake, theSnake[theSnake.length - 1] - 1].slice(1)
+              );
             }
-          }, [snakeSpeed])
+          }, [snakeSpeed]);
         } else {
           setPopsUpOpen(true);
           setRequest(true);
         }
-      } else if (direction === 'down') {
+      } else if (direction === "down") {
         if (
           theSnake[theSnake.length - 1] + 13 <= 168 &&
           !theSnake.includes(theSnake[theSnake.length - 1] + 13)
@@ -94,14 +106,16 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
               setFood(Math.floor(Math.random() * 169));
               setCounter(counter + 1);
             } else {
-              setTheSnake([...theSnake, theSnake[theSnake.length - 1] + 13].slice(1))
+              setTheSnake(
+                [...theSnake, theSnake[theSnake.length - 1] + 13].slice(1)
+              );
             }
-          }, [snakeSpeed])
+          }, [snakeSpeed]);
         } else {
           setPopsUpOpen(true);
           setRequest(true);
         }
-      } else if (direction === 'up') {
+      } else if (direction === "up") {
         if (
           theSnake[theSnake.length - 1] - 13 >= 0 &&
           !theSnake.includes(theSnake[theSnake.length - 1] - 13)
@@ -112,44 +126,51 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
               setFood(Math.floor(Math.random() * 169));
               setCounter(counter + 1);
             } else {
-              setTheSnake([...theSnake, theSnake[theSnake.length - 1] - 13].slice(1))
+              setTheSnake(
+                [...theSnake, theSnake[theSnake.length - 1] - 13].slice(1)
+              );
             }
-          }, [snakeSpeed])
+          }, [snakeSpeed]);
         } else {
           setPopsUpOpen(true);
           setRequest(true);
         }
       }
     }
-  }, [theSnake, running])
+  }, [theSnake, running]);
 
   useEffect(() => {
     (async () => {
       if (request && email) {
         try {
           const responseData = await sendRequest(
-            'http://localhost:5000/api/userStatistics/updata/snake',
-            'PATCH',
+            "http://localhost:5000/api/userStatistics/updata/snake",
+            "PATCH",
             JSON.stringify({
               email: email,
-              level: snakeSpeed === 200 ? 'medium' : snakeSpeed === 600 ? 'easy' : 'hard',
-              result: counter
+              level:
+                snakeSpeed === 200
+                  ? "medium"
+                  : snakeSpeed === 600
+                  ? "easy"
+                  : "hard",
+              result: counter,
             }),
             {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json",
             }
-          )
-        } catch (err) { }
+          );
+        } catch (err) {}
       }
-    })()
-  }, [request])
+    })();
+  }, [request]);
 
   const handleClose = () => {
     setRunning(false);
-    setDirection('up')
+    setDirection("up");
     setTheSnake([110, 97, 84]);
     setFood(Math.floor(Math.random() * 169));
-    setCounter(0)
+    setCounter(0);
     setRequest(false);
     setTimeout(() => {
       setPopsUpOpen(false);
@@ -157,36 +178,35 @@ const SnakeBoard = ({ running, direction, counter, setCounter, snakeSpeed, setRu
   };
 
   return (
-    <div >
-      <Box className='snake-board' >
-        {
-          index.map((i) => {
-            if (theSnake.includes(i)) {
-              return (
-                <Box bgcolor="#000099" color="#000099" key={i}>
-                  ---
-                </Box>
-              )
-            }
-
-            if (food === i) {
-              return (
-                <Box bgcolor="#ffb2ff" color="#000099" key={i}>
-                  <img src={apple} alt="apple" />
-                </Box>
-              )
-            }
-
+    <div>
+      <Box className='snake-board'>
+        {index.map((i) => {
+          if (theSnake.includes(i)) {
             return (
-              <Box bgcolor="#ffb2ff" color="#000099" key={i}>
+              <Box bgcolor='#000099' color='#000099' key={i}>
+                ---
               </Box>
-            )
-          })
-        }
+            );
+          }
+
+          if (food === i) {
+            return (
+              <Box bgcolor='#ffb2ff' color='#000099' key={i}>
+                <img src={apple} alt='apple' />
+              </Box>
+            );
+          }
+
+          return <Box bgcolor='#ffb2ff' color='#000099' key={i}></Box>;
+        })}
       </Box>
-      <PopsUp open={popsUpOpen} handleClose={handleClose} description={['snake', counter]} />
+      <PopsUp
+        open={popsUpOpen}
+        handleClose={handleClose}
+        description={["snake", counter]}
+      />
     </div>
-  )
+  );
 };
 
-export default SnakeBoard
+export default SnakeBoard;

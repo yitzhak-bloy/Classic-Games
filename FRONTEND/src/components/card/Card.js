@@ -42,6 +42,16 @@ const Card = ({
   };
 
   useEffect(() => {
+    const finished = !game.some((card) => card.flipped);
+    if (finished && flippedCount > 0) {
+      setTimeout(() => {
+        setFlipped(false);
+        console.log("dj");
+      }, 2000);
+    }
+  }, [game]);
+
+  useEffect(() => {
     if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
       setTimeout(() => {
         setFlipped((state) => !state);
