@@ -7,7 +7,12 @@ const MatchingCardBoard = () => {
   const [game, setGame] = useState([]);
   const [options, setOptions] = useState(16);
   const [flippedCount, setFlippedCount] = useState(0);
+  console.log(
+    "🚀 ~ file: MatchingCardBoard.js ~ line 10 ~ MatchingCardBoard ~ flippedCount",
+    flippedCount
+  );
   const [flippedIndexes, setFlippedIndexes] = useState([]);
+  const [highScore, setHighScore] = useState();
 
   const colors = [
     "#ecdb54",
@@ -48,9 +53,15 @@ const MatchingCardBoard = () => {
     setGame(shuffledGame);
   }, []);
 
-  // useEffect(() => {
-  //   // Loads when the game variable changes
-  // }, [game]);
+  useEffect(() => {
+    const finished = !game.some((card) => !card.flipped);
+    if (finished && game.length > 0) {
+      setTimeout(() => {
+        const points = Math.round(0.66 * flippedCount);
+        console.log("🚀 ~ you win! ~ points:", points);
+      }, 500);
+    }
+  }, [game]);
 
   if (flippedIndexes.length === 2) {
     const match =
