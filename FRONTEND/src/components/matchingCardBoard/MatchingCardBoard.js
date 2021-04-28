@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { Button } from "@material-ui/core";
+
 import PopsUp from "../../shared/components/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
@@ -9,6 +11,7 @@ const MatchingCardBoard = () => {
   const [options, setOptions] = useState(16);
   const [flippedCount, setFlippedCount] = useState(0);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
+  const [reset, setReset] = useState(false);
 
   console.log(
     "🚀 ~ file: MatchingCardBoard.js ~ line 10 ~ MatchingCardBoard ~ flippedCount",
@@ -67,15 +70,20 @@ const MatchingCardBoard = () => {
         console.log("🚀 ~ you win! ~ points:", points);
         shuffledGame();
         setPopsUpOpen(true);
+        setReset(true);
       }, 500);
     }
   }, [game]);
 
-  const handleClose = () => {
+  const handelClose = () => {
     setFlippedCount(0);
     setGame([]);
     shuffledGame();
     setPopsUpOpen(false);
+  };
+  const handelRestart = () => {
+    setReset(true);
+    handelClose();
   };
 
   if (flippedIndexes.length === 2) {
@@ -113,14 +121,27 @@ const MatchingCardBoard = () => {
               setFlippedCount={setFlippedCount}
               flippedIndexes={flippedIndexes}
               setFlippedIndexes={setFlippedIndexes}
+              reset={reset}
+              setReset={setReset}
             />
           ))}
         </div>
+
         <PopsUp
           open={popsUpOpen}
-          handleClose={handleClose}
+          handleClose={handelClose}
           description={["MatchingCard", points]}
         />
+
+        <Button
+          onClick={handelRestart}
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
+          new game
+        </Button>
       </div>
     );
   }

@@ -11,6 +11,8 @@ const Card = ({
   setFlippedCount,
   flippedIndexes,
   setFlippedIndexes,
+  reset,
+  setReset,
 }) => {
   const [flipped, setFlipped] = useState(false); // true = open, false = close
   const { transform, opacity } = useSpring({
@@ -43,11 +45,12 @@ const Card = ({
 
   useEffect(() => {
     const finished = !game.some((card) => card.flipped);
-    if (finished && flippedCount > 0) {
+    if (finished && reset) {
       setTimeout(() => {
         setFlipped(false);
         console.log("dj");
-      }, 2000);
+        setReset(false);
+      }, 1000);
     }
   }, [game]);
 
