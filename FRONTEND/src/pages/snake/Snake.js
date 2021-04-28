@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import "./Snake.css";
 
-import DifficultyLevelButtons from "../../components/difficultyLevelButtons/DifficultyLevelButtons";
-import SnakeBoard from "../../components/SnakeBoard";
-import DirectionButtons from "../../components/DirectionButtons/DirectionButtons";
+import DifficultyLevelButtons from "../../components/snake-components/difficultyLevelButtons/DifficultyLevelButtons";
+import SnakeBoard from "../../components/snake-components/SnakeBoard/SnakeBoard";
+import DirectionButtons from "../../components/snake-components/DirectionButtons/DirectionButtons";
 
 const Snake = () => {
   const [direction, setDirection] = useState("up");

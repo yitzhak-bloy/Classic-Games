@@ -1,4 +1,4 @@
-import MatchingCardBoard from "../../components/matchingCardBoard/MatchingCardBoard";
+import MatchingCardBoard from "../../components/matchingCard-components/matchingCardBoard/MatchingCardBoard";
 
 const MatchingCard = () => {
   return (

@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from "react";
 
 import { Box } from "@material-ui/core";
 
-import { useHttpClient } from "../shared/hooks/http-hook";
-import { UserContext } from "../shared/context/User-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { UserContext } from "../../../shared/context/User-context";
 
-import apple from "../svg/apple.svg";
-import PopsUp from "../shared/components/PopsUp";
+import apple from "../../../svg/apple.svg";
+import PopsUp from "../../../shared/components/PopsUp";
 import "./SnakeBoard.css";
 
 let index = [...Array(169).keys()];

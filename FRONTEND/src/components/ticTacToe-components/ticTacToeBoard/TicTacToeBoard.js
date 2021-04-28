@@ -1,16 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { Box, Button } from "@material-ui/core";
 
-import Square from "./Square";
-import { minimax } from "../Algorithms/minimax";
-import { winning } from "../shared/winning";
-import { PlayerContext } from "../shared/context/Player-context";
-import { DifficultyLevelContext } from "../shared/context/DifficultyLevel-context";
-import { GameRunning } from "../shared/context/GameRunning-context";
-import { TurnContext } from "../shared/context/Turn-context";
-import { UserContext } from "../shared/context/User-context";
-import { useHttpClient } from "../shared/hooks/http-hook";
-import PopsUp from "../shared/components/PopsUp";
+import Square from "../square/Square";
+import { minimax } from "../../../Algorithms/minimax";
+import { winning } from "../../../shared/winning";
+import { PlayerContext } from "../../../shared/context/Player-context";
+import { DifficultyLevelContext } from "../../../shared/context/DifficultyLevel-context";
+import { GameRunning } from "../../../shared/context/GameRunning-context";
+import { TurnContext } from "../../../shared/context/Turn-context";
+import { UserContext } from "../../../shared/context/User-context";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import PopsUp from "../../../shared/components/PopsUp";
 import "./TicTacToeBoard.css";
 
 const TicTacToeBoard = () => {

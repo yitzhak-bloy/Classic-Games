@@ -23,7 +23,6 @@ const Card = ({
 
   const onCardClick = () => {
     if (!game[id].flipped && flippedCount % 3 === 0) {
-      console.log(111);
       setFlipped((state) => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
@@ -34,7 +33,6 @@ const Card = ({
       !game[id].flipped &&
       flippedIndexes.indexOf(id) < 0
     ) {
-      console.log(222);
       setFlipped((state) => !state);
       setFlippedCount(flippedCount + 1);
       const newIndexes = [...flippedIndexes];
@@ -48,7 +46,6 @@ const Card = ({
     if (finished && reset) {
       setTimeout(() => {
         setFlipped(false);
-        console.log("dj");
         setReset(false);
       }, 1000);
     }

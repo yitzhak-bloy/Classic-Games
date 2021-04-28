@@ -2,8 +2,8 @@ import { useContext } from "react";
 import Box from "@material-ui/core/Box";
 import { Button } from "@material-ui/core";
 
-import { GameRunning } from "../shared/context/GameRunning-context";
-import { DifficultyLevelContext } from "../shared/context/DifficultyLevel-context";
+import { GameRunning } from "../../../shared/context/GameRunning-context";
+import { DifficultyLevelContext } from "../../../shared/context/DifficultyLevel-context";
 
 const SelectLevel = () => {
   const difficultyChange = useContext(DifficultyLevelContext).difficultyChange;

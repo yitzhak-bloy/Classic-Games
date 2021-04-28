@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Button } from "@material-ui/core";
 
-import PopsUp from "../../shared/components/PopsUp";
+import PopsUp from "../../../shared/components/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 
@@ -13,10 +13,6 @@ const MatchingCardBoard = () => {
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [reset, setReset] = useState(false);
 
-  console.log(
-    "🚀 ~ file: MatchingCardBoard.js ~ line 10 ~ MatchingCardBoard ~ flippedCount",
-    flippedCount
-  );
   const [flippedIndexes, setFlippedIndexes] = useState([]);
 
   const colors = [
@@ -67,7 +63,6 @@ const MatchingCardBoard = () => {
     const finished = !game.some((card) => !card.flipped);
     if (finished && game.length > 0) {
       setTimeout(() => {
-        console.log("🚀 ~ you win! ~ points:", points);
         shuffledGame();
         setPopsUpOpen(true);
         setReset(true);

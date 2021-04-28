@@ -1,13 +1,13 @@
 import { useState } from "react";
 import Box from "@material-ui/core/Box";
 
-import TicTacToeBoard from "../components/TicTacToeBoard";
-import SelectPlayer from "../components/SelectPlayer";
-import SelectLevel from "../components/SelectLevel";
-import { PlayerContext } from "../shared/context/Player-context";
-import { DifficultyLevelContext } from "../shared/context/DifficultyLevel-context";
-import { GameRunning } from "../shared/context/GameRunning-context";
-import { TurnContext } from "../shared/context/Turn-context";
+import TicTacToeBoard from "../../components/ticTacToe-components/ticTacToeBoard/TicTacToeBoard";
+import SelectPlayer from "../../components/ticTacToe-components/selectPlayer/SelectPlayer";
+import SelectLevel from "../../components/ticTacToe-components/selectLevel/SelectLevel";
+import { PlayerContext } from "../../shared/context/Player-context";
+import { DifficultyLevelContext } from "../../shared/context/DifficultyLevel-context";
+import { GameRunning } from "../../shared/context/GameRunning-context";
+import { TurnContext } from "../../shared/context/Turn-context";
 import "./TicTacToe.css";
 import { Grid } from "@material-ui/core";
 
