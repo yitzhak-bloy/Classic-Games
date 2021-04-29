@@ -1,4 +1,4 @@
-import { winning } from "../shared/winning";
+import { winning } from "./winning";
 
 const huPlayer = "O";
 const aiPlayer = "X";

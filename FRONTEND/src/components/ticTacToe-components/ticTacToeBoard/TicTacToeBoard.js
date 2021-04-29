@@ -3,7 +3,7 @@ import { Box, Button } from "@material-ui/core";
 
 import Square from "../square/Square";
 import { minimax } from "../../../Algorithms/minimax";
-import { winning } from "../../../shared/winning";
+import { winning } from "../../../Algorithms/winning";
 import { PlayerContext } from "../../../shared/context/Player-context";
 import { DifficultyLevelContext } from "../../../shared/context/DifficultyLevel-context";
 import { GameRunning } from "../../../shared/context/GameRunning-context";
