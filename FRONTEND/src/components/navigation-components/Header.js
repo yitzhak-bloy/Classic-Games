@@ -3,7 +3,7 @@ import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 
 import DisplayDesktop from "./DisplayDesktop";
 import DisplayMobile from "./DisplayMobile";
-import { UserContext } from "../shared/context/User-context";
+import { UserContext } from "../../shared/context/User-context";
 
 const headersData = [
   {

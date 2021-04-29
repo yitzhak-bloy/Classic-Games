@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 
-import Header from "./Navigation/Header";
+import Header from "./components/navigation-components/Header";
 import TicTacToe from "./pages/ticTacToe/TicTacToe";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
