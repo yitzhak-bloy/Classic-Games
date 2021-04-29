@@ -2,20 +2,21 @@ import "./DifficultyLevelButtons.css";
 
 import { Button } from "@material-ui/core";
 
-const DifficultyLevelButtons = ({ running, snakeSpeed, setSnakeSpeed }) => {
-  const handelEasy = () => !running && setSnakeSpeed(600);
-  const handelMedium = () => !running && setSnakeSpeed(200);
-  const handelHard = () => !running && setSnakeSpeed(50);
-
+const DifficultyLevelButtons = ({
+  difficulty,
+  handelEasy,
+  handelMedium,
+  handelHard,
+}) => {
   return (
-    <div className='snake-butten'>
+    <div className='DifficultyLevelButtons__buttens'>
       <Button
         onClick={handelEasy}
         className='difficultyLevelButtons-button'
         disableElevation
         variant='outlined'
         size='large'
-        color={snakeSpeed === 600 ? "primary" : "palette.primary.dark"}
+        color={difficulty === "easy" ? "primary" : "palette.primary.dark"}
       >
         Easy
       </Button>
@@ -25,7 +26,7 @@ const DifficultyLevelButtons = ({ running, snakeSpeed, setSnakeSpeed }) => {
         disableElevation
         variant='outlined'
         size='large'
-        color={snakeSpeed === 200 ? "primary" : "palette.primary.dark"}
+        color={difficulty === "medium" ? "primary" : "palette.primary.dark"}
       >
         Medium
       </Button>
@@ -35,7 +36,7 @@ const DifficultyLevelButtons = ({ running, snakeSpeed, setSnakeSpeed }) => {
         disableElevation
         variant='outlined'
         size='large'
-        color={snakeSpeed === 50 ? "primary" : "palette.primary.dark"}
+        color={difficulty === "hard" ? "primary" : "palette.primary.dark"}
       >
         Hard
       </Button>

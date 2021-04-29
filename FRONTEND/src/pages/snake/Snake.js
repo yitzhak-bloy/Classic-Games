@@ -11,14 +11,37 @@ const Snake = () => {
   const [running, setRunning] = useState(false);
   const [snakeSpeed, setSnakeSpeed] = useState(200);
   const [counter, setCounter] = useState(0);
+  const [difficulty, setDifficulty] = useState("medium");
+
+  const handelEasy = () => {
+    if (!running) {
+      setSnakeSpeed(600);
+      setDifficulty("easy");
+    }
+  };
+
+  const handelMedium = () => {
+    if (!running) {
+      setSnakeSpeed(200);
+      setDifficulty("medium");
+    }
+  };
+
+  const handelHard = () => {
+    if (!running) {
+      setSnakeSpeed(50);
+      setDifficulty("hard");
+    }
+  };
 
   return (
     <div className='snake-div-center'>
       <h2 className='snake-counter'>{counter}</h2>
       <DifficultyLevelButtons
-        running={running}
-        snakeSpeed={snakeSpeed}
-        setSnakeSpeed={setSnakeSpeed}
+        difficulty={difficulty}
+        handelEasy={handelEasy}
+        handelMedium={handelMedium}
+        handelHard={handelHard}
       />
       <SnakeBoard
         running={running}
