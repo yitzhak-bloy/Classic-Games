@@ -10,7 +10,7 @@ import { GameRunning } from "../../../shared/context/GameRunning-context";
 import { TurnContext } from "../../../shared/context/Turn-context";
 import { UserContext } from "../../../shared/context/User-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-import PopsUp from "../../../shared/components/PopsUp";
+import PopsUp from "../../shared-components/popsUp/PopsUp";
 import "./TicTacToeBoard.css";
 
 const TicTacToeBoard = () => {

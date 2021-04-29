@@ -6,7 +6,7 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { UserContext } from "../../../shared/context/User-context";
 
 import apple from "../../../svg/apple.svg";
-import PopsUp from "../../../shared/components/PopsUp";
+import PopsUp from "../../shared-components/popsUp/PopsUp";
 import "./SnakeBoard.css";
 
 let index = [...Array(169).keys()];

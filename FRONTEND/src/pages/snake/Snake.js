@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import "./Snake.css";
 
-import DifficultyLevelButtons from "../../components/snake-components/difficultyLevelButtons/DifficultyLevelButtons";
+import DifficultyLevelButtons from "../../components/shared-components/difficultyLevelButtons/DifficultyLevelButtons";
 import SnakeBoard from "../../components/snake-components/SnakeBoard/SnakeBoard";
 import DirectionButtons from "../../components/snake-components/DirectionButtons/DirectionButtons";
 

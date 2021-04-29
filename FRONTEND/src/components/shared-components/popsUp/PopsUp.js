@@ -7,7 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { PlayerContext } from "../context/Player-context";
+import { PlayerContext } from "../../../shared/context/Player-context";
 
 const useStyles = makeStyles(() => ({
   dialogContent: {

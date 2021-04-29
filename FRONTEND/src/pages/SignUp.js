@@ -13,8 +13,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-import LoadingSpinner from "../shared/components/LoadingSpinner";
-import PopsUp from "../shared/components/PopsUp";
+import LoadingSpinner from "../components/shared-components/loadingSpinner/LoadingSpinner";
+import PopsUp from "../components/shared-components/popsUp/PopsUp";
 import { UserContext } from "../shared/context/User-context";
 import { useHttpClient } from "../shared//hooks/http-hook";
 

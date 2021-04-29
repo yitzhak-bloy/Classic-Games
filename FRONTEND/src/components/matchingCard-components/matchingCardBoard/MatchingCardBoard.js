@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Button } from "@material-ui/core";
 
-import PopsUp from "../../../shared/components/PopsUp";
+import PopsUp from "../../shared-components/popsUp/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 

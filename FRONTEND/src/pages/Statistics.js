@@ -13,7 +13,7 @@ import {
   Link,
 } from "@material-ui/core";
 
-import LoadingSpinner from "../shared/components/LoadingSpinner";
+import LoadingSpinner from "../components/shared-components/loadingSpinner/LoadingSpinner";
 import { findHighestScore } from "../Algorithms/findHighestScore";
 import { UserContext } from "../shared/context/User-context";
 import { useHttpClient } from "../shared/hooks/http-hook";
