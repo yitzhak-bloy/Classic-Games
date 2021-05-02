@@ -55,7 +55,7 @@ const MatchingCardBoard = ({ options }) => {
 
   useEffect(() => {
     shuffledGame();
-  }, []);
+  }, [options]);
 
   let points = Math.round(0.66 * flippedCount);
   useEffect(() => {
@@ -104,7 +104,15 @@ const MatchingCardBoard = ({ options }) => {
   else {
     return (
       <div className='MatchingCard__board'>
-        <div className='MatchingCard__squares'>
+        <div
+          className={`MatchingCard__squares ${
+            options === 64
+              ? "MatchingCard__squares-hard"
+              : options === 16
+              ? "MatchingCard__squares-easy"
+              : null
+          }`}
+        >
           {game.map((card, index) => (
             <Card
               className='MatchingCard__square'

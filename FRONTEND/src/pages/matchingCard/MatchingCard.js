@@ -4,24 +4,24 @@ import MatchingCardBoard from "../../components/matchingCard-components/matching
 import DifficultyLevelButtons from "../../components/shared-components/difficultyLevelButtons/DifficultyLevelButtons";
 
 const MatchingCard = () => {
-  const [options, setOptions] = useState(16);
+  const [options, setOptions] = useState(36);
   const [difficulty, setDifficulty] = useState("medium");
 
   const handelEasy = () => {
-    setOptions(9);
+    setOptions(16);
     setDifficulty("easy");
   };
   const handelMedium = () => {
-    setOptions(16);
+    setOptions(36);
     setDifficulty("medium");
   };
   const handelHard = () => {
-    setOptions(36);
+    setOptions(64);
     setDifficulty("hard");
   };
 
   useEffect(() => {
-    setDifficulty(options === 9 ? "easy" : options === 16 ? "medium" : "hard");
+    setDifficulty(options === 16 ? "easy" : options === 36 ? "medium" : "hard");
   }, [options]);
 
   return (

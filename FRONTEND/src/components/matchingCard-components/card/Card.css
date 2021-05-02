@@ -23,8 +23,8 @@ body,
 
   /* max-width: 50px;
   max-height: 50px; */
-  width: 84.5px;
-  height: 84.5px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   will-change: transform, opacity;
 }
