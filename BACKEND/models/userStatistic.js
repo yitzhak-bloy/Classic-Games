@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const uniqueValidetor = require('mongoose-unique-validator')
 
 const Schena = mongoose.Schema;
-// ticTacToeStatistic
 const userStatistcSchema = new Schena({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },

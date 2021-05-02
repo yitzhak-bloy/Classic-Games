@@ -6,9 +6,8 @@ import PopsUp from "../../shared-components/popsUp/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 
-const MatchingCardBoard = () => {
+const MatchingCardBoard = ({ options }) => {
   const [game, setGame] = useState([]);
-  const [options, setOptions] = useState(16);
   const [flippedCount, setFlippedCount] = useState(0);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [reset, setReset] = useState(false);
