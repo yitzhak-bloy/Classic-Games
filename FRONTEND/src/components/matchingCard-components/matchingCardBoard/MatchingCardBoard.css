@@ -1,6 +1,8 @@
 .MatchingCard__board {
-  display: grid;
-  justify-content: center;
+  margin-top: 1.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .MatchingCard__squares {
@@ -31,4 +33,8 @@
 .MatchingCard__square {
   border: 2px saddlebrown solid;
   padding: 5px;
+}
+
+.matching-card-board-button__new-game {
+  margin-top: 25px !important;
 }

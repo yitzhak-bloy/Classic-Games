@@ -142,6 +142,7 @@ const MatchingCardBoard = ({ options }) => {
           variant='outlined'
           size='large'
           color='primary'
+          className='matching-card-board-button__new-game'
         >
           new game
         </Button>

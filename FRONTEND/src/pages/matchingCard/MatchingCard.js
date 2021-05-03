@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import MatchingCardBoard from "../../components/matchingCard-components/matchingCardBoard/MatchingCardBoard";
 import DifficultyLevelButtons from "../../components/shared-components/difficultyLevelButtons/DifficultyLevelButtons";
+import "./MatchingCard.css";
 
 const MatchingCard = () => {
   const [options, setOptions] = useState(36);
@@ -25,7 +26,7 @@ const MatchingCard = () => {
   }, [options]);
 
   return (
-    <div>
+    <div className='MatchingCard-container'>
       <DifficultyLevelButtons
         difficulty={difficulty}
         handelEasy={handelEasy}
