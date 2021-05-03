@@ -125,6 +125,7 @@ const MatchingCardBoard = ({ options }) => {
               setFlippedIndexes={setFlippedIndexes}
               reset={reset}
               setReset={setReset}
+              options={options}
             />
           ))}
         </div>

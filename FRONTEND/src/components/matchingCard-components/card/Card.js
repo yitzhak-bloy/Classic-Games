@@ -13,6 +13,7 @@ const Card = ({
   setFlippedIndexes,
   reset,
   setReset,
+  options,
 }) => {
   const [flipped, setFlipped] = useState(false); // true = open, false = close
   const { transform, opacity } = useSpring({
@@ -67,7 +68,7 @@ const Card = ({
   return (
     <div onClick={onCardClick}>
       <a.div
-        class='c back'
+        className={`c back ${options === 64 && "cHard"}`}
         style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
       />
       <a.div

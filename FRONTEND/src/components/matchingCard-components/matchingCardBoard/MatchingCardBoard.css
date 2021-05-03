@@ -15,8 +15,8 @@
 }
 
 .MatchingCard__squares-hard {
-  width: 430px;
-  height: 430px;
+  width: 360px;
+  height: 360px;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
 }
