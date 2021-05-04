@@ -17,5 +17,12 @@
 }
 
 .back {
-  background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+  /* background-image: url(https://fonts.google.com/icons?selected=Material%20Icons%20Outlined%3Ahelp); */
+  background-color: rgb(218, 179, 255, 0.5);
+}
+
+.card-h2 {
+  position: relative;
+  bottom: 12px;
+  left: 17px;
 }

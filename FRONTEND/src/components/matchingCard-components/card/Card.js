@@ -70,9 +70,11 @@ const Card = ({
       <a.div
         className={`c back ${options === 64 && "cHard"}`}
         style={{ opacity: opacity.interpolate((o) => 1 - o), transform }}
-      />
+      >
+        <h2 className='card-h2'>?</h2>
+      </a.div>
       <a.div
-        class='c front'
+        class={`c front ${options === 64 && "cHard"}`}
         style={{
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
