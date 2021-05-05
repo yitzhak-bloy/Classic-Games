@@ -5,7 +5,7 @@ import "./Card.css";
 
 const Card = ({
   id,
-  color,
+  illustration,
   game,
   flippedCount,
   setFlippedCount,
@@ -78,9 +78,15 @@ const Card = ({
         style={{
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`),
-          backgroundColor: color,
         }}
-      />
+      >
+        {" "}
+        <img
+          src={illustration}
+          className={`card-img ${options === 64 && "card-img__hard"}`}
+          alt='fireSpot'
+        />
+      </a.div>
     </div>
   );
 };
