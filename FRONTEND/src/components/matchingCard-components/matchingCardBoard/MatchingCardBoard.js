@@ -6,12 +6,10 @@ import PopsUp from "../../shared-components/popsUp/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 
-const MatchingCardBoard = ({ options }) => {
+const MatchingCardBoard = ({ options, flippedCount, setFlippedCount }) => {
   const [game, setGame] = useState([]);
-  const [flippedCount, setFlippedCount] = useState(0);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [reset, setReset] = useState(false);
-
   const [flippedIndexes, setFlippedIndexes] = useState([]);
 
   const colors = [

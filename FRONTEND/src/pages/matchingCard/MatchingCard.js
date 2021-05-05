@@ -7,18 +7,27 @@ import "./MatchingCard.css";
 const MatchingCard = () => {
   const [options, setOptions] = useState(36);
   const [difficulty, setDifficulty] = useState("medium");
+  const [flippedCount, setFlippedCount] = useState(0);
 
   const handelEasy = () => {
-    setOptions(16);
-    setDifficulty("easy");
+    if (!flippedCount) {
+      setOptions(16);
+      setDifficulty("easy");
+    }
   };
+
   const handelMedium = () => {
-    setOptions(36);
-    setDifficulty("medium");
+    if (!flippedCount) {
+      setOptions(36);
+      setDifficulty("medium");
+    }
   };
+
   const handelHard = () => {
-    setOptions(64);
-    setDifficulty("hard");
+    if (!flippedCount) {
+      setOptions(64);
+      setDifficulty("hard");
+    }
   };
 
   useEffect(() => {
@@ -33,7 +42,11 @@ const MatchingCard = () => {
         handelMedium={handelMedium}
         handelHard={handelHard}
       />
-      <MatchingCardBoard options={options} />
+      <MatchingCardBoard
+        options={options}
+        flippedCount={flippedCount}
+        setFlippedCount={setFlippedCount}
+      />
     </div>
   );
 };
