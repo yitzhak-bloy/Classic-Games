@@ -1,37 +1,43 @@
-const express = require('express');
-const { check } = require('express-validator');
+const express = require("express");
+const { check } = require("express-validator");
 
-const userStatisticsControllers = require('../controllers/userStatistics-controller');
-const ticTacToeStatisticsControllers = require('../controllers/ticTacToeStatistics-controllers');
-const snakeStatisticsControllers = require('../controllers/snakeStatistics-controllers');
+const userStatisticsControllers = require("../controllers/userStatistics-controller");
+const ticTacToeStatisticsControllers = require("../controllers/ticTacToeStatistics-controllers");
+const snakeStatisticsControllers = require("../controllers/snakeStatistics-controllers");
+const matchingCardStatisticsControllers = require("../controllers/matchingCardStatistics-controllers");
 
 const router = express.Router();
 
-router.get('/', userStatisticsControllers.getAllUserStatistics);
+router.get("/", userStatisticsControllers.getAllUserStatistics);
 
-router.post('/signup',
+router.post(
+  "/signup",
   [
-    check('name').notEmpty(),
-    check('email').normalizeEmail().isEmail(),
-    check('password').isLength({ min: 6 })
+    check("name").notEmpty(),
+    check("email").normalizeEmail().isEmail(),
+    check("password").isLength({ min: 6 }),
   ],
-  userStatisticsControllers.signup);
+  userStatisticsControllers.signup
+);
 
-router.post('/login', userStatisticsControllers.login);
+router.post("/login", userStatisticsControllers.login);
 
-router.patch('/updata/tictactoe',
-  [
-    check('level').notEmpty(),
-    check('outcome').notEmpty(),
-  ],
-  ticTacToeStatisticsControllers.updateTicTacToeStatistics);
+router.patch(
+  "/updata/tictactoe",
+  [check("level").notEmpty(), check("outcome").notEmpty()],
+  ticTacToeStatisticsControllers.updateTicTacToeStatistics
+);
 
-router.patch('/updata/snake',
-  [
-    check('level').notEmpty(),
-    check('result').notEmpty(),
-  ],
-  snakeStatisticsControllers.updateSnakeStatistics);
+router.patch(
+  "/updata/snake",
+  [check("level").notEmpty(), check("result").notEmpty()],
+  snakeStatisticsControllers.updateSnakeStatistics
+);
 
+router.patch(
+  "/updata/matching-card",
+  [check("level").notEmpty(), check("result").notEmpty()],
+  matchingCardStatisticsControllers.updateMatchingCardStatistics
+);
 
 module.exports = router;
