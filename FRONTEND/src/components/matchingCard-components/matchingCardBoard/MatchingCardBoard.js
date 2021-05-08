@@ -31,19 +31,34 @@ import emojisAvatarIllustrations02 from "../../../shared/png/Emojis Avatar Illus
 import emojisAvatarIllustrations03 from "../../../shared/png/Emojis Avatar Illustrations-03.png";
 import emojisAvatarIllustrations04 from "../../../shared/png/Emojis Avatar Illustrations-04.png";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { Button } from "@material-ui/core";
+
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+
+import { UserContext } from "../../../shared/context/User-context";
 
 import PopsUp from "../../shared-components/popsUp/PopsUp";
 import Card from "../card/Card";
 import "./MatchingCardBoard.css";
 
-const MatchingCardBoard = ({ options, flippedCount, setFlippedCount }) => {
+const MatchingCardBoard = ({
+  options,
+  flippedCount,
+  setFlippedCount,
+  difficulty,
+}) => {
   const [game, setGame] = useState([]);
   const [popsUpOpen, setPopsUpOpen] = useState(false);
   const [reset, setReset] = useState(false);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
+  const [request, setRequest] = useState(false);
+
+  const email = useContext(UserContext).email;
+
+  const { sendRequest } = useHttpClient();
+  let points = Math.round(0.66 * flippedCount);
 
   const illustrations = [
     mangaAvatar1,
@@ -108,12 +123,33 @@ const MatchingCardBoard = ({ options, flippedCount, setFlippedCount }) => {
     shuffledGame();
   }, [options]);
 
-  let points = Math.round(0.66 * flippedCount);
+  useEffect(() => {
+    (async () => {
+      if (request && email) {
+        try {
+          const responseData = await sendRequest(
+            "http://localhost:5000/api/userStatistics/updata/matching-card",
+            "PATCH",
+            JSON.stringify({
+              email: email,
+              level: difficulty,
+              result: points,
+            }),
+            {
+              "Content-Type": "application/json",
+            }
+          );
+        } catch (err) {}
+      }
+    })();
+  }, [request]);
+
   useEffect(() => {
     const finished = !game.some((card) => !card.flipped);
     if (finished && game.length > 0) {
       setTimeout(() => {
         shuffledGame();
+        setRequest(true);
         setPopsUpOpen(true);
         setReset(true);
       }, 500);
@@ -124,6 +160,7 @@ const MatchingCardBoard = ({ options, flippedCount, setFlippedCount }) => {
     setFlippedCount(0);
     setGame([]);
     shuffledGame();
+    setRequest(false);
     setPopsUpOpen(false);
   };
   const handelRestart = () => {

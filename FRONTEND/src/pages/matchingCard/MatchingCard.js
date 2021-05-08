@@ -46,6 +46,7 @@ const MatchingCard = () => {
         options={options}
         flippedCount={flippedCount}
         setFlippedCount={setFlippedCount}
+        difficulty={difficulty}
       />
     </div>
   );
