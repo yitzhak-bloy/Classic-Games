@@ -1,3 +1,5 @@
+import { useState, useEffect, useContext } from "react";
+
 import mangaAvatar1 from "../../../shared/png/Manga Avatar 1.png";
 import mangaAvatar2 from "../../../shared/png/Manga Avatar 2.png";
 import mangaAvatar3 from "../../../shared/png/Manga Avatar 3.png";
@@ -31,12 +33,9 @@ import emojisAvatarIllustrations02 from "../../../shared/png/Emojis Avatar Illus
 import emojisAvatarIllustrations03 from "../../../shared/png/Emojis Avatar Illustrations-03.png";
 import emojisAvatarIllustrations04 from "../../../shared/png/Emojis Avatar Illustrations-04.png";
 
-import { useState, useEffect, useContext } from "react";
-
 import { Button } from "@material-ui/core";
 
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-
 import { UserContext } from "../../../shared/context/User-context";
 
 import PopsUp from "../../shared-components/popsUp/PopsUp";
@@ -56,9 +55,8 @@ const MatchingCardBoard = ({
   const [request, setRequest] = useState(false);
 
   const email = useContext(UserContext).email;
-
   const { sendRequest } = useHttpClient();
-  let points = Math.round(0.66 * flippedCount);
+  const points = Math.round(0.66 * flippedCount);
 
   const illustrations = [
     mangaAvatar1,
@@ -119,6 +117,19 @@ const MatchingCardBoard = ({
     setGame(shuffledGame);
   };
 
+  const handelClose = () => {
+    setFlippedCount(0);
+    setGame([]);
+    shuffledGame();
+    setRequest(false);
+    setPopsUpOpen(false);
+  };
+
+  const handelRestart = () => {
+    setReset(true);
+    handelClose();
+  };
+
   useEffect(() => {
     shuffledGame();
   }, [options]);
@@ -155,18 +166,6 @@ const MatchingCardBoard = ({
       }, 500);
     }
   }, [game]);
-
-  const handelClose = () => {
-    setFlippedCount(0);
-    setGame([]);
-    shuffledGame();
-    setRequest(false);
-    setPopsUpOpen(false);
-  };
-  const handelRestart = () => {
-    setReset(true);
-    handelClose();
-  };
 
   if (flippedIndexes.length === 2) {
     const match =
