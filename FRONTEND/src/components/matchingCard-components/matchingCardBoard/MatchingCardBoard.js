@@ -205,6 +205,7 @@ const MatchingCardBoard = ({
             <Card
               className='MatchingCard__square'
               id={index}
+              key={index}
               illustration={card.illustration}
               game={game}
               flippedCount={flippedCount}
