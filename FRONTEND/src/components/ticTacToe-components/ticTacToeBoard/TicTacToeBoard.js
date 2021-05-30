@@ -112,14 +112,14 @@ const TicTacToeBoard = () => {
     }
   };
 
-  const handelRestart = () => {
+  const restartHandler = () => {
     setSquares(["0", "1", "2", "3", "4", "5", "6", "7", "8"]);
     gameRunChange(false);
     setWhoseTurn("X");
   };
 
-  const handleClose = () => {
-    handelRestart();
+  const closeHandler = () => {
+    restartHandler();
     setTimeout(() => {
       setPopsUpOpen(false);
     }, 1);
@@ -139,10 +139,10 @@ const TicTacToeBoard = () => {
         <Square state={squares[8]} keys={8} clickHandler={clickHandler} />
       </Box>
 
-      <PopsUp open={popsUpOpen} handleClose={handleClose} description={win} />
+      <PopsUp open={popsUpOpen} handleClose={closeHandler} description={win} />
 
       <Button
-        onClick={handelRestart}
+        onClick={restartHandler}
         disableElevation
         variant='outlined'
         size='large'
