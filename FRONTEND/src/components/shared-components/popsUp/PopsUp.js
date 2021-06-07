@@ -45,7 +45,7 @@ const PopsUp = ({ open, handleClose, description }) => {
   const contentButton = description.message ? "Close" : "New game";
 
   return (
-    <div>
+    <>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -73,7 +73,7 @@ const PopsUp = ({ open, handleClose, description }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 

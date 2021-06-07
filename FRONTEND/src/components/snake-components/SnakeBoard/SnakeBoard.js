@@ -178,7 +178,7 @@ const SnakeBoard = ({
   };
 
   return (
-    <div>
+    <>
       <Box className='snake-board'>
         {index.map((i) => {
           if (theSnake.includes(i)) {
@@ -205,7 +205,7 @@ const SnakeBoard = ({
         handleClose={handleClose}
         description={["snake", counter]}
       />
-    </div>
+    </>
   );
 };
 

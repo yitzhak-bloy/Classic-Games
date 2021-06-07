@@ -121,7 +121,7 @@ const Statistics = () => {
   }
 
   return (
-    <div>
+    <>
       <h1 align='center'>Users with the highest score</h1>
       <TableContainer component={Paper}>
         <Table
@@ -209,7 +209,7 @@ const Statistics = () => {
           </TableContainer>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

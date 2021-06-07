@@ -4,7 +4,7 @@ import { Link } from "@material-ui/core";
 
 const Homepage = () => {
   return (
-    <div>
+    <>
       <h1>
         To the{" "}
         <Link component={RouterLink} to='/ticTacToe'>
@@ -23,7 +23,7 @@ const Homepage = () => {
           Matching-Card game
         </Link>
       </h1>
-    </div>
+    </>
   );
 };
 
