@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom";
+
 import { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -16,9 +18,48 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const PopsUpOverlay = ({
+  open,
+  handleClose,
+  title,
+  contentText,
+  contentButton,
+}) => {
+  const { dialogContent } = useStyles();
+
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby='alert-dialog-title'
+      aria-describedby='alert-dialog-description'
+    >
+      <DialogTitle id='alert-dialog-title' className={dialogContent}>
+        {title}
+      </DialogTitle>
+      <DialogContent className={dialogContent}>
+        <DialogContentText id='alert-dialog-description'>
+          {contentText}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          onClick={handleClose}
+          variant='outlined'
+          size='small'
+          color='primary'
+          autoFocus
+          className={dialogContent}
+        >
+          {contentButton}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
 const PopsUp = ({ open, handleClose, description }) => {
   const huPlayer = useContext(PlayerContext).huPlayer;
-  const { dialogContent } = useStyles();
 
   const title =
     description[0] === "snake"
@@ -46,33 +87,16 @@ const PopsUp = ({ open, handleClose, description }) => {
 
   return (
     <>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
-      >
-        <DialogTitle id='alert-dialog-title' className={dialogContent}>
-          {title}
-        </DialogTitle>
-        <DialogContent className={dialogContent}>
-          <DialogContentText id='alert-dialog-description'>
-            {contentText}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            variant='outlined'
-            size='small'
-            color='primary'
-            autoFocus
-            className={dialogContent}
-          >
-            {contentButton}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {createPortal(
+        <PopsUpOverlay
+          open={open}
+          handleClose={handleClose}
+          title={title}
+          contentText={contentText}
+          contentButton={contentButton}
+        />,
+        document.getElementById("overlay-root")
+      )}
     </>
   );
 };
