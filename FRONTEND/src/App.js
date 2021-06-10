@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,25 +13,11 @@ import Statistics from "./pages/Statistics";
 import Homepage from "./pages/Homepage";
 import Snake from "./pages/snake/Snake";
 import MatchingCard from "./pages/matchingCard/MatchingCard";
-import { UserContext } from "./shared/context/User-context";
+import { UserContextProvider } from "./shared/context/User-context";
 
 const App = () => {
-  const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userData"));
-    if (storedData) {
-      setEmail(storedData.email);
-    }
-  }, []);
-
   return (
-    <UserContext.Provider
-      value={{
-        email: email,
-        setEmail: (email) => setEmail(email),
-      }}
-    >
+    <UserContextProvider>
       <Router>
         <Header />
         <Switch>
@@ -60,7 +45,7 @@ const App = () => {
           <Redirect to='./' />
         </Switch>
       </Router>
-    </UserContext.Provider>
+    </UserContextProvider>
   );
 };
 
