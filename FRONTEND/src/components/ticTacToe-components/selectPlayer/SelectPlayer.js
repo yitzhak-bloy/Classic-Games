@@ -2,14 +2,14 @@ import { useContext } from "react";
 import Box from "@material-ui/core/Box";
 import { Button } from "@material-ui/core";
 
-import { GameRunning } from "../../../shared/context/GameRunning-context";
+import { GameRunningContext } from "../../../shared/context/GameRunning-context";
 import { PlayerContext } from "../../../shared/context/Player-context";
 import { TurnContext } from "../../../shared/context/Turn-context";
 
 const SelectPlayer = () => {
   const playerChangeHandler = useContext(PlayerContext).playerChangeHandler;
   const huPlayer = useContext(PlayerContext).huPlayer;
-  const gameRun = useContext(GameRunning).gameRunning;
+  const gameRun = useContext(GameRunningContext).gameRunning;
   const TurnChange = useContext(TurnContext).TurnChange;
 
   const changeTo = () => {

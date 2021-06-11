@@ -6,7 +6,7 @@ import { minimax } from "../../../Algorithms/minimax";
 import { winning } from "../../../Algorithms/winning";
 import { PlayerContext } from "../../../shared/context/Player-context";
 import { DifficultyLevelContext } from "../../../shared/context/DifficultyLevel-context";
-import { GameRunning } from "../../../shared/context/GameRunning-context";
+import { GameRunningContext } from "../../../shared/context/GameRunning-context";
 import { TurnContext } from "../../../shared/context/Turn-context";
 import { UserContext } from "../../../shared/context/User-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -30,7 +30,7 @@ const TicTacToeBoard = () => {
   const [request, setRequest] = useState(false);
 
   const email = useContext(UserContext).email;
-  const gameRunChange = useContext(GameRunning).gameChange;
+  const gameRunChange = useContext(GameRunningContext).gameChange;
   const huPlayer = useContext(PlayerContext).huPlayer;
   const aiPlayer = useContext(PlayerContext).aiPlayer;
   const setWhoseTurn = useContext(TurnContext).TurnChange;

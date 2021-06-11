@@ -20,7 +20,7 @@ const reducerPlayer = (state, action) => {
   }
 };
 
-export const UserPlayerProvider = (props) => {
+export const PlayerProvider = (props) => {
   const [statePlayer, dispatchPlayer] = useReducer(reducerPlayer, {
     huPlayer: "X",
     aiPlayer: "O",
