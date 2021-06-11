@@ -7,14 +7,14 @@ import { PlayerContext } from "../../../shared/context/Player-context";
 import { TurnContext } from "../../../shared/context/Turn-context";
 
 const SelectPlayer = () => {
-  const playerChange = useContext(PlayerContext).playerChange;
+  const playerChangeHandler = useContext(PlayerContext).playerChangeHandler;
   const huPlayer = useContext(PlayerContext).huPlayer;
   const gameRun = useContext(GameRunning).gameRunning;
   const TurnChange = useContext(TurnContext).TurnChange;
 
   const changeTo = () => {
     if (!gameRun) {
-      playerChange(huPlayer == "X" ? "O" : "X");
+      playerChangeHandler(huPlayer == "X" ? "O" : "X");
       TurnChange("X");
     }
   };

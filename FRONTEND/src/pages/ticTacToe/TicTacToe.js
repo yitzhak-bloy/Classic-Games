@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import Box from "@material-ui/core/Box";
 
 import TicTacToeBoard from "../../components/ticTacToe-components/ticTacToeBoard/TicTacToeBoard";
@@ -11,12 +11,33 @@ import { TurnContext } from "../../shared/context/Turn-context";
 import "./TicTacToe.css";
 import { Grid } from "@material-ui/core";
 
+const reducerPlayer = (state, action) => {
+  if (action.type === "X") {
+    return {
+      huPlayer: "X",
+      aiPlayer: "O",
+    };
+  } else if (action.type === "O") {
+    return {
+      huPlayer: "O",
+      aiPlayer: "X",
+    };
+  }
+};
+
 const TicTacToe = () => {
-  const [huPlayer, setHuPlayer] = useState("X");
-  const [aiPlayer, setaiPlayer] = useState("O");
   const [level, setLevel] = useState("hard");
   const [gameRunning, setGameRunning] = useState(false);
   const [whoseTurn, setWhoseTurn] = useState("X");
+
+  const [statePlayer, dispatchPlayer] = useReducer(reducerPlayer, {
+    huPlayer: "X",
+    aiPlayer: "O",
+  });
+
+  const playerChangeHandler = (player) => {
+    dispatchPlayer({ type: player });
+  };
 
   return (
     <GameRunning.Provider
@@ -29,12 +50,9 @@ const TicTacToe = () => {
     >
       <PlayerContext.Provider
         value={{
-          huPlayer: huPlayer,
-          aiPlayer: aiPlayer,
-          playerChange: (player) => {
-            setHuPlayer(player);
-            setaiPlayer(player === "X" ? "O" : "X");
-          },
+          huPlayer: statePlayer.huPlayer,
+          aiPlayer: statePlayer.aiPlayer,
+          playerChangeHandler: playerChangeHandler,
         }}
       >
         <DifficultyLevelContext.Provider
