@@ -10,7 +10,7 @@ import TicTacToe from "./pages/ticTacToe/TicTacToe";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Statistics from "./pages/Statistics";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/homepage/Homepage";
 import Snake from "./pages/snake/Snake";
 import MatchingCard from "./pages/matchingCard/MatchingCard";
 import { UserContextProvider } from "./shared/context/User-context";
