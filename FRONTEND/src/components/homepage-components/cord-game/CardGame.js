@@ -1,15 +1,14 @@
+import "./CardGame.css";
 import { Link as RouterLink } from "react-router-dom";
 
 import { Link } from "@material-ui/core";
 
 const CardGame = ({ link, name }) => {
   return (
-    <h1>
-      To the{" "}
-      <Link component={RouterLink} to={link}>
-        {name}
-      </Link>
-    </h1>
+    <a className='card__game' component={RouterLink} href={link}>
+      <div className='imag-card__game'></div>
+      <div className='name-card__game'>{name}</div>
+    </a>
   );
 };
 
