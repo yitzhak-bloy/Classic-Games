@@ -1,9 +1,8 @@
 .card__game {
-  width: 15rem;
-  height: 20rem !important;
+  width: 20rem;
+  height: 25rem;
   border: 2px blue solid;
-  border-radius: 10px;
-
+  border-radius: 15px;
   background: rgb(199, 195, 255);
   margin: 15px;
   text-decoration: none;
@@ -13,12 +12,11 @@
 }
 
 .imag-card__game {
-  border: 2px black groove;
-  border-radius: 5px;
-  margin-top: 5%;
   width: 90%;
   height: 80%;
-  background: url("./imag/snake.png");
+  margin-top: 5%;
+  border: 2px black groove;
+  border-radius: 5px;
   background-size: cover;
   background-position: 48% 0%;
 }
@@ -26,4 +24,16 @@
 .name-card__game {
   margin: 10px;
   font-size: larger;
+}
+
+.image-TicTacToe {
+  background-image: url("./imag/ticTacToe.png");
+}
+
+.image-Snake {
+  background-image: url("./imag/snake.png");
+}
+
+.image-Matching-Card {
+  background-image: url("./imag/matching-card.png");
 }
