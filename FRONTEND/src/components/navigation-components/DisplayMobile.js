@@ -56,7 +56,7 @@ const DisplayMobile = (
       <div>
         <Link component={RouterLink} to='/'>
           <Typography variant='h6' component='h1' className={logo}>
-            TicTacToeGame
+            ClassicGames
           </Typography>
         </Link>
       </div>

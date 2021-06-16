@@ -1,0 +1,43 @@
+.initial-site-view {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contect-site-view {
+  margin-top: 10vh;
+  justify-self: center;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameboy {
+  width: 50vw;
+  height: 60vh;
+}
+
+@media (min-width: 40rem) {
+  .initial-site-view {
+    align-items: center;
+  }
+
+  .contect-site-view {
+    margin-top: 15vh;
+    align-items: flex-start;
+  }
+
+  .gameboy {
+    width: 35vw;
+    height: 65vh;
+    justify-self: self-end;
+  }
+}
+
+@media (min-width: 62.5rem) {
+  .gameboy {
+    margin-left: 25%;
+  }
+}
