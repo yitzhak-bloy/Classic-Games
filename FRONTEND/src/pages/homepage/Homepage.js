@@ -1,18 +1,14 @@
+import OpeningScreen from "../../components/homepage-components/openingScreen/OpeningScreen";
 import ListGames from "../../components/homepage-components/listGame/ListGames";
+import Footer from "../../components/homepage-components/footer/Footer";
 import "./Homepage.css";
-import gameboy from "../../svg/gameboy.svg";
 
 const Homepage = () => {
   return (
     <>
-      <div className='initial-site-view'>
-        <div className='contect-site-view'>
-          <h1>Welcome to ClassicGames</h1>
-          <h3>A whole world of classic games</h3>
-        </div>
-        <img className='gameboy' src={gameboy} alt='gameboy' />
-      </div>
+      <OpeningScreen />
       <ListGames />
+      <Footer />
     </>
   );
 };

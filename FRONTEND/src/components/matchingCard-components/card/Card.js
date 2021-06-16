@@ -50,7 +50,7 @@ const Card = ({
         setReset(false);
       }, 1000);
     }
-  }, [game]);
+  }, [game, reset, setReset]);
 
   useEffect(() => {
     if (flippedIndexes[2] === true && flippedIndexes.indexOf(id) > -1) {
