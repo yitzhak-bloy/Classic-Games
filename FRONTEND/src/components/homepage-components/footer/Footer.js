@@ -2,9 +2,9 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className='Footer'>
-      <p>Support</p>
-      <p>Terms of Use</p>
+    <div className='footer'>
+      <a>Support</a>
+      <a>Terms of Use</a>
     </div>
   );
 };

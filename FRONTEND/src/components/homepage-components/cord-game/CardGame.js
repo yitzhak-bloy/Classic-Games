@@ -1,8 +1,6 @@
 import "./CardGame.css";
 import { Link as RouterLink } from "react-router-dom";
 
-import { Link } from "@material-ui/core";
-
 const CardGame = ({ link, name }) => {
   return (
     <a className='card__game' component={RouterLink} href={link}>

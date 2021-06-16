@@ -2,8 +2,5 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-
-  /* height: 1500px;
-  margin: 1px; */
-  background: burlywood;
+  background: rgb(252, 231, 231);
 }
