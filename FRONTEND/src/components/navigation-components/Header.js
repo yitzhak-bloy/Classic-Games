@@ -18,7 +18,7 @@ const headersData = [
 
 const useStyles = makeStyles(() => ({
   header: {
-    backgroundColor: "#400CCC", 
+    backgroundColor: "#264653",
   },
   logo: {
     fontFamily: "Work Sans, sans-serif",

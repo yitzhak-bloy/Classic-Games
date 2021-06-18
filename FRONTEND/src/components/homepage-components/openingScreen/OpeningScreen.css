@@ -1,8 +1,10 @@
-.initial-site-view {
+.opening-screen {
   height: 95vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: #2a9d8f;
+  color: #effbf9;
 }
 
 .contect-site-view {
@@ -20,7 +22,7 @@
 }
 
 @media (min-width: 40rem) {
-  .initial-site-view {
+  .opening-screen {
     align-items: center;
   }
 
