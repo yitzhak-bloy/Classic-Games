@@ -27,7 +27,7 @@ const Square = ({ state, keys, clickHandler }) => {
 
   return (
     <div onClick={handler} className={classes.root} color='secondary'>
-      <Box bgcolor='#ffb2ff' color='#400CCC'>
+      <Box bgcolor='#f4a261' color='#264653'>
         {state === "O" || state === "X" ? (
           <Typography variant='h1' component='h2'>
             {state}

@@ -17,7 +17,7 @@ const TicTacToe = () => {
         <DifficultyLevelProvider>
           <TurnProvider>
             <Box className='GameBoard' bgcolor='#FFFFFF'>
-              <Grid container justify='space-evenly'>
+              <Grid container justify='space-evenly' alignItems='flex-end'>
                 <Grid item>
                   <SelectLevel />
                 </Grid>

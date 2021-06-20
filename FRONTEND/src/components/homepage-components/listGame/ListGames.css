@@ -2,6 +2,6 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background: #31c4ab;
-  border-top: 0.5rem rgba(45, 180, 157, 0.5) solid;
+  background: #2a9d8f;
+  /* border-top: 1.5rem rgb(53, 189, 173) solid; */
 }

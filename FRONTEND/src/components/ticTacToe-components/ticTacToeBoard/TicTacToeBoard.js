@@ -141,13 +141,7 @@ const TicTacToeBoard = () => {
 
       <PopsUp open={popsUpOpen} handleClose={closeHandler} description={win} />
 
-      <Button
-        onClick={restartHandler}
-        disableElevation
-        variant='outlined'
-        size='large'
-        color='primary'
-      >
+      <Button onClick={restartHandler} variant='contained'>
         new game
       </Button>
     </Box>

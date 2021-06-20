@@ -2,4 +2,7 @@
   text-align: center;
   display: grid;
   justify-content: center;
+  /* align-items: center; */
+  background: #efd595 !important;
+  height: calc(100% - 4rem);
 }
