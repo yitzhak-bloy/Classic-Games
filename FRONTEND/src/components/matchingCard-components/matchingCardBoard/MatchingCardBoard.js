@@ -117,7 +117,7 @@ const MatchingCardBoard = ({
     setGame(shuffledGame);
   };
 
-  const handelClose = () => {
+  const closeHandler = () => {
     setFlippedCount(0);
     setGame([]);
     shuffledGame();
@@ -125,9 +125,9 @@ const MatchingCardBoard = ({
     setPopsUpOpen(false);
   };
 
-  const handelRestart = () => {
+  const restartHandler = () => {
     setReset(true);
-    handelClose();
+    closeHandler();
   };
 
   useEffect(() => {
@@ -221,12 +221,12 @@ const MatchingCardBoard = ({
 
         <PopsUp
           open={popsUpOpen}
-          handleClose={handelClose}
+          handleClose={closeHandler}
           description={["MatchingCard", points]}
         />
 
         <Button
-          onClick={handelRestart}
+          onClick={restartHandler}
           disableElevation
           variant='outlined'
           size='large'

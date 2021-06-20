@@ -183,7 +183,7 @@ const SnakeBoard = ({
         {index.map((i) => {
           if (theSnake.includes(i)) {
             return (
-              <Box bgcolor='#000099' color='#000099' key={i}>
+              <Box bgcolor='#264653' color='#264653' key={i}>
                 ---
               </Box>
             );
@@ -191,13 +191,13 @@ const SnakeBoard = ({
 
           if (food === i) {
             return (
-              <Box bgcolor='#ffb2ff' color='#000099' key={i}>
+              <Box bgcolor='#f4a261' color='#000099' key={i}>
                 <img src={apple} alt='apple' />
               </Box>
             );
           }
 
-          return <Box bgcolor='#ffb2ff' color='#000099' key={i}></Box>;
+          return <Box bgcolor='#f4a261' color='#000099' key={i}></Box>;
         })}
       </Box>
       <PopsUp

@@ -1,7 +1,16 @@
 import { useEffect } from "react";
 import { Button } from "@material-ui/core";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import "./DirectionButtons.css";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#264653",
+    },
+  },
+});
 
 const DirectionButtons = ({ direction, setRunning, setDirection }) => {
   useEffect(() => {
@@ -50,51 +59,53 @@ const DirectionButtons = ({ direction, setRunning, setDirection }) => {
   };
 
   return (
-    <div className='buttons'>
-      <div className='buttons-directions'>
-        <div></div>
-        <Button
-          onClick={handelUp}
-          disableElevation
-          variant='outlined'
-          size='large'
-          color='primary'
-        >
-          up
-        </Button>
-        <div></div>
-        <Button
-          onClick={handelLeft}
-          disableElevation
-          variant='outlined'
-          size='large'
-          color='primary'
-        >
-          left
-        </Button>
-        <div></div>
-        <Button
-          onClick={handelRight}
-          disableElevation
-          variant='outlined'
-          size='large'
-          color='primary'
-        >
-          right
-        </Button>
-        <div></div>
-        <Button
-          onClick={handelDown}
-          disableElevation
-          variant='outlined'
-          size='large'
-          color='primary'
-        >
-          down
-        </Button>
-        <div></div>
+    <ThemeProvider theme={theme}>
+      <div className='buttons'>
+        <div className='buttons-directions'>
+          <div></div>
+          <Button
+            onClick={handelUp}
+            disableElevation
+            variant='outlined'
+            size='large'
+            color='primary'
+          >
+            up
+          </Button>
+          <div></div>
+          <Button
+            onClick={handelLeft}
+            disableElevation
+            variant='outlined'
+            size='large'
+            color='primary'
+          >
+            left
+          </Button>
+          <div></div>
+          <Button
+            onClick={handelRight}
+            disableElevation
+            variant='outlined'
+            size='large'
+            color='primary'
+          >
+            right
+          </Button>
+          <div></div>
+          <Button
+            onClick={handelDown}
+            disableElevation
+            variant='outlined'
+            size='large'
+            color='primary'
+          >
+            down
+          </Button>
+          <div></div>
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 
