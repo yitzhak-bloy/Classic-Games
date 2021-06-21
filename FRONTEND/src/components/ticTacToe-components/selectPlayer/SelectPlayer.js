@@ -22,7 +22,14 @@ const SelectPlayer = () => {
   return (
     <Box>
       <Box component='div' p={1} m={1} mt={5}>
-        <Button onClick={changeTo} variant='contained'>
+        <Button
+          onClick={changeTo}
+          variant='contained'
+          disableElevation
+          variant='outlined'
+          size='large'
+          color='primary'
+        >
           {huPlayer}
         </Button>
       </Box>

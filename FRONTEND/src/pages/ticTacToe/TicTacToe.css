@@ -2,7 +2,14 @@
   text-align: center;
   display: grid;
   justify-content: center;
-  /* align-items: center; */
   background: #efd595 !important;
-  height: calc(100% - 4rem);
+  height: calc(100vh - 2.6rem);
+  width: 102vw;
+}
+
+@media (min-width: 40rem) {
+  .GameBoard {
+    height: calc(100vh - 4rem);
+    width: 100vw;
+  }
 }

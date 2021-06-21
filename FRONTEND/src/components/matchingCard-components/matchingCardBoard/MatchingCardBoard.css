@@ -8,7 +8,7 @@
 .MatchingCard__squares {
   width: 325px;
   height: 325px;
-  border: solid blue 1px;
+  border: solid #264653 1px;
   padding: 5px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
