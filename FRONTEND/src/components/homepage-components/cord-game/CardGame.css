@@ -3,12 +3,13 @@
   height: 25rem;
   border: 2px #264653 solid;
   border-radius: 15px;
-  background: #ffffff;
+  background: #e9c46a;
   margin: 15px;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 10px 5px 5px #264653;
 }
 
 .imag-card__game {
@@ -22,7 +23,7 @@
 }
 
 .name-card__game {
-  color: aliceblue;
+  color: #264653;
   margin: 10px;
   font-size: larger;
 }
