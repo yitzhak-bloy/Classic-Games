@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 10px 5px 5px #264653;
+  box-shadow: 10px 5px 10px #264653;
 }
 
 .imag-card__game {

@@ -3,5 +3,17 @@
   justify-content: space-around;
   flex-wrap: wrap;
   background: #2a9d8f;
-  /* border-top: 1.5rem rgb(53, 189, 173) solid; */
+  height: 1500px;
+}
+
+@media (min-width: 45.25rem) {
+  .list-game {
+    height: 1000px;
+  }
+}
+
+@media (min-width: 67.3rem) {
+  .list-game {
+    height: 500px;
+  }
 }
