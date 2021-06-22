@@ -23,12 +23,13 @@ const useStyles = makeStyles(() => ({
   logo: {
     fontFamily: "Work Sans, sans-serif",
     fontWeight: 600,
-    color: "#FFFEFE",
+    color: "#efd595",
     textAlign: "left",
   },
   menuButton: {
     fontFamily: "Open Sans, sans-serif",
     fontWeight: 700,
+    color: "#efd595",
     size: "18px",
     marginLeft: "38px",
   },
@@ -37,7 +38,10 @@ const useStyles = makeStyles(() => ({
     justifyContent: "space-between",
   },
   drawerContainer: {
+    color: "#efd595",
+    backgroundColor: "#264653",
     padding: "20px 30px",
+    height: "100%",
   },
 }));
 

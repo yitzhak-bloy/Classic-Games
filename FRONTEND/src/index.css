@@ -21,3 +21,7 @@ code {
     monospace;
 }
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans&display=swap");
+
+.MuiAppBar-colorPrimary {
+  color: #efd595 !important;
+}
