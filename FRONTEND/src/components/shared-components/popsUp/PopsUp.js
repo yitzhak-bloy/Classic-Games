@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
-
 import { useContext } from "react";
+
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -10,6 +10,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { PlayerContext } from "../../../shared/context/Player-context";
+import "./PopsUp.css";
 
 const useStyles = makeStyles(() => ({
   dialogContent: {
@@ -34,26 +35,32 @@ const PopsUpOverlay = ({
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
-      <DialogTitle id='alert-dialog-title' className={dialogContent}>
-        {title}
-      </DialogTitle>
-      <DialogContent className={dialogContent}>
-        <DialogContentText id='alert-dialog-description'>
-          {contentText}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={handleClose}
-          variant='outlined'
-          size='small'
-          color='primary'
-          autoFocus
-          className={dialogContent}
-        >
-          {contentButton}
-        </Button>
-      </DialogActions>
+      <div className='dialog'>
+        <DialogTitle id='alert-dialog-title' className={dialogContent}>
+          {title}
+        </DialogTitle>
+        <DialogContent className={dialogContent}>
+          <DialogContentText
+            className='dialog--text'
+            id='alert-dialog-description'
+          >
+            {contentText}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            variant='outlined'
+            size='small'
+            color='primary'
+            autoFocus
+            className={dialogContent}
+            className='dialog--text dialog__button'
+          >
+            {contentButton}
+          </Button>
+        </DialogActions>
+      </div>
     </Dialog>
   );
 };
@@ -71,6 +78,7 @@ const PopsUp = ({ open, handleClose, description }) => {
       : description[1] == huPlayer || description[0] == "MatchingCard"
       ? "You won!"
       : "You lost!";
+
   const contentText =
     description[0] === "snake"
       ? `The game is over, your achievement is ${description[1]}.`
@@ -83,6 +91,7 @@ const PopsUp = ({ open, handleClose, description }) => {
       : description[0] == "MatchingCard"
       ? `The number of steps you have taken to win the game is: ${description[1]}`
       : "Losing isn't the end. You can always win the next time.";
+
   const contentButton = description.message ? "Close" : "New game";
 
   return (

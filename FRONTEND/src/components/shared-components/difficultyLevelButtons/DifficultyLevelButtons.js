@@ -20,6 +20,10 @@ const DifficultyLevelButtons = ({
   handelMedium,
   handelHard,
 }) => {
+  console.log(
+    "🚀 ~ file: DifficultyLevelButtons.js ~ line 23 ~ difficulty:",
+    difficulty
+  );
   return (
     <ThemeProvider theme={theme}>
       <div className='DifficultyLevelButtons__buttens'>

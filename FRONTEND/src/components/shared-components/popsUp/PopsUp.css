@@ -1,0 +1,13 @@
+.dialog {
+  background-color: #264653;
+  color: #efd595;
+}
+
+.dialog__button {
+  margin: auto !important;
+  border: #efd595 1px solid !important;
+}
+
+.dialog--text {
+  color: #efd595 !important;
+}
