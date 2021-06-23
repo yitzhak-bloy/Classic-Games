@@ -4,6 +4,7 @@
   height: 50px;
   cursor: pointer;
   will-change: transform, opacity;
+  color: #264653;
 }
 
 .cHard {

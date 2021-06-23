@@ -5,6 +5,7 @@ const listGames = [
   { name: "TicTacToe", link: "/ticTacToe" },
   { name: "Snake", link: "/snake" },
   { name: "Matching-Card", link: "/matchingCard" },
+  // { name: "Coming soon!", link: "/" },
 ];
 
 const ListGames = () => {

@@ -4,6 +4,8 @@ html {
 
 #root {
   height: 100%;
+  color: #efd595;
+  background-color: #2a9d8f;
 }
 
 body {
@@ -22,6 +24,47 @@ code {
 }
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans&display=swap");
 
+/*New design for the default Material-UI design */
+
 .MuiAppBar-colorPrimary {
   color: #efd595 !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  color: #efd595 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #efd595 !important;
+  border-width: 2.5px !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-width: 2px !important;
+  border-color: #264653 !important;
+}
+
+.MuiFormLabel-root {
+  color: #264653 !important;
+}
+.MuiFormLabel-root.Mui-focused {
+  color: #efd595 !important;
+}
+
+.MuiButton-containedPrimary {
+  color: #efd595 !important;
+  background-color: #264653 !important;
+}
+
+.MuiTypography-colorPrimary {
+  color: #efd595 !important;
+}
+
+.input:-internal-autofill-selected {
+  background-color: blue !important;
+  color: blue !important;
+}
+
+.loading-spinner__overlay {
+  background-color: #1e7167;
 }
