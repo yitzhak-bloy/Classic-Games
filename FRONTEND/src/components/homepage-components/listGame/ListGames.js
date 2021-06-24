@@ -10,11 +10,13 @@ const listGames = [
 
 const ListGames = () => {
   return (
-    <div className='list-game'>
+    <ul className='list-game'>
       {listGames.map((game) => (
-        <CardGame name={game.name} link={game.link} />
+        <li key={game.name}>
+          <CardGame name={game.name} link={game.link} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

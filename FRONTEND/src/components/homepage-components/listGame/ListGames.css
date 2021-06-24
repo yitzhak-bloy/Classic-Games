@@ -4,6 +4,9 @@
   flex-wrap: wrap;
   background: #2a9d8f;
   height: 1500px;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
 }
 
 @media (min-width: 45.25rem) {
