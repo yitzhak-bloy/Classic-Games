@@ -16,7 +16,11 @@ const TicTacToe = () => {
       <PlayerProvider>
         <DifficultyLevelProvider>
           <TurnProvider>
-            <Box className='GameBoard' bgcolor='#FFFFFF'>
+            <Box
+              className='GameBoard'
+              bgcolor='#FFFFFF'
+              data-testid='TicTacToe'
+            >
               <Grid container justify='space-evenly' alignItems='flex-end'>
                 <Grid item>
                   <SelectLevel />
